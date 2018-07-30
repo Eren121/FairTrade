@@ -1,0 +1,29 @@
+name: FairTrade
+main: fr.rafoudiablol.ft.main.FairTrade
+version: Beta
+
+commands:
+  request:
+    description: Send a trade request.
+    aliases: [req]
+    usage: "Usage: /<command> <player>"
+  accept:
+    description: Accept last trade request.
+    aliases: [acc]
+    usage: "Usage: /<command>"
+  historyft:
+    description: Show server trade history.
+    permission: trade.history
+    usage: "Usage: /command> <ID>"
+  maxft:
+    description: Set trade distance max.
+    permission: trade.max
+    usage: "Usage: /<command> [distance]"
+
+permissions:
+  trade.history:
+    description: Allow history command.
+    default: op
+  trade.max:
+    description: Allow set maximum distance command.
+    default: op
