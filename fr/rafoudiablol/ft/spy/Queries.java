@@ -13,7 +13,7 @@ public enum Queries {
             "  id INTEGER PRIMARY KEY," +
                     Requester.query + " varchar(50)," +
                     Accepter.query + " VARCHAR(50)," +
-                    WhatRequestGive.query + "text," +
+                    WhatRequestGive.query + " text," +
                     WhatAccepterGive.query + " text," +
                     At + " datetime" +
             ");");
