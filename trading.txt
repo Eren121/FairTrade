@@ -1,0 +1,11 @@
+#0=empty
+#1=local-items
+#2=remote-items
+#3=confirm
+#7=local-wool
+#8=remote-wool
+
+1,1,1,1,0,2,2,2,2,
+1,1,1,1,0,2,2,2,2,
+1,1,1,1,0,2,2,2,2,
+7,7,7,7,3,8,8,8,8

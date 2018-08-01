@@ -28,7 +28,7 @@ public class DummyUpdater implements OnTransactionToggle {
     private void updateInventory(Player p, ToggleTransactionEvent e)
     {
         Inventory inv = p.getOpenInventory().getTopInventory();
-        Locations loc = (p == e.getPlayer()) ? Locations.Owner : Locations.Remote;
+        Locations loc = (p == e.getPlayer()) ? Locations.OwnerConfirm : Locations.RemoteConfirm;
 
         ItemStack decoration = FairTrade.getFt().getOptions().getDummyItem(e.hasConfirm());
         Skeleton.getSlots(loc).forEach(slot -> inv.setItem(slot, decoration));

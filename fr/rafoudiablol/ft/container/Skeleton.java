@@ -13,7 +13,7 @@ public final class Skeleton
 
     // length multiple of LINE_LENGTH
     // have to be mirrored horizontally
-    public static final int[] INVENTORY = {
+    public static int[] INVENTORY = {
             1, 1, 1, 7, 8, 8, 2, 2, 2,
             1, 1, 1, 7, 3, 8, 2, 2, 2,
             1, 1, 1, 7, 7, 8, 2, 2, 2
@@ -22,6 +22,7 @@ public final class Skeleton
     public static int getMirrorLocation(int loc) {
         return mirrorLocations.get(loc);
     }
+
     public static int getConfirm() {
         return slots.get(Locations.Confirm).get(0);
     }
@@ -43,8 +44,9 @@ public final class Skeleton
         return slots.get(loc);
     }
 
-    static
-    {
+    public static void initInv(int[] skeSlots) {
+
+        INVENTORY = skeSlots;
         Arrays.stream(Locations.values()).forEach(loc -> slots.put(loc, new ArrayList<>()));
 
         int j = 0;

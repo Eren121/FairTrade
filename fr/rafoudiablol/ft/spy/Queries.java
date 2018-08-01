@@ -11,15 +11,18 @@ public enum Queries {
     CreateTable(
             "create table if not exists notary(" +
             "  id INTEGER PRIMARY KEY," +
-                    Requester.query + " varchar(50)," +
-                    Accepter.query + " VARCHAR(50)," +
-                    WhatRequestGive.query + "text," +
-                    WhatAccepterGive.query + " text," +
-                    At + " datetime" +
-            ");");
+                    Requester + " VARCHAR(50)," +
+                    Accepter + " VARCHAR(50)," +
+                    WhatRequestGive + " TEXT," +
+                    WhatAccepterGive + " TEXT," +
+                    At + " DATETIME);");
 
 
     public final String query;
+
+    @Override
+    public String toString() { return query; }
+
     Queries(String str)
     {
         query = str;

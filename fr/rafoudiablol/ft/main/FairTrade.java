@@ -94,7 +94,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
         getCommand(TypeCommand.HISTORY.name).setExecutor(new CommandDecoratorPlayer(
                 new CommandDecoratorIntegerArg(
-                        new CommandSpy(), true
+                        new CommandSpy()
                 )
         ));
     }

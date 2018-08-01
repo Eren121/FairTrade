@@ -14,4 +14,6 @@ public interface IOptions {
         double f = getDistanceMax();
         return f * f;
     }
+
+    int[] getSkeSlots();
 }

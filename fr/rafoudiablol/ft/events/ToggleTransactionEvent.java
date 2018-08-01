@@ -11,7 +11,6 @@ public class ToggleTransactionEvent extends TransactionEvent {
     private boolean status;
     private HumanEntity src;
     private Inventory inv;
-    private int slot;
 
     /**
      * @param player the player who toggle his status
@@ -42,10 +41,6 @@ public class ToggleTransactionEvent extends TransactionEvent {
 
     public Inventory getInventory() {
         return inv;
-    }
-
-    public int getSlot() {
-        return slot;
     }
 
     public boolean hasConfirm() {

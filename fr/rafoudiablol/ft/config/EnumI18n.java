@@ -3,6 +3,8 @@ package fr.rafoudiablol.ft.config;
 import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.entity.Player;
 
+import static fr.rafoudiablol.ft.config.I18n.PWNED;
+
 public enum EnumI18n {
 
     WELCOME("<name>"),
@@ -17,7 +19,7 @@ public enum EnumI18n {
     REQUEST("<player>"),
     REASON_WORLD,
     REASON_DISTANCE,
-    FINALIZED,
+    FINALIZED("<id>"),
 
     BUTTON_CANCEL,
     BUTTON_CONFIRM,
@@ -27,7 +29,7 @@ public enum EnumI18n {
     NOBODY_ACCEPTED;
 
     public final String path;
-    public final String args[];
+    public final String[] args;
 
     EnumI18n(String... args) {
         this.path = this.name();
@@ -35,6 +37,11 @@ public enum EnumI18n {
     }
 
     public String replaceArgs(String localized, Object... params) {
+
+        if(localized == null) { // String to found
+
+            return PWNED;
+        }
 
         for(int i = 0; i < params.length; ++i) {
 

@@ -21,6 +21,14 @@ public enum Locations {
 
     public static Locations valueOf(int id) {
 
-        return Locations.values()[id];
+        for(Locations loc : values()) {
+
+            if(loc.id == id) {
+
+                return loc;
+            }
+        }
+
+        return null;
     }
 }

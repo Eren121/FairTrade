@@ -11,8 +11,9 @@ public class CommandDecoratorIntegerArg implements CommandExecutor {
 
     public CommandDecoratorIntegerArg(CommandExecutor cmd)
     {
-        exe = cmd;
+        this(cmd, false);
     }
+
     public CommandDecoratorIntegerArg(CommandExecutor cmd, boolean opt) { exe = cmd; optional = opt; }
 
     @Override
@@ -27,7 +28,7 @@ public class CommandDecoratorIntegerArg implements CommandExecutor {
             }
             catch(NumberFormatException e)
             {
-                commandSender.sendMessage(String.format("/%s: cannot parse '%s' to number", s, strings[0]));
+                commandSender.sendMessage(String.format("/%s: cannot parse %s to number", s, strings[0]));
             }
         }
         else if(strings.length == 0 && optional)

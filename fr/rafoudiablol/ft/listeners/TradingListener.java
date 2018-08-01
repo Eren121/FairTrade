@@ -29,6 +29,8 @@ public class TradingListener implements OnInventoryClick, OnInventoryClose, OnTr
     public TradingListener(Logger l) {
         tasks = new HashMap<>();
         tasks.put(Locations.Empty, new TaskDeny());
+        tasks.put(Locations.RemoteConfirm, new TaskDeny());
+        tasks.put(Locations.OwnerConfirm, new TaskDeny());
         tasks.put(Locations.Remote, new TaskDeny());
         tasks.put(Locations.Confirm, new TaskConfirm());
         tasks.put(Locations.Owner, new TaskUpdate());

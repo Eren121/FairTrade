@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class I18n {
 
-    private static final String PWNED = "§kPaStA pASTa";
+    public static final String PWNED = "§kPaStA pASTa";
     private FileConfiguration config = null;
 
     public void setLangConfig(YamlConfiguration config) {
