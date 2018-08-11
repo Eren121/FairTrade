@@ -2,6 +2,7 @@ package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.container.Locations;
+import fr.rafoudiablol.ft.container.TradeHistoryMarker;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -30,7 +31,7 @@ public class ContainerSpyFactory {
 
     public Inventory createSpy(Transaction tr)
     {
-        Inventory inv = Bukkit.createInventory(null, INVENTORY.length, tr.getTitle());
+        Inventory inv = Bukkit.createInventory(new TradeHistoryMarker(), INVENTORY.length, tr.getTitle());
         LinkedList<ItemStack> whatAccGive = new LinkedList<>(Arrays.asList(tr.whatAccepterGives));
         LinkedList<ItemStack> whatReqGive = new LinkedList<>(Arrays.asList(tr.whatRequesterGives));
 
