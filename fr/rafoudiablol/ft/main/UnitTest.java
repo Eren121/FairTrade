@@ -12,9 +12,6 @@ public class UnitTest
 {
     public void checkSkeletonInventory()
     {
-        Validate.isTrue(getMirrorLocation(2) == 8, getMirrorLocation(2) + "");
-        Validate.isTrue(getMirrorLocation(10) == 16, getMirrorLocation(10) + "");
-
         int[] array = INVENTORY;
         boolean confirmFound = false;
 

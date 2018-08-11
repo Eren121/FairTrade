@@ -2,9 +2,9 @@ package fr.rafoudiablol.ft.commands;
 
 public enum TypeCommand {
 
-    REQUEST("request"),
+    REQUEST("trade"),
     ACCEPT("accept"),
-    HISTORY("historyft");
+    HISTORY("tradelog");
 
     public final String name;
 

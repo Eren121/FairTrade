@@ -5,6 +5,14 @@
 #7=local-wool
 #8=remote-wool
 
+
+
+#Important
+#Only one 3 (button confirm)
+#Quantity of 1=Quantity of 2
+
+
+
 1,1,1,1,0,2,2,2,2,
 1,1,1,1,0,2,2,2,2,
 1,1,1,1,0,2,2,2,2,

@@ -2,6 +2,7 @@ package fr.rafoudiablol.ft.config;
 
 import fr.rafoudiablol.ft.container.Skeleton;
 import fr.rafoudiablol.ft.main.ILoggeable;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -44,21 +45,16 @@ public class Options implements IOptions {
 
         i18n.setLangConfig(loadConfiguration(langFile));
 
+        int lineNo = 0;
         try {
             BufferedReader in = new BufferedReader(new FileReader(fileSkeleton));
             StringBuilder tmp = new StringBuilder();
-            int lineNo = 0;
             String line;
 
             while((line = in.readLine()) != null) {
                 line = line.trim();
                 lineNo++;
-                if(!line.startsWith("#")) {
-
-                    if(line.length() != 17) {
-
-                        throw new IOException("invalid nb. of characters: " + line.length() + " line n." + lineNo);
-                    }
+                if(!line.startsWith("#") && !line.isEmpty()) {
 
                     char c;
                     for(int i = 0; i < line.length(); ++i) {
@@ -67,7 +63,12 @@ public class Options implements IOptions {
 
                             tmp.append(c);
                         }
-                        else if(c != ' ' || (c == ',' && (i == 0))) {
+                        else if(c == ',') {
+
+                            if(i == 0)
+                                throw new IOException("invalid character, line " + lineNo + "-" + i);
+                        }
+                        else if(c != ' ') {
 
                             throw new IOException("invalid character, line " + lineNo + "-" + i);
                         }
@@ -78,11 +79,19 @@ public class Options implements IOptions {
             skeSlots = new int[tmp.length()];
 
             for(int i = 0; i < tmp.length(); ++i) {
-                skeSlots[i] = tmp.charAt(i);
+                skeSlots[i] = tmp.charAt(i) - '0';
             }
 
         } catch (IOException e) {
+
+            StackTraceElement origins[] = e.getStackTrace();
+            StackTraceElement s[] = new StackTraceElement[origins.length + 1];
+            s[0] = new StackTraceElement("Options", "<init>", "trading.txt", lineNo);
+            for(int i = 1; i < s.length; ++i) {
+                s[i] = origins[i-1];
+            }
             plugin.w("cannot load trading.txt");
+            e.setStackTrace(s);
             e.printStackTrace();
             skeSlots = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
         }
@@ -116,6 +125,13 @@ public class Options implements IOptions {
     @Override
     public int[] getSkeSlots() {
         return skeSlots;
+    }
+
+    @Override
+    public ItemStack getEmptyItem() {
+        ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE);
+        i.setDurability((short)11);
+        return i;
     }
 
     private void setAndSave(EnumOption opt, Object o) {

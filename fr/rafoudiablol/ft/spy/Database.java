@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
+import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 import static fr.rafoudiablol.ft.spy.Queries.*;
 
 public class Database implements IDatabase, OnTransactionAccept
@@ -86,7 +87,7 @@ public class Database implements IDatabase, OnTransactionAccept
     public void onAcceptTransaction(AcceptTransactionEvent e) {
 
         int id = registerTransaction(e.getPlayer(), e.getOther(), YamlBuilder.toString(e.getPlayerGift()), YamlBuilder.toString(e.getOtherGift()));
-        FairTrade.getFt().sendMessage(EnumI18n.FINALIZED.localize(id), e.getPlayer(), e.getOther());
+        e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
     }
 
     /**

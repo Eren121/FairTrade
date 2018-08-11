@@ -22,12 +22,16 @@ public interface ITransactionLink {
     default void forEach(BiConsumer<Player, Player> lambda) {
 
         lambda.accept(getPlayer(), getOther());
-        lambda.accept(getOther(), getPlayer());
+
+        if(getPlayer() != getOther())
+            lambda.accept(getOther(), getPlayer());
     }
 
     default void forEach(Consumer<Player> lambda) {
 
         lambda.accept(getPlayer());
-        lambda.accept(getOther());
+
+        if(getPlayer() != getOther())
+            lambda.accept(getOther());
     }
 }

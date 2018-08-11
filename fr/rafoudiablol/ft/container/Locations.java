@@ -1,5 +1,7 @@
 package fr.rafoudiablol.ft.container;
 
+import fr.rafoudiablol.ft.main.FairTrade;
+
 public enum Locations {
 
     Empty(0),
@@ -29,6 +31,7 @@ public enum Locations {
             }
         }
 
+        FairTrade.getFt().w("not found slot ID " + id);
         return null;
     }
 }

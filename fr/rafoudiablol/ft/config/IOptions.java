@@ -16,4 +16,5 @@ public interface IOptions {
     }
 
     int[] getSkeSlots();
+    ItemStack getEmptyItem();
 }

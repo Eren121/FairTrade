@@ -1,2 +1,8 @@
+# config.yml
+
+
+# max distance for trading
 max-trade-distance: 10.0
+
+# All messages are located in "lang/lang_**.yml" (ie. "lang/lang_en.yml")
 lang: en

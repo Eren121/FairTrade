@@ -27,6 +27,7 @@ public class ContainerShopFactory
         Map<Locations, ItemStack> defaultItems = new HashMap<>();
         defaultItems.put(Locations.OwnerConfirm, FairTrade.getFt().getOptions().getDummyItem(false));
         defaultItems.put(Locations.RemoteConfirm, FairTrade.getFt().getOptions().getDummyItem(false));
+        defaultItems.put(Locations.Empty, FairTrade.getFt().getOptions().getEmptyItem());
         defaultItems.put(Locations.Confirm, confirm);
 
         for(int i = 0; i < contents.length; ++i)

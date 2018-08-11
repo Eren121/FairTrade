@@ -55,6 +55,14 @@ public class TradingListener implements OnInventoryClick, OnInventoryClose, OnTr
                 e.setCancelled(true);
             }
         }
+        if(inv.getHolder() instanceof TradeHistoryMarker)
+        {
+            // User clicked history inv. or made action that can affect history inv.
+            if(clickedInv == inv || !isActionAvailable(e.getAction()))
+            {
+                e.setCancelled(true);
+            }
+        }
     }
 
 

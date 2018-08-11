@@ -79,7 +79,6 @@ public class TransactionsManager implements
 
     public void remove(ITransactionLink link)
     {
-        transactions.remove(link.getPlayerID());
-        transactions.remove(link.getOtherID());
+        link.forEach(p -> transactions.remove(p.getUniqueId()));
     }
 }
