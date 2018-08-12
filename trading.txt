@@ -7,9 +7,8 @@
 
 
 
-#Important
-#Only one 3 (button confirm)
-#Quantity of 1=Quantity of 2
+# only one (3)
+# nb of (1) = nb of (2)
 
 
 
