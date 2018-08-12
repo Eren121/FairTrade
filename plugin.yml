@@ -1,7 +1,7 @@
 name: FairTrade
 main: fr.rafoudiablol.ft.main.FairTrade
 version: 1.1
-api-version: 1.13
+api-version: 1.12
 
 commands:
   trade:
