@@ -86,7 +86,7 @@ public class Options implements IOptions {
 
             StackTraceElement origins[] = e.getStackTrace();
             StackTraceElement s[] = new StackTraceElement[origins.length + 1];
-            s[0] = new StackTraceElement("Options", "<init>", "trading.txt", lineNo);
+            s[0] = new StackTraceElement("trading", "txt", "trading.txt", lineNo);
             for(int i = 1; i < s.length; ++i) {
                 s[i] = origins[i-1];
             }
