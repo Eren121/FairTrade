@@ -122,6 +122,11 @@ public class Options implements IOptions {
     }
 
     @Override
+    public boolean canSelfTrade() {
+        return getConfig().getBoolean("self", false);
+    }
+
+    @Override
     public int[] getSkeSlots() {
         return skeSlots;
     }
