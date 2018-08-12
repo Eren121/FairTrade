@@ -19,7 +19,7 @@ public class ContainerShopFactory
 
     private ContainerShopFactory()
     {
-        ItemStack confirm = new ItemStack(Material.BOOK_AND_QUILL);
+        ItemStack confirm = new ItemStack(Material.WRITTEN_BOOK);
         ItemMeta meta = confirm.getItemMeta();
         meta.setDisplayName(EnumI18n.CONFIRM.localize());
         confirm.setItemMeta(meta);

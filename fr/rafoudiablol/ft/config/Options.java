@@ -117,8 +117,7 @@ public class Options implements IOptions {
     @Override
     public ItemStack getDummyItem(boolean ok) {
 
-        ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE);
-        i.setDurability((short)(ok ? 13 : 14));
+        ItemStack i = new ItemStack(ok ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
         return i;
     }
 
@@ -129,8 +128,7 @@ public class Options implements IOptions {
 
     @Override
     public ItemStack getEmptyItem() {
-        ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE);
-        i.setDurability((short)11);
+        ItemStack i = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
         return i;
     }
 
