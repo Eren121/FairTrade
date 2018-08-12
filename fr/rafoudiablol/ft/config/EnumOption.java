@@ -3,7 +3,8 @@ package fr.rafoudiablol.ft.config;
 public enum EnumOption {
 
     DISTANCE("max-trade-distance"),
-    LANG("lang");
+    LANG("lang"),
+    SELF_TRADING("self");
 
     public final String path;
 

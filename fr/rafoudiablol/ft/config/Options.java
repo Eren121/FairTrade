@@ -26,7 +26,7 @@ public class Options implements IOptions {
         this.plugin = plugin;
 
         i18n = new I18n();
-        String locale = getConfig().getString(EnumOption.LANG.path);
+        String locale = getConfig().getString(EnumOption.LANG.path, "en");
         File langFolder = new File(plugin.getDataFolder(), "lang");
         File langFile = new File(langFolder, "lang_" + locale + ".yml");
         File fileSkeleton = new File(plugin.getDataFolder(), "trading.txt");
@@ -93,7 +93,7 @@ public class Options implements IOptions {
             plugin.w("cannot load trading.txt");
             e.setStackTrace(s);
             e.printStackTrace();
-            skeSlots = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+            skeSlots = new int[] {1, 1, 1, 7, 3, 8, 2, 2, 2};
         }
 
         initInv(skeSlots);
@@ -101,7 +101,7 @@ public class Options implements IOptions {
 
     @Override
     public double getDistanceMax() {
-        return getConfig().getDouble(EnumOption.DISTANCE.path);
+        return getConfig().getDouble(EnumOption.DISTANCE.path, 10);
     }
 
     @Override
