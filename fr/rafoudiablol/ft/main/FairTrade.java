@@ -149,6 +149,6 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
     private void welcome() {
 
-        i(getOptions().geti18n().localize(EnumI18n.WELCOME, this));
+        i(EnumI18n.WELCOME.localize(this));
     }
 }
