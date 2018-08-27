@@ -9,10 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 import static fr.rafoudiablol.ft.container.Skeleton.*;
 
@@ -55,12 +53,12 @@ public class ContainerSpyFactory {
     private ItemStack getHistoryInfoItem(Transaction tr)
     {
         String[] info = new String[3];
-        info[0] = EnumI18n.INFOS_1.localize(tr.requesterName, tr.accepterName, tr.date);
-        info[1] = EnumI18n.INFOS_2.localize(tr.requesterName, tr.accepterName, tr.date);
-        info[2] = EnumI18n.INFOS_3.localize(tr.requesterName, tr.accepterName, tr.date);
+        info[0] = EnumI18n.INFO_1.localize(tr.requesterName, tr.accepterName, tr.date);
+        info[1] = EnumI18n.INFO_2.localize(tr.requesterName, tr.accepterName, tr.date);
+        info[2] = EnumI18n.INFO_3.localize(tr.requesterName, tr.accepterName, tr.date);
 
         ItemStack item = new ItemStack(Material.BARRIER);
-        ItemStaxs.rename(item, EnumI18n.INFOS_0.localize(tr.requesterName, tr.accepterName, tr.date));
+        ItemStaxs.rename(item, EnumI18n.INFO_0.localize(tr.requesterName, tr.accepterName, tr.date));
         ItemStaxs.brief(item, info);
 
         return item;
