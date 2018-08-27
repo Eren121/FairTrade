@@ -67,7 +67,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     @Override
     public void sendMessage(String msg, CommandSender... players) {
         for(CommandSender p : players) {
-            p.sendMessage(ChatColor.GOLD + "[" + ChatColor.AQUA + "Trade" + ChatColor.GOLD + "] " + ChatColor.WHITE + msg);
+            p.sendMessage(EnumI18n.PREFIX.localize() + msg);
         }
     }
 

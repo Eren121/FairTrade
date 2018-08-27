@@ -1,4 +1,5 @@
 WELCOME: "Plugin <name> initialized, welcome!"
+PREFIX: "§b[§lTrade§r§b]§r "
 CONFIRM: "Click to confirm!"
 NO_REQUEST: "No pendings request."
 NO_TRANSACTION: "Transaction with ID §l<id>§c not found."

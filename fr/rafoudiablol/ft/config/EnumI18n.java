@@ -8,6 +8,7 @@ import static fr.rafoudiablol.ft.config.I18n.PWNED;
 public enum EnumI18n {
 
     WELCOME("<name>"),
+    PREFIX,
     NO_REQUEST,
     NO_TRANSACTION("<id>"),
     CONFIRM,
