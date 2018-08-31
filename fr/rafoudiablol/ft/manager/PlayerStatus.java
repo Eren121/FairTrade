@@ -7,6 +7,7 @@ public class PlayerStatus implements ITransactionLink {
     private Player player, other;
     private boolean confirm = false;
     private boolean ask;
+    public boolean aborted = false;
 
     public PlayerStatus(Player p1, Player p2, boolean flag) {
         player = p1;

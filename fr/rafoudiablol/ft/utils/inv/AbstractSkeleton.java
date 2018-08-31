@@ -1,6 +1,8 @@
-package fr.rafoudiablol.ft.container;
+package fr.rafoudiablol.ft.utils.inv;
 
 import fr.rafoudiablol.ft.main.FairTrade;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.inventory.Inventory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +24,7 @@ public abstract class AbstractSkeleton {
      * @param slot
      * @return le combien-tième slot de ce type est-il dans l'inventaire
      */
-    public int indexOf(int slot) {
+    public final int nth(int slot) {
 
         Class<? extends AbstractSlotType> clazz = matrix[slot].getClass();
         int ret = 1;
@@ -39,7 +41,7 @@ public abstract class AbstractSkeleton {
      * @param n the nth slot to get
      * @return le slot qui contient le n-ième slot du type représenté par clazz
      */
-    public int nth(Class<? extends AbstractSlotType> clazz, int n) {
+    public final int nth(Class<? extends AbstractSlotType> clazz, int n) {
 
         for(int i = 0; i < matrix.length; ++i) {
             if(clazz.equals(matrix[i].getClass())) {
@@ -57,7 +59,7 @@ public abstract class AbstractSkeleton {
     /**
      * @return une List de tous les slots qui sont du type clazz, triés par ordre croissant
      */
-    public List<Integer> byType(Class<? extends AbstractSlotType> clazz) {
+    public final List<Integer> byType(Class<? extends AbstractSlotType> clazz) {
 
         List<Integer> ret = new LinkedList<>();
         for(int i = 0; i < matrix.length; ++i) {
@@ -66,5 +68,17 @@ public abstract class AbstractSkeleton {
             }
         }
         return ret;
+    }
+
+    public final int length() {
+        return matrix.length;
+    }
+
+    public final AbstractSlotType type(int slot) {
+        return matrix[slot];
+    }
+
+    public void close(HumanEntity player)
+    {
     }
 }
