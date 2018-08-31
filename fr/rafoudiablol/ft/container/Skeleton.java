@@ -26,14 +26,6 @@ public final class Skeleton
     public static int getConfirm() {
         return slots.get(Locations.Confirm).get(0);
     }
-    public static List<Integer> getOwners() {
-        return slots.get(Locations.Owner);
-    }
-    public static List<Integer> getEmpties() {
-        return slots.get(Locations.Empty);
-    }
-    public static List<Integer> getOwnerLeds() { return slots.get(Locations.OwnerConfirm); }
-    public static List<Integer> getRemoteLeds() { return slots.get(Locations.RemoteConfirm); }
     public static ItemStack[] getOwnerItems(Inventory inv) { return bind(Locations.Owner, inv); }
 
     public static ItemStack[] bind(Locations loc, Inventory inv) {
