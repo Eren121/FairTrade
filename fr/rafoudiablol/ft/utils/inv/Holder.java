@@ -3,7 +3,7 @@ package fr.rafoudiablol.ft.utils.inv;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
-class Holder implements InventoryHolder {
+public class Holder implements InventoryHolder {
 
     private final AbstractSkeleton skeleton;
     private boolean aborted;
@@ -22,7 +22,7 @@ class Holder implements InventoryHolder {
         return aborted;
     }
 
-    public void abort() {
+    public void stopTracing() {
         aborted = true;
     }
 

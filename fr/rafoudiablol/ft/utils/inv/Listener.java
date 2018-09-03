@@ -24,7 +24,9 @@ public final class Listener {
                 if(inv == clickedInv) {
 
                     int slot = e.getSlot();
-                    sk.type(slot).action(action, e.getWhoClicked(), inv, slot);
+                    if(!sk.action(action, e.getWhoClicked(), inv, slot)) {
+                        e.setCancelled(true);
+                    }
                 }
             }
             else {
@@ -40,6 +42,7 @@ public final class Listener {
         AbstractSkeleton sk = Holder.tryGet(e.getInventory().getHolder());
 
         if(sk != null) {
+            ((Holder)e.getInventory().getHolder()).stopTracing();
             sk.close(e.getPlayer());
         }
     }

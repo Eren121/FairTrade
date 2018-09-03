@@ -8,7 +8,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AcceptTransactionEvent extends TransactionEvent {
+/**
+ * Fire when all players have confirmed and trade items
+ */
+public class FinalizeTransactionEvent extends TransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private List<ItemStack> playerGift = new ArrayList<>();
@@ -19,7 +22,7 @@ public class AcceptTransactionEvent extends TransactionEvent {
      * @param player the asker (/request)
      * @param other the replier (/accept)
      */
-    public AcceptTransactionEvent(Player player, Player other) {
+    public FinalizeTransactionEvent(Player player, Player other) {
         super(player, other);
     }
 
@@ -33,14 +36,14 @@ public class AcceptTransactionEvent extends TransactionEvent {
         return handlers;
     }
 
-    public static AcceptTransactionEvent cookEvent(PlayerStatus status) {
+    public static FinalizeTransactionEvent cookEvent(PlayerStatus status) {
 
-        AcceptTransactionEvent ret;
+        FinalizeTransactionEvent ret;
 
         if(status.isAsker())
-            ret = new AcceptTransactionEvent(status.getPlayer(), status.getOther());
+            ret = new FinalizeTransactionEvent(status.getPlayer(), status.getOther());
         else
-            ret = new AcceptTransactionEvent(status.getOther(), status.getPlayer());
+            ret = new FinalizeTransactionEvent(status.getOther(), status.getPlayer());
 
         return ret;
     }

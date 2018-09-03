@@ -1,5 +1,11 @@
 package fr.rafoudiablol.ft.inventory;
 
-public class SlotRemote extends AbstractSlotDeny {
+import fr.rafoudiablol.ft.utils.inv.SlotLocked;
 
+public class SlotRemote extends SlotLocked {
+
+    @Override
+    public int getId() {
+        return 2;
+    }
 }

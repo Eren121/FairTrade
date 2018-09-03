@@ -1,25 +1,26 @@
 package fr.rafoudiablol.ft.config;
 
-import fr.rafoudiablol.ft.container.Skeleton;
+import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.main.ILoggeable;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
+import fr.rafoudiablol.ft.spy.SkeletonLog;
+import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.StringUtil;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-import static fr.rafoudiablol.ft.container.Skeleton.initInv;
 import static org.bukkit.configuration.file.YamlConfiguration.loadConfiguration;
 
 public class Options implements IOptions {
 
     private JavaPlugin plugin;
-    private int[] skeSlots;
+    private SkeletonTrade ske;
+    private SkeletonLog skeForLog;
     private I18n i18n;
 
     public <T extends JavaPlugin & ILoggeable>Options(T plugin) {
@@ -76,11 +77,12 @@ public class Options implements IOptions {
                 }
             }
 
-            skeSlots = new int[tmp.length()];
-
+            int[] slots = new int[tmp.length()];
             for(int i = 0; i < tmp.length(); ++i) {
-                skeSlots[i] = tmp.charAt(i) - '0';
+                slots[i] = tmp.charAt(i) - '0';
             }
+
+            ske = new SkeletonTrade(slots);
 
         } catch (IOException e) {
 
@@ -93,10 +95,10 @@ public class Options implements IOptions {
             plugin.w("cannot load trading.txt");
             e.setStackTrace(s);
             e.printStackTrace();
-            skeSlots = new int[] {1, 1, 1, 7, 3, 8, 2, 2, 2};
+            ske = new SkeletonTrade();
         }
 
-        initInv(skeSlots);
+        skeForLog = new SkeletonLog();
     }
 
     @Override
@@ -127,8 +129,13 @@ public class Options implements IOptions {
     }
 
     @Override
-    public int[] getSkeSlots() {
-        return skeSlots;
+    public SkeletonTrade getSkeleton() {
+        return ske;
+    }
+
+    @Override
+    public SkeletonLog getSkeletonForLog() {
+        return skeForLog;
     }
 
     @Override

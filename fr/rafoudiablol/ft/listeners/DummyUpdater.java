@@ -1,12 +1,9 @@
 package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.container.Locations;
-import fr.rafoudiablol.ft.container.Skeleton;
-import fr.rafoudiablol.ft.events.ToggleTransactionEvent;
+import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
-import org.apache.commons.lang.enums.Enum;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.Inventory;
@@ -20,12 +17,12 @@ public class DummyUpdater implements OnTransactionToggle {
 
     @EventHandler
     @Override
-    public void onTransactionToggle(ToggleTransactionEvent e) {
+    public void onTransactionToggle(StatusTransactionEvent e) {
 
         e.forEach(p -> updateInventory(p, e));
     }
 
-    private void updateInventory(Player p, ToggleTransactionEvent e)
+    private void updateInventory(Player p, StatusTransactionEvent e)
     {
         Inventory inv = p.getOpenInventory().getTopInventory();
         Locations loc = (p == e.getPlayer()) ? Locations.OwnerConfirm : Locations.RemoteConfirm;

@@ -1,18 +1,34 @@
 package fr.rafoudiablol.ft.inventory;
 
+import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlotType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
 
 public class SkeletonTrade extends AbstractSkeleton {
 
-    public SkeletonTrade(AbstractSlotType[] m) {
-        super(m);
+    public SkeletonTrade(int[] slots) {
+
+        registerSlot(new SlotEmpty());
+        registerSlot(new SlotOwner());
+        registerSlot(new SlotRemote());
+        registerSlot(new SlotConfirm());
+        registerSlot(new SlotStatus());
+        setMatrix(slots);
+    }
+
+    /**
+     * minimalist default constructor, used if options are broken
+     */
+    public SkeletonTrade() {
+       this(new int[] {1, 1, 1, 7, 3, 8, 2, 2, 2});
     }
 
     @Override

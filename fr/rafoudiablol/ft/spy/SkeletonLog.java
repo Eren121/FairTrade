@@ -1,9 +1,14 @@
 package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.container.Locations;
-import fr.rafoudiablol.ft.container.TradeHistoryMarker;
+import fr.rafoudiablol.ft.inventory.SlotConfirm;
+import fr.rafoudiablol.ft.inventory.SlotOwner;
+import fr.rafoudiablol.ft.inventory.SlotRemote;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
+import fr.rafoudiablol.ft.utils.inv.Holder;
+import fr.rafoudiablol.ft.utils.inv.SlotLocked;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -12,40 +17,46 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import static fr.rafoudiablol.ft.container.Skeleton.*;
+public class SkeletonLog extends AbstractSkeleton {
 
-public class ContainerSpyFactory {
+    public SkeletonLog() {
 
-    private static final ContainerSpyFactory INSTANCE = new ContainerSpyFactory();
+        registerSlot(new SlotLocked());
 
-    public static ContainerSpyFactory getInstance() {
-        return INSTANCE;
+        int[] m = new int[9 * 6];
+
+        Arrays.fill(m, SlotLocked.ID);
+        setMatrix(m);
     }
 
-    private ContainerSpyFactory()
-    {
+    //TODO: matrix in history
 
-    }
+    /**
+     * Build inventory matching basic trading inventory
+     *
+     * @param tr
+     * @return
+     */
+    public Inventory buildInventory(Transaction tr) {
 
-    public Inventory createSpy(Transaction tr)
-    {
-        Inventory inv = Bukkit.createInventory(new TradeHistoryMarker(), INVENTORY.length, tr.getTitle());
+        AbstractSkeleton trade = FairTrade.getFt().getOptions().getSkeleton();
+        Inventory inv = super.buildInventory(tr.getTitle());
         LinkedList<ItemStack> whatAccGive = new LinkedList<>(Arrays.asList(tr.whatAccepterGives));
         LinkedList<ItemStack> whatReqGive = new LinkedList<>(Arrays.asList(tr.whatRequesterGives));
 
-        for(int i = 0; i < INVENTORY.length; ++i)
+        for(int i = 0; i < size(); ++i)
         {
-            if(!whatReqGive.isEmpty() && INVENTORY[i] == Locations.Left.id)
+            if(!whatReqGive.isEmpty() && trade.get(i) instanceof SlotOwner)
             {
                 inv.setItem(i, whatReqGive.removeLast());
             }
-            else if(!whatAccGive.isEmpty() && INVENTORY[i] == Locations.Right.id)
+            else if(!whatAccGive.isEmpty() && trade.get(i) instanceof SlotRemote)
             {
                 inv.setItem(i, whatAccGive.removeLast());
             }
         }
 
-        inv.setItem(getConfirm(), getHistoryInfoItem(tr));
+        inv.setItem(trade.getFirst(SlotConfirm.class), getHistoryInfoItem(tr));
 
         return inv;
     }

@@ -5,6 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.Inventory;
 
+/**
+ * Fire when a player change a trade item
+ */
 public class UpdateTransactionEvent extends TransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();

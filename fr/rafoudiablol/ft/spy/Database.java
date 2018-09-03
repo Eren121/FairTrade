@@ -1,9 +1,8 @@
 package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.events.AcceptTransactionEvent;
+import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.listeners.OnTransactionAccept;
-import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -84,7 +83,7 @@ public class Database implements IDatabase, OnTransactionAccept
 
     @Override
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onAcceptTransaction(AcceptTransactionEvent e) {
+    public void onAcceptTransaction(FinalizeTransactionEvent e) {
 
         int id = registerTransaction(e.getPlayer(), e.getOther(), YamlBuilder.toString(e.getPlayerGift()), YamlBuilder.toString(e.getOtherGift()));
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));

@@ -1,10 +1,10 @@
 package fr.rafoudiablol.ft.listeners;
 
-import fr.rafoudiablol.ft.events.AcceptTransactionEvent;
+import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import org.bukkit.event.Listener;
 
 public interface OnTransactionAccept extends Listener {
 
     @SuppressWarnings("unused")
-    void onAcceptTransaction(AcceptTransactionEvent e);
+    void onAcceptTransaction(FinalizeTransactionEvent e);
 }

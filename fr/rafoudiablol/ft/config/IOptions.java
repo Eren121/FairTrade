@@ -1,5 +1,7 @@
 package fr.rafoudiablol.ft.config;
 
+import fr.rafoudiablol.ft.inventory.SkeletonTrade;
+import fr.rafoudiablol.ft.spy.SkeletonLog;
 import org.bukkit.inventory.ItemStack;
 
 public interface IOptions {
@@ -16,6 +18,7 @@ public interface IOptions {
         return f * f;
     }
 
-    int[] getSkeSlots();
     ItemStack getEmptyItem();
+    SkeletonTrade getSkeleton();
+    SkeletonLog getSkeletonForLog();
 }

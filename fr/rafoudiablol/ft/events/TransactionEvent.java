@@ -4,6 +4,9 @@ import fr.rafoudiablol.ft.manager.ITransactionLink;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
+/**
+ * Base event for FairTrade events
+ */
 public abstract class TransactionEvent extends Event implements ITransactionLink {
 
     protected Player player, other;

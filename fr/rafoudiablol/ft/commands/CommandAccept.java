@@ -1,7 +1,6 @@
 package fr.rafoudiablol.ft.commands;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.container.ContainerShopFactory;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.Bukkit;
@@ -24,7 +23,7 @@ public class CommandAccept implements CommandExecutor {
             Bukkit.getPluginManager().callEvent(event);
 
             if (!event.isCancelled()) {
-                event.forEach((p1, p2) -> p1.openInventory(ContainerShopFactory.getInstance().createShop(p1, p2)));
+                event.forEach((p1, p2) -> p1.openInventory(FairTrade.getFt().getOptions().getSkeleton().buildInventory(EnumI18n.TITLE.localize(p1, p2))));
                 ret = true;
             }
         }

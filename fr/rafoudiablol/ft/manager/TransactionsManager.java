@@ -36,7 +36,7 @@ public class TransactionsManager implements
 
     @Override
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onTransactionToggle(ToggleTransactionEvent e) {
+    public void onTransactionToggle(StatusTransactionEvent e) {
 
         PlayerStatus status1 = getStatus(e.getPlayerID());
         PlayerStatus status2 = getStatus(e.getOtherID());
@@ -47,7 +47,7 @@ public class TransactionsManager implements
 
             if(status1.hasConfirm() && status2.hasConfirm())
             {
-                AcceptTransactionEvent e2 = AcceptTransactionEvent.cookEvent(status1);
+                FinalizeTransactionEvent e2 = FinalizeTransactionEvent.cookEvent(status1);
                 Bukkit.getPluginManager().callEvent(e2);
                 remove(e);
             }

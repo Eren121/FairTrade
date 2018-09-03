@@ -5,7 +5,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.Inventory;
 
-public class ToggleTransactionEvent extends TransactionEvent {
+/**
+ * Fire when a player click on confirmation button to switch his status
+ * (from confirm to cancel or from cancel to confirm)
+ */
+public class StatusTransactionEvent extends TransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean status;
@@ -18,7 +22,7 @@ public class ToggleTransactionEvent extends TransactionEvent {
      * @param inv the trading inventory
      * @param status the new status of 'player'
      */
-    public ToggleTransactionEvent(Player player, Player other, Inventory inv, boolean status) {
+    public StatusTransactionEvent(Player player, Player other, Inventory inv, boolean status) {
         super(player, other);
         this.src = player;
         this.inv = inv;
