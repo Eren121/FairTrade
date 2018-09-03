@@ -1,6 +1,5 @@
 package fr.rafoudiablol.ft.inventory;
 
-import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
@@ -8,9 +7,6 @@ import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
 
 public class SkeletonTrade extends AbstractSkeleton {
 
@@ -20,7 +16,8 @@ public class SkeletonTrade extends AbstractSkeleton {
         registerSlot(new SlotOwner());
         registerSlot(new SlotRemote());
         registerSlot(new SlotConfirm());
-        registerSlot(new SlotStatus());
+        registerSlot(new SlotStatusLocal());
+        registerSlot(new SlotStatusRemote());
         setMatrix(slots);
     }
 

@@ -4,6 +4,7 @@ import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.Inventory;
@@ -25,7 +26,7 @@ public class DummyUpdater implements OnTransactionToggle {
     private void updateInventory(Player p, StatusTransactionEvent e)
     {
         Inventory inv = p.getOpenInventory().getTopInventory();
-        Locations loc = (p == e.getPlayer()) ? Locations.OwnerConfirm : Locations.RemoteConfirm;
+        Class<? extends AbstractSlot> clazz = (p == e.getPlayer()) ? Locations.OwnerConfirm : Locations.RemoteConfirm;
 
         ItemStack decoration = FairTrade.getFt().getOptions().getDummyItem(e.hasConfirm());
         Skeleton.getSlots(loc).forEach(slot -> inv.setItem(slot, decoration));
