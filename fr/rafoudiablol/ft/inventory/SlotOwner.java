@@ -24,7 +24,7 @@ public class SlotOwner extends AbstractSlot {
 
     @Override
     public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot) {
-
+        
         getFt().taskAtNextTick(() -> updateInventory(human, inv, slot));
         return true;
     }
