@@ -21,7 +21,6 @@ public final class APIListener implements Listener {
 
         if(sk != null && clickedInv != null) {
 
-
             if(isActionSimple(action)) {
 
                 if(inv == clickedInv) {

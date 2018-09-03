@@ -5,6 +5,7 @@ import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
+import fr.rafoudiablol.ft.utils.inv.AbstractSlotLocked;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -14,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-public class SlotConfirm extends AbstractSlot {
+public class SlotConfirm extends AbstractSlotLocked {
 
     @Override
     public ItemStack getDefault() {
