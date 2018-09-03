@@ -14,8 +14,8 @@ import java.util.List;
 public class FinalizeTransactionEvent extends TransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
-    private List<ItemStack> playerGift = new ArrayList<>();
-    private List<ItemStack> otherGift = new ArrayList<>();
+    private ItemStack[] playerGift = new ItemStack[0];
+    private ItemStack[] otherGift = new ItemStack[0];
 
     /**
      *
@@ -48,19 +48,19 @@ public class FinalizeTransactionEvent extends TransactionEvent {
         return ret;
     }
 
-    public void setPlayerGift(List<ItemStack> itemStacks) {
+    public void setPlayerGift(ItemStack[] itemStacks) {
         playerGift = itemStacks;
     }
 
-    public void setOtherGift(List<ItemStack> itemStacks) {
+    public void setOtherGift(ItemStack[] itemStacks) {
         otherGift = itemStacks;
     }
 
-    public List<ItemStack> getPlayerGift() {
+    public ItemStack[] getPlayerGift() {
         return playerGift;
     }
 
-    public List<ItemStack> getOtherGift() {
+    public ItemStack[] getOtherGift() {
         return otherGift;
     }
 }

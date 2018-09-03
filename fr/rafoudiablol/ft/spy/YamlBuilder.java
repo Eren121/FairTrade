@@ -11,10 +11,6 @@ public class YamlBuilder
     private static final String KEY = "item";
     private static final YamlConfiguration tmp = new YamlConfiguration();
 
-    public static String toString(List<ItemStack> list) {
-        return toString(list.toArray(new ItemStack[0]));
-    }
-
     public static String toString(ItemStack stacks[])
     {
         tmp.set(KEY, stacks);
