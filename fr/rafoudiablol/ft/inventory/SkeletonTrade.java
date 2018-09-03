@@ -5,6 +5,7 @@ import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.Holder;
+import fr.rafoudiablol.ft.utils.inv.SlotLocked;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -17,6 +18,8 @@ public class SkeletonTrade extends AbstractSkeleton {
         registerSlot(new SlotOwner());
         registerSlot(new SlotRemote());
         registerSlot(new SlotConfirm());
+        registerSlot(new SlotMoreXP());
+        registerSlot(new SlotLessXP());
         registerSlot(new SlotStatusLocal());
         registerSlot(new SlotStatusRemote());
         setMatrix(slots);
