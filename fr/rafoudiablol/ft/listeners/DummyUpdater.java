@@ -2,9 +2,15 @@ package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
+import fr.rafoudiablol.ft.inventory.SkeletonTrade;
+import fr.rafoudiablol.ft.inventory.SlotConfirm;
+import fr.rafoudiablol.ft.inventory.SlotStatusLocal;
+import fr.rafoudiablol.ft.inventory.SlotStatusRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
+import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.Inventory;
@@ -26,12 +32,13 @@ public class DummyUpdater implements OnTransactionToggle {
     private void updateInventory(Player p, StatusTransactionEvent e)
     {
         Inventory inv = p.getOpenInventory().getTopInventory();
-        Class<? extends AbstractSlot> clazz = (p == e.getPlayer()) ? Locations.OwnerConfirm : Locations.RemoteConfirm;
+        AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
+        Class<? extends AbstractSlot> clazz = (p == e.getPlayer()) ? SlotStatusLocal.class : SlotStatusRemote.class;
 
         ItemStack decoration = FairTrade.getFt().getOptions().getDummyItem(e.hasConfirm());
-        Skeleton.getSlots(loc).forEach(slot -> inv.setItem(slot, decoration));
+        sk.byType(clazz).forEach(slot -> inv.setItem(slot, decoration));
 
-        ItemStack confirm = inv.getItem(Skeleton.getConfirm());
+        ItemStack confirm = inv.getItem(sk.firstSlot(SlotConfirm.class));
         String title, msg;
 
         if(p == e.getPlayer())

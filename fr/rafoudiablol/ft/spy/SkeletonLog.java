@@ -7,9 +7,7 @@ import fr.rafoudiablol.ft.inventory.SlotRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
-import fr.rafoudiablol.ft.utils.inv.Holder;
 import fr.rafoudiablol.ft.utils.inv.SlotLocked;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -56,7 +54,7 @@ public class SkeletonLog extends AbstractSkeleton {
             }
         }
 
-        inv.setItem(trade.getFirst(SlotConfirm.class), getHistoryInfoItem(tr));
+        inv.setItem(trade.firstSlot(SlotConfirm.class), getHistoryInfoItem(tr));
 
         return inv;
     }

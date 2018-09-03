@@ -72,7 +72,7 @@ public abstract class AbstractSkeleton {
     /**
      * @return a list of all slots that meet the condition slotType.getClass() == clazz, sorted ascending order
      */
-    public List<Integer> fromType(Class<? extends AbstractSlot> clazz) {
+    public List<Integer> byType(Class<? extends AbstractSlot> clazz) {
 
         List<Integer> ret = new LinkedList<>();
         for(int i = 0; i < matrix.length; ++i) {
@@ -88,7 +88,7 @@ public abstract class AbstractSkeleton {
      * @param clazz
      * @return the first slot of this type. -1 if no slot found.
      */
-    public int getFirst(Class<? extends AbstractSlot> clazz) {
+    public int firstSlot(Class<? extends AbstractSlot> clazz) {
 
         for(int i = 0; i < size(); ++i) {
             if(clazz.equals(matrix[i].getClass())) {

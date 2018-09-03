@@ -1,6 +1,5 @@
 package fr.rafoudiablol.ft.utils;
 
-import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
@@ -30,7 +29,7 @@ public class Inventoris {
 
         ItemStack[] remotes = new ItemStack[size];
 
-        for(int slot : sk.fromType(clazz)) {
+        for(int slot : sk.byType(clazz)) {
 
             remotes[slot] = inv.getItem(slot);
         }
