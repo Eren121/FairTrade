@@ -18,6 +18,7 @@ public abstract class AbstractSkeleton {
 
     public void registerSlot(AbstractSlot type) {
         slots.put(type.getId(), type);
+        FairTrade.getFt().i(getClass().getName() + " bind id " + type.getId() + " " + type.getClass().getName());
     }
 
     public void setMatrix(int[] ids) {
@@ -28,7 +29,11 @@ public abstract class AbstractSkeleton {
 
         matrix = new AbstractSlot[ids.length];
         for(int i = 0; i < matrix.length; ++i) {
-            matrix[i] = slots.get(i);
+            matrix[i] = slots.get(ids[i]);
+
+            if(matrix[i] == null) {
+                FairTrade.getFt().w(getClass() + ": id not bind " + ids[i]);
+            }
         }
     }
 

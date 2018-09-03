@@ -18,7 +18,7 @@ public class TradingListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void event(FinalizeTransactionEvent e) {
 
-        e.setOtherGift(Inventoris.takeAll(SlotRemote.class, e.getPlayer()));
-        e.setPlayerGift(Inventoris.takeAll(SlotRemote.class, e.getOther()));
+        e.setOtherGift(Inventoris.merge(SlotRemote.class, e.getPlayer().getInventory(), e.getPlayer().getOpenInventory().getTopInventory()));
+        e.setPlayerGift(Inventoris.merge(SlotRemote.class, e.getOther().getInventory(), e.getOther().getOpenInventory().getTopInventory()));
     }
 }

@@ -1,12 +1,15 @@
-package fr.rafoudiablol.ft.utils.inv;
+package fr.rafoudiablol.ft.utils;
 
+import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
+import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
-public final class Listener {
+public final class APIListener implements Listener {
 
     @EventHandler
     public void event(InventoryClickEvent e) {

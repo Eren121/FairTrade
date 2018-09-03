@@ -1,49 +1,59 @@
 package fr.rafoudiablol.ft.utils;
 
+import com.google.common.collect.Lists;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
+import net.minecraft.server.v1_13_R2.IMaterial;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Inventoris {
 
     /**
-     * Add to player inventory all items in the slots that matches getClass() == clazz, and clear inventory
-     * Keep items in inventory if they cannot be stored
+     * Merge two inventories.
+     * If dest has not enough place, items are keep.
      *
-     * @param player corresponding player
+     * @param filter filter for source inventory slots
+     * @param dest
+     * @param source
      * @return an array of all matches items, including what it cannot be stored
      */
-    public static ItemStack[] takeAll(Class<? extends AbstractSlot> clazz, HumanEntity player)
+    public static ItemStack[] merge(Class<? extends AbstractSlot> filter, Inventory dest, Inventory source)
     {
-        Inventory inv = player.getOpenInventory().getTopInventory();
-        AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
-        Inventory playerInv = player.getInventory();
-        int size = inv.getSize();
+        ArrayList<ItemStack> ret = new ArrayList<>();
+        AbstractSkeleton sk = Holder.tryGet(source.getHolder());
+        int size = source.getSize();
 
-        // Get all owner items
+        for(int i = 0; i < size; ++i) {
 
-        ItemStack[] remotes = new ItemStack[size];
+            ItemStack stack = source.getItem(i);
+            ItemStack newItem = null;
 
-        for(int slot : sk.byType(clazz)) {
+            if(filter.equals(sk.get(i).getClass())) {
 
-            remotes[slot] = inv.getItem(slot);
+                if(stack != null) {
+
+                    ret.add(stack);
+
+                    Map<Integer, ItemStack> remain = dest.addItem(stack);
+                    if(!remain.isEmpty()) {
+
+                        // Maximum one item, because we add only one
+                        source.setItem(i, remain.get(0));
+                        newItem = remain.get(0);
+                    }
+                }
+            }
+
+            source.setItem(i, newItem);
         }
 
-        inv.clear();
-
-        // Keep the item when the player has no empty space
-
-        Map<Integer, ItemStack> remaining = playerInv.addItem(remotes);
-        remaining.forEach(inv::setItem);
-
-        // Remove null items
-
-        remotes = Arrais.removeNullFromArray(remotes);
-        return remotes;
+        return ret.toArray(new ItemStack[0]);
     }
 }

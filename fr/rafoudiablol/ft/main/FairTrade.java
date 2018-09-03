@@ -11,6 +11,7 @@ import fr.rafoudiablol.ft.manager.ITransactionManager;
 import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
+import fr.rafoudiablol.ft.utils.APIListener;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -78,6 +79,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         getServer().getPluginManager().registerEvents(db, this);
         getServer().getPluginManager().registerEvents(new RequiredDistance(), this);
         getServer().getPluginManager().registerEvents(new DummyUpdater(), this);
+        getServer().getPluginManager().registerEvents(new APIListener(), this);
     }
 
     private void registerCommands()
