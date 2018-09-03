@@ -4,6 +4,7 @@ import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
+import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -42,6 +43,8 @@ public class SkeletonTrade extends AbstractSkeleton {
             status.aborted = true;
 
             if (otherStatus != null) {
+
+                ((Holder)other.getOpenInventory().getTopInventory().getHolder()).stopTracing();
                 otherStatus.aborted = true;
                 other.closeInventory();
                 FairTrade.getFt().taskAtNextTick(other::closeInventory);
