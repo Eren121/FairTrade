@@ -4,6 +4,7 @@ import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.events.RequestTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
@@ -37,11 +38,18 @@ public class RequiredDistance implements OnTransactionRequest, OnTransactionInit
     }
 
     private String getReason(Player p1, Player p2) {
+
         if (p1.getWorld() != p2.getWorld()) {
+
             return EnumI18n.REASON_WORLD.localize();
-        } else if (p1.getLocation().distanceSquared(p2.getLocation()) > FairTrade.getFt().getOptions().getDistanceMinSq()) {
+
+        } else if (p1.getLocation().distanceSquared(p2.getLocation()) > FairTrade.getFt().getOptions().getDistanceMinSq()
+                && !p1.getGameMode().equals(GameMode.CREATIVE) && !p2.getGameMode().equals(GameMode.CREATIVE)) {
+
             return EnumI18n.REASON_DISTANCE.localize();
+
         } else {
+
             return null;
         }
     }
