@@ -15,13 +15,11 @@ public class Inventoris {
     /**
      * Add to player inventory all items in the slots that matches getClass() == clazz, and clear inventory
      * Keep items in inventory if they cannot be stored
-     * And optionally close inventory if all items can be taken
      *
      * @param player corresponding player
-     * @param close true to close the inventory. If the player has not enough space, the inventory is never closed, even if close == true
      * @return an array of all matches items, including what it cannot be stored
      */
-    public static ItemStack[] takeAll(Class<? extends AbstractSlot> clazz, HumanEntity player, boolean close)
+    public static ItemStack[] takeAll(Class<? extends AbstractSlot> clazz, HumanEntity player)
     {
         Inventory inv = player.getOpenInventory().getTopInventory();
         AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
@@ -44,15 +42,9 @@ public class Inventoris {
         Map<Integer, ItemStack> remaining = playerInv.addItem(remotes);
         remaining.forEach(inv::setItem);
 
-        // Optionally close the inventory
+        // Remove null items
 
         remotes = Arrais.removeNullFromArray(remotes);
-
-        if(remotes.length > 0 && close) {
-
-            FairTrade.getFt().taskAtNextTick(player::closeInventory);
-        }
-
         return remotes;
     }
 }
