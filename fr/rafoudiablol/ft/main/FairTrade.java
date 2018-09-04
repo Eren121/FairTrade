@@ -9,10 +9,9 @@ import fr.rafoudiablol.ft.listeners.RequiredDistance;
 import fr.rafoudiablol.ft.listeners.TradingListener;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
 import fr.rafoudiablol.ft.manager.TransactionsManager;
-import fr.rafoudiablol.ft.spy.Database;
-import fr.rafoudiablol.ft.spy.Queries;
+import fr.rafoudiablol.ft.db.Database;
+import fr.rafoudiablol.ft.db.Queries;
 import fr.rafoudiablol.ft.utils.APIListener;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.inventory;
 
+import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
@@ -31,14 +32,9 @@ public class SlotMoreXP extends AbstractSlotXP {
         int xp = FairTrade.getFt().getOptions().getExpAmount();
         xp *= click.isShiftClick() ? 10 : 1;
         status.xp += xp;
+        status.xp = Math.min((int)player.getExp(), status.xp);
 
         updateText(inv, status.xp);
         return false;
-    }
-
-    @Override
-    public ItemStack getDefault() {
-
-        return ItemStaxs.rename(new ItemStack(Material.EXPERIENCE_BOTTLE), "Giving 0 Xp");
     }
 }

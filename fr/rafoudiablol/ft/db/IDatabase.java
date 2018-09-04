@@ -1,4 +1,4 @@
-package fr.rafoudiablol.ft.spy;
+package fr.rafoudiablol.ft.db;
 
 import java.sql.ResultSet;
 

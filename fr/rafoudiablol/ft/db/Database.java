@@ -1,8 +1,9 @@
-package fr.rafoudiablol.ft.spy;
+package fr.rafoudiablol.ft.db;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.listeners.OnTransactionAccept;
+import fr.rafoudiablol.ft.spy.Transaction;
 import fr.rafoudiablol.ft.utils.YamlBuilder;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -14,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
-import static fr.rafoudiablol.ft.spy.Queries.*;
+import static fr.rafoudiablol.ft.db.Queries.*;
 
 public class Database implements IDatabase, OnTransactionAccept
 {

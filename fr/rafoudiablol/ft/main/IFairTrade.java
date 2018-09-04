@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.main;
 
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
-import fr.rafoudiablol.ft.spy.Database;
+import fr.rafoudiablol.ft.db.Database;
 import org.bukkit.command.CommandSender;
 
 public interface IFairTrade extends ILoggeable {

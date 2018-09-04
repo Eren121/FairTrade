@@ -3,8 +3,10 @@ package fr.rafoudiablol.ft.listeners;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.inventory.SlotOwner;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.Inventoris;
 import fr.rafoudiablol.ft.utils.inv.Holder;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -28,5 +30,8 @@ public class TradingListener implements Listener {
 
         ((Holder)e.getPlayer().getOpenInventory().getTopInventory().getHolder()).stopTracing();
         ((Holder)e.getOther().getOpenInventory().getTopInventory().getHolder()).stopTracing();
+
+        // Give XP
+        e.forEach((p1, p2) -> p1.giveExp(FairTrade.getFt().getManager().getStatus(p2.getUniqueId()).xp));
     }
 }
