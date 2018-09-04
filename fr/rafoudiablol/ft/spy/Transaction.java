@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.spy;
 
+import fr.rafoudiablol.ft.utils.YamlBuilder;
 import org.bukkit.inventory.ItemStack;
 
 public class Transaction

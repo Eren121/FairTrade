@@ -3,6 +3,7 @@ package fr.rafoudiablol.ft.spy;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.listeners.OnTransactionAccept;
+import fr.rafoudiablol.ft.utils.YamlBuilder;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

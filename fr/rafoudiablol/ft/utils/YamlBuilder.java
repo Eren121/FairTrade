@@ -1,4 +1,4 @@
-package fr.rafoudiablol.ft.spy;
+package fr.rafoudiablol.ft.utils;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
