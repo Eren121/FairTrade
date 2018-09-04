@@ -35,7 +35,7 @@ public class SkeletonLog extends AbstractSkeleton {
      * @param tr
      * @return
      */
-    public Inventory buildInventory(Transaction tr) {
+    public Inventory buildInventory(OldTransaction tr) {
 
         AbstractSkeleton trade = FairTrade.getFt().getOptions().getSkeleton();
         Inventory inv = super.buildInventory(tr.getTitle());
@@ -59,7 +59,7 @@ public class SkeletonLog extends AbstractSkeleton {
         return inv;
     }
 
-    private ItemStack getHistoryInfoItem(Transaction tr)
+    private ItemStack getHistoryInfoItem(OldTransaction tr)
     {
         String[] info = new String[3];
         info[0] = EnumI18n.INFO_1.localize(tr.requesterName, tr.accepterName, tr.date);

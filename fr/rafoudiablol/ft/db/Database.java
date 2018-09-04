@@ -3,7 +3,7 @@ package fr.rafoudiablol.ft.db;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.listeners.OnTransactionAccept;
-import fr.rafoudiablol.ft.spy.Transaction;
+import fr.rafoudiablol.ft.spy.OldTransaction;
 import fr.rafoudiablol.ft.utils.YamlBuilder;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -127,10 +127,10 @@ public class Database implements IDatabase, OnTransactionAccept
         return ret;
     }
 
-    public Transaction getTransactionFromID(int id)
+    public OldTransaction getTransactionFromID(int id)
     {
         ResultSet res = query("SELECT * FROM notary WHERE id = " + id);
-        Transaction ret = null;
+        OldTransaction ret = null;
 
         if(res != null)
         {
@@ -138,7 +138,7 @@ public class Database implements IDatabase, OnTransactionAccept
 
                 //Check ID was found
                 if(res.next()) {
-                    ret = new Transaction(
+                    ret = new OldTransaction(
                             res.getString(Requester.query),
                             res.getString(Accepter.query),
                             res.getString(WhatRequestGive.query),

@@ -3,7 +3,7 @@ package fr.rafoudiablol.ft.spy;
 import fr.rafoudiablol.ft.utils.YamlBuilder;
 import org.bukkit.inventory.ItemStack;
 
-public class Transaction
+public class OldTransaction
 {
     public final String requesterName;
     public final String accepterName;
@@ -11,7 +11,7 @@ public class Transaction
     public final ItemStack[] whatAccepterGives;
     public final String date;
 
-    public Transaction(String requesterName, String accepterName, String whatRequesterGives, String whatAccepterGives, String date) {
+    public OldTransaction(String requesterName, String accepterName, String whatRequesterGives, String whatAccepterGives, String date) {
 
         this.requesterName = requesterName;
         this.accepterName = accepterName;
