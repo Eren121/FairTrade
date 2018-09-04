@@ -1,8 +1,8 @@
 package fr.rafoudiablol.ft.inventory;
 
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlotLocked;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-public class SlotLessXP extends AbstractSlotLocked {
+public class SlotLessXP extends AbstractSlotXP {
 
     @Override
     public int getId() {
@@ -28,15 +28,12 @@ public class SlotLessXP extends AbstractSlotLocked {
 
         //TODO XpChangedTransactionEvent
 
-        int amount = 5;
+        int xp = FairTrade.getFt().getOptions().getExpAmount();
+        xp *= click.isShiftClick() ? 10 : 1;
+        status.xp -= xp;
+        status.xp = Math.max(0, status.xp);
 
-        if(action == InventoryAction.PICKUP_HALF) amount *= 10;
-
-        status.xp -= amount;
-        player.giveExp(-amount);
-
-        ItemStaxs.rename(inv.getItem(getSkeleton().firstSlot(SlotLessXP.class)), "Giving " + status.xp + " Xp");
-        ItemStaxs.rename(inv.getItem(getSkeleton().firstSlot(SlotMoreXP.class)), "Giving " + status.xp + " Xp");
+        updateText(inv, status.xp);
         return false;
     }
 

@@ -27,7 +27,9 @@ public enum EnumI18n {
 
     YOU_ACCEPTED,
     REMOTE_ACCEPTED("<player>"),
-    NOBODY_ACCEPTED;
+    NOBODY_ACCEPTED,
+
+    XP_AMOUNT("<xp>");
 
     public final String path;
     public final String[] args;

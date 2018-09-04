@@ -9,6 +9,8 @@ public interface IOptions {
     double getDistanceMax();
     void setDistanceMax(double f);
 
+    int getExpAmount();
+
     I18n geti18n();
     ItemStack getDummyItem(boolean ok);
     boolean canSelfTrade();

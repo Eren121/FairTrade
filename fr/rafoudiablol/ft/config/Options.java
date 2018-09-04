@@ -112,6 +112,11 @@ public class Options implements IOptions {
     }
 
     @Override
+    public int getExpAmount() {
+        return getConfig().getInt(EnumOption.XP_AMOUNT.path, 5);
+    }
+
+    @Override
     public I18n geti18n() {
         return i18n;
     }

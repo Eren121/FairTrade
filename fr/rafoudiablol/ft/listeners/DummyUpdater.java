@@ -17,7 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * APIListener used to update unmodifiable items of the trade inventory
+ * APIListener used to updateText unmodifiable items of the trade inventory
  * And confirm button text
  */
 public class DummyUpdater implements OnTransactionToggle {

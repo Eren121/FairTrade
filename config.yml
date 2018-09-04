@@ -9,3 +9,6 @@ lang: en
 
 # Can you trade with yourself ? You probably don't want that. Used for debugging purpose.
 self: false
+
+# How much XP add by each click. Shift-clicking multiply this value by 10
+xp-amount: 5

@@ -21,4 +21,4 @@ nobody_accepted: "Nobody has accepted."
 remote_accepted: "<player> has accepted."
 
 
-give_xp: "Give <xp> xp"
+xp_amount: "Give <xp> xp"
