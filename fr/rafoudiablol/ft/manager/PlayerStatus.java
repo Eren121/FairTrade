@@ -8,6 +8,7 @@ public class PlayerStatus implements ITransactionLink {
     private boolean confirm = false;
     private boolean ask;
     public boolean aborted = false;
+    public float xp;
 
     public PlayerStatus(Player p1, Player p2, boolean flag) {
         player = p1;

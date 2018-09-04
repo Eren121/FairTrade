@@ -26,7 +26,7 @@ public final class APIListener implements Listener {
                 if(inv == clickedInv) {
 
                     int slot = e.getSlot();
-                    if(!sk.action(action, e.getWhoClicked(), inv, slot)) {
+                    if(!sk.action(action, e.getWhoClicked(), inv, slot, e.getClick())) {
                         e.setCancelled(true);
                     }
                 }

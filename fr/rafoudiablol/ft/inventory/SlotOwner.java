@@ -1,13 +1,13 @@
 package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.events.UpdateTransactionEvent;
-import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 
@@ -23,7 +23,7 @@ public class SlotOwner extends AbstractSlot {
     }
 
     @Override
-    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot) {
+    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot, ClickType click) {
         
         getFt().taskAtNextTick(() -> updateInventory(human, inv, slot));
         return true;

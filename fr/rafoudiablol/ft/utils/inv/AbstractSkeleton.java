@@ -3,6 +3,7 @@ package fr.rafoudiablol.ft.utils.inv;
 import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 
@@ -17,6 +18,7 @@ public abstract class AbstractSkeleton {
     private Map<Integer, AbstractSlot> slots = new HashMap<>();
 
     public void registerSlot(AbstractSlot type) {
+        type.setSkeleton(this);
         slots.put(type.getId(), type);
         FairTrade.getFt().i(getClass().getName() + " bind id " + type.getId() + " " + type.getClass().getName());
     }
@@ -127,7 +129,7 @@ public abstract class AbstractSkeleton {
     {
     }
 
-    public boolean action(InventoryAction a, HumanEntity human, Inventory inv, int slot) {
-        return matrix[slot].action(a, human, inv, slot);
+    public boolean action(InventoryAction a, HumanEntity human, Inventory inv, int slot, ClickType click) {
+        return matrix[slot].action(a, human, inv, slot, click);
     }
 }

@@ -9,20 +9,23 @@ import static java.util.Arrays.asList;
 
 public class ItemStaxs {
 
-    public static void rename(ItemStack i, String display)
+    public static ItemStack rename(ItemStack i, String display)
     {
         metaCall(i, meta -> meta.setDisplayName(display));
+        return i;
     }
 
-    public static void brief(ItemStack i, String... des)
+    public static ItemStack brief(ItemStack i, String... des)
     {
         metaCall(i, meta -> meta.setLore(asList(des)));
+        return i;
     }
 
-    public static void renameAndBrief(ItemStack i, String s1, String s2)
+    public static ItemStack renameAndBrief(ItemStack i, String s1, String s2)
     {
         rename(i, s1);
         brief(i, s2);
+        return i;
     }
 
     public static void metaCall(ItemStack i, Consumer<ItemMeta> f)

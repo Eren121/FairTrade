@@ -33,7 +33,7 @@ public enum EnumI18n {
     public final String[] args;
 
     EnumI18n(String... args) {
-        this.path = this.name();
+        this.path = this.name().toLowerCase();
         this.args = args;
     }
 

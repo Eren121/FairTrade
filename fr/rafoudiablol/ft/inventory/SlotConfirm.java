@@ -4,11 +4,11 @@ import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.utils.ItemStaxs;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlotLocked;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +31,7 @@ public class SlotConfirm extends AbstractSlotLocked {
     }
 
     @Override
-    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot) {
+    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot, ClickType click) {
 
         if(action == InventoryAction.PICKUP_ALL) {
 

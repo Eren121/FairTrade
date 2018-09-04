@@ -15,7 +15,6 @@ public class UnitTest
         AbstractSkeleton sk = FairTrade.getFt().getOptions().getSkeleton();
 
         Validate.isTrue(sk.byType(SlotConfirm.class).size() > 0, "confirm button not found");
-        Validate.isTrue(sk.byType(SlotConfirm.class).size() < 2, "too many confirm buttons");
         Validate.isTrue(sk.byType(SlotOwner.class).size() == sk.byType(SlotRemote.class).size(), "count not match");
     }
 
