@@ -1,12 +1,8 @@
 package fr.rafoudiablol.ft.utils;
 
-import com.google.common.collect.Lists;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
-import net.minecraft.server.v1_13_R2.IMaterial;
-import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 

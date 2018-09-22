@@ -13,6 +13,7 @@ import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,11 +21,10 @@ import org.bukkit.inventory.ItemStack;
  * APIListener used to update unmodifiable items of the trade inventory
  * And confirm button text
  */
-public class DummyUpdater implements OnTransactionToggle {
+public class DummyUpdater implements Listener {
 
     @EventHandler
-    @Override
-    public void onTransactionToggle(StatusTransactionEvent e) {
+    public void event(StatusTransactionEvent e) {
 
         e.forEach(p -> updateInventory(p, e));
     }

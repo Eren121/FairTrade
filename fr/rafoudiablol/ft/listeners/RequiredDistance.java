@@ -6,12 +6,12 @@ import fr.rafoudiablol.ft.events.RequestTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public class RequiredDistance implements OnTransactionRequest, OnTransactionInitiate {
+public class RequiredDistance implements Listener {
 
     @EventHandler
-    @Override
-    public void onTransactionRequest(RequestTransactionEvent e) {
+    public void event(RequestTransactionEvent e) {
 
         Player p1 = e.getPlayer();
         Player p2 = e.getOther();
@@ -23,9 +23,8 @@ public class RequiredDistance implements OnTransactionRequest, OnTransactionInit
         }
     }
 
-    @Override
     @EventHandler
-    public void onInitiateTransaction(InitiateTransactionEvent e) {
+    public void event(InitiateTransactionEvent e) {
 
         Player p1 = e.getPlayer();
         Player p2 = e.getOther();

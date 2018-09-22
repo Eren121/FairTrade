@@ -2,10 +2,10 @@ package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
-import fr.rafoudiablol.ft.listeners.OnTransactionAccept;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 import static fr.rafoudiablol.ft.spy.Queries.*;
 
-public class Database implements IDatabase, OnTransactionAccept
+public class Database implements IDatabase, Listener
 {
     private Connection connection;
     private Statement statement;
@@ -81,9 +81,8 @@ public class Database implements IDatabase, OnTransactionAccept
         }
     }
 
-    @Override
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onAcceptTransaction(FinalizeTransactionEvent e) {
+    public void event(FinalizeTransactionEvent e) {
 
         int id = registerTransaction(e.getPlayer(), e.getOther(), YamlBuilder.toString(e.getPlayerGift()), YamlBuilder.toString(e.getOtherGift()));
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
