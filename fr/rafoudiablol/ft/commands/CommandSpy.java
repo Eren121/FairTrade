@@ -23,6 +23,6 @@ public class CommandSpy implements CommandExecutor {
             FairTrade.getFt().sendMessage(EnumI18n.NO_TRANSACTION.localize(params[0]), commandSender);
         }
 
-        return tr != null;
+        return true;
     }
 }

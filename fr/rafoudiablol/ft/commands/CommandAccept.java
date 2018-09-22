@@ -14,7 +14,6 @@ public class CommandAccept implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 
-        boolean ret = false;
         Player dest = (Player)commandSender;
         Player source = FairTrade.getFt().getManager().popSource(dest);
 
@@ -24,13 +23,12 @@ public class CommandAccept implements CommandExecutor {
 
             if (!event.isCancelled()) {
                 event.forEach((p1, p2) -> p1.openInventory(FairTrade.getFt().getOptions().getSkeleton().buildInventory(EnumI18n.TITLE.localize(p1, p2))));
-                ret = true;
             }
         }
         else {
             FairTrade.getFt().sendMessage(EnumI18n.NO_REQUEST.localize(), commandSender);
         }
 
-        return ret;
+        return true;
     }
 }

@@ -18,6 +18,6 @@ public class CommandRequest implements CommandExecutor {
         RequestTransactionEvent e = new RequestTransactionEvent(player, arg);
         Bukkit.getPluginManager().callEvent(e);
 
-        return !e.isCancelled();
+        return true;
     }
 }
