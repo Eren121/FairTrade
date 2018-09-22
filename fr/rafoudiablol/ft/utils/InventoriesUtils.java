@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Inventoris {
+public class InventoriesUtils {
 
     /**
      * Merge two inventories.

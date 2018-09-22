@@ -3,7 +3,7 @@ package fr.rafoudiablol.ft.main;
 import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotOwner;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
-import fr.rafoudiablol.ft.utils.Arrais;
+import fr.rafoudiablol.ft.utils.ArraysUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.apache.commons.lang.Validate;
 
@@ -22,6 +22,6 @@ public class UnitTest
     public void checkArrais() {
 
         Integer[] a1 = {1, 2, null, 3, null, 4, null, null};
-        Validate.isTrue(Arrais.removeNullFromArray(a1).length == 4);
+        Validate.isTrue(ArraysUtils.removeNullFromArray(a1).length == 4);
     }
 }

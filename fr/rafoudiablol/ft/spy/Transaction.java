@@ -1,6 +1,6 @@
 package fr.rafoudiablol.ft.spy;
 
-import fr.rafoudiablol.ft.utils.YamlBuilder;
+import fr.rafoudiablol.ft.utils.YamlUtils;
 import org.bukkit.inventory.ItemStack;
 
 public class Transaction
@@ -15,8 +15,8 @@ public class Transaction
 
         this.requesterName = requesterName;
         this.accepterName = accepterName;
-        this.whatRequesterGives = YamlBuilder.toItems(whatRequesterGives);
-        this.whatAccepterGives = YamlBuilder.toItems(whatAccepterGives);
+        this.whatRequesterGives = YamlUtils.toItems(whatRequesterGives);
+        this.whatAccepterGives = YamlUtils.toItems(whatAccepterGives);
         this.date = date;
     }
 

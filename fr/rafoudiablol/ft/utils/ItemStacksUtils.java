@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 import static java.util.Arrays.asList;
 
-public class ItemStaxs {
+public class ItemStacksUtils {
 
     public static void rename(ItemStack i, String display)
     {

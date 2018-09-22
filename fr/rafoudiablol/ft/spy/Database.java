@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
-import fr.rafoudiablol.ft.utils.YamlBuilder;
+import fr.rafoudiablol.ft.utils.YamlUtils;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -85,7 +85,7 @@ public class Database implements IDatabase, Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void event(FinalizeTransactionEvent e) {
 
-        int id = registerTransaction(e.getPlayer(), e.getOther(), YamlBuilder.toString(e.getPlayerGift()), YamlBuilder.toString(e.getOtherGift()));
+        int id = registerTransaction(e.getPlayer(), e.getOther(), YamlUtils.toString(e.getPlayerGift()), YamlUtils.toString(e.getOtherGift()));
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
     }
 

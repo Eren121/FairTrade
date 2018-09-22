@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class YamlBuilder
+public class YamlUtils
 {
     private static final String KEY = "item";
     private static final YamlConfiguration tmp = new YamlConfiguration();

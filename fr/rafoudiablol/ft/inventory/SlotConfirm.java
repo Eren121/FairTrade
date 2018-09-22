@@ -3,14 +3,12 @@ package fr.rafoudiablol.ft.inventory;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
-import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
@@ -21,7 +19,7 @@ public class SlotConfirm extends AbstractSlot {
     public ItemStack getDefault() {
 
         ItemStack ret = new ItemStack(Material.WRITTEN_BOOK);
-        ItemStaxs.rename(ret, EnumI18n.CONFIRM.localize());
+        ItemStacksUtils.rename(ret, EnumI18n.CONFIRM.localize());
         return ret;
     }
 

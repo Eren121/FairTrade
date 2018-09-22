@@ -3,7 +3,7 @@ package fr.rafoudiablol.ft.utils;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-public class Arrais {
+public class ArraysUtils {
 
     public static<T> T[] removeNullFromArray(T[] a)
     {

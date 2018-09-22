@@ -2,12 +2,11 @@ package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
-import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotStatusLocal;
 import fr.rafoudiablol.ft.inventory.SlotStatusRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
@@ -68,6 +67,6 @@ public class DummyUpdater implements Listener {
             }
         }
 
-        ItemStaxs.renameAndBrief(confirm, title, msg);
+        ItemStacksUtils.renameAndBrief(confirm, title, msg);
     }
 }

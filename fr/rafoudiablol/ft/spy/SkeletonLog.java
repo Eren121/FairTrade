@@ -5,7 +5,7 @@ import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotOwner;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.utils.ItemStaxs;
+import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.SlotLocked;
 import org.bukkit.Material;
@@ -67,8 +67,8 @@ public class SkeletonLog extends AbstractSkeleton {
         info[2] = EnumI18n.INFO_3.localize(tr.requesterName, tr.accepterName, tr.date);
 
         ItemStack item = new ItemStack(Material.BARRIER);
-        ItemStaxs.rename(item, EnumI18n.INFO_0.localize(tr.requesterName, tr.accepterName, tr.date));
-        ItemStaxs.brief(item, info);
+        ItemStacksUtils.rename(item, EnumI18n.INFO_0.localize(tr.requesterName, tr.accepterName, tr.date));
+        ItemStacksUtils.brief(item, info);
 
         return item;
     }
