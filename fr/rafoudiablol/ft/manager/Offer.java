@@ -14,7 +14,11 @@ public class Offer {
         this.p = p;
     }
 
-    public boolean confirm() {
+    public Player getPlayer() {
+        return p;
+    }
+
+    public boolean getConfirm() {
         return confirmed;
     }
 

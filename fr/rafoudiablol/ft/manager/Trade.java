@@ -7,4 +7,12 @@ public class Trade {
     public Trade() {
 
     }
+
+    public void setOffer(int i, Offer offer) {
+        offers[i] = offer;
+    }
+
+    public Offer getOffer(int i) {
+        return offers[i];
+    }
 }
