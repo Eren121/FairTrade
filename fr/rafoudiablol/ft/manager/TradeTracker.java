@@ -32,7 +32,10 @@ public class TradeTracker implements Listener {
         for(int i = 0; i < trades.size(); ++i) {
 
             if(trades.get(i).getOffer(0).getPlayer().getUniqueId().equals(e.getPlayerID())) {
-
+                trades.remove(i);
+                break;
+            }
+            if(trades.get(i).getOffer(1).getPlayer().getUniqueId().equals(e.getOtherID())) {
                 trades.remove(i);
                 break;
             }
