@@ -72,6 +72,7 @@ public class TransactionsManager implements
     }
 
     @Override
+    @EventHandler
     public void onTransactionAbort(AbortTransactionEvent e) {
 
         remove(e);
