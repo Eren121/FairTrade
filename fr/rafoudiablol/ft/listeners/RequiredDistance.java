@@ -24,6 +24,7 @@ public class RequiredDistance implements OnTransactionRequest, OnTransactionInit
     }
 
     @Override
+    @EventHandler
     public void onInitiateTransaction(InitiateTransactionEvent e) {
 
         Player p1 = e.getPlayer();
