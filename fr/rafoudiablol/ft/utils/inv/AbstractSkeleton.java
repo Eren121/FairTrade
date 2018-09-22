@@ -4,6 +4,7 @@ import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
@@ -127,7 +128,7 @@ public abstract class AbstractSkeleton {
     {
     }
 
-    public boolean action(InventoryAction a, HumanEntity human, Inventory inv, int slot) {
-        return matrix[slot].action(a, human, inv, slot);
+    public boolean action(InventoryClickEvent e) {
+        return matrix[e.getSlot()].action(e);
     }
 }

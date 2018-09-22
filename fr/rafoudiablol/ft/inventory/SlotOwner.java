@@ -9,6 +9,7 @@ import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
@@ -23,9 +24,9 @@ public class SlotOwner extends AbstractSlot {
     }
 
     @Override
-    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot) {
+    public boolean action(InventoryClickEvent e) {
 
-        getFt().taskAtNextTick(() -> updateInventory(human, inv, slot));
+        getFt().taskAtNextTick(() -> updateInventory(e.getWhoClicked(), e.getInventory(), e.getSlot()));
         return true;
     }
 

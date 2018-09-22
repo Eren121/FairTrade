@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,14 +31,14 @@ public class SlotConfirm extends AbstractSlot {
     }
 
     @Override
-    public boolean action(InventoryAction action, HumanEntity human, Inventory inv, int slot) {
+    public boolean action(InventoryClickEvent e) {
 
-        if(action == InventoryAction.PICKUP_ALL) {
+        if(e.getAction() == InventoryAction.PICKUP_ALL) {
 
-            PlayerStatus status = getFt().getManager().getStatus(human.getUniqueId());
+            PlayerStatus status = getFt().getManager().getStatus(e.getWhoClicked().getUniqueId());
 
             if(status != null) {
-                StatusTransactionEvent event = new StatusTransactionEvent(status.getPlayer(), status.getOther(), inv, !status.hasConfirm());
+                StatusTransactionEvent event = new StatusTransactionEvent(status.getPlayer(), status.getOther(), e.getInventory(), !status.hasConfirm());
                 Bukkit.getPluginManager().callEvent(event);
             }
         }
