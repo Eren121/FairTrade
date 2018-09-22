@@ -1,4 +1,4 @@
-package fr.rafoudiablol.ft.commands;
+package fr.rafoudiablol.ft.utils.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -12,7 +12,10 @@ import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
 import fr.rafoudiablol.ft.utils.APIListener;
-import org.bukkit.ChatColor;
+import fr.rafoudiablol.ft.utils.commands.CommandDecoratorIntegerArg;
+import fr.rafoudiablol.ft.utils.commands.CommandDecoratorOPlayerArg;
+import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayer;
+import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayerArg;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
