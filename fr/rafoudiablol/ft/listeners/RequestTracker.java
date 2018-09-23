@@ -19,7 +19,6 @@ public class RequestTracker implements Listener {
     public void event(RequestTransactionEvent e) {
 
         targetToRequester.put(e.getOther(), e.getPlayer());
-        FairTrade.getFt().sendMessage(EnumI18n.REQUEST.localize(e.getPlayer()), e.getOther());
     }
 
     @EventHandler

@@ -2,6 +2,7 @@ package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.events.UpdateTransactionEvent;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
@@ -19,7 +20,9 @@ public class SlotOwner extends AbstractSlotTrade {
         UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
         Bukkit.getPluginManager().callEvent(event);
 
-        o.setItem(e.getSlot(), e.getCursor());
+        o.setItem(e.getSlot(), e.getCurrentItem());
+
+        FairTrade.getFt().i("current=" + e.getCurrentItem() + "___cursor="+e.getCursor());
 
         if(o.getConfirm()) {
 
