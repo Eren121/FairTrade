@@ -122,7 +122,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         getLogger().info("Do unit tests...");
         UnitTest unitTest = new UnitTest();
         unitTest.checkSkeletonInventory();
-        unitTest.checkArrais();
+        unitTest.checkArraysUtils();
         getLogger().info("Unit Tests ok.");
     }
 

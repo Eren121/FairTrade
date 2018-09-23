@@ -19,7 +19,7 @@ public class UnitTest
         Validate.isTrue(sk.byType(SlotOwner.class).size() == sk.byType(SlotRemote.class).size(), "count not match");
     }
 
-    public void checkArrais() {
+    public void checkArraysUtils() {
 
         Integer[] a1 = {1, 2, null, 3, null, 4, null, null};
         Validate.isTrue(ArraysUtils.removeNullFromArray(a1).length == 4);
