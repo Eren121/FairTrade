@@ -16,8 +16,6 @@ import org.bukkit.inventory.Inventory;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-//TODO: confirm is not reseted to false when changed now!
-
 public class SlotOwner extends AbstractSlotTrade {
 
     @Override
