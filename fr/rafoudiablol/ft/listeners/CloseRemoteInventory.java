@@ -13,13 +13,12 @@ public class CloseRemoteInventory implements Listener {
 
     public void event(AbortTransactionEvent e) {
 
-        if(Holder.isInstanceof(e.getPlayer().getOpenInventory().getTopInventory(), SkeletonTrade.class)) {
+        e.forEach(p -> {
 
-            FairTrade.getFt().taskAtNextTick(e.getPlayer()::closeInventory);
-        }
-        if(Holder.isInstanceof(e.getPlayer().getOpenInventory().getTopInventory(), SkeletonTrade.class)) {
+            if(Holder.isInstanceof(p.getOpenInventory().getTopInventory(), SkeletonTrade.class)) {
 
-            FairTrade.getFt().taskAtNextTick(e.getOther()::closeInventory);
-        }
+                FairTrade.getFt().taskAtNextTick(p::closeInventory);
+            }
+        });
     }
 }
