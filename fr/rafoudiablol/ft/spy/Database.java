@@ -32,8 +32,6 @@ public class Database implements IDatabase, Listener
     {
         String conPath = "jdbc:sqlite:" + path;
 
-        log.info("Connect to database '" + conPath + "'");
-
         try {
 
             Class.forName("org.sqlite.JDBC");
