@@ -16,9 +16,6 @@ import java.util.logging.Logger;
  */
 public class MergeItems implements Listener {
 
-    public MergeItems(Logger l) {
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void event(FinalizeTransactionEvent e) {
 

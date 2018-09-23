@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.utils;
 
+import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -14,8 +15,11 @@ public class YamlUtils
     public static String toString(ItemStack stacks[])
     {
         tmp.set(KEY, stacks);
-        String str = tmp.saveToString();
-        return str.substring(str.indexOf('\n')+1);
+        String str = stacks.length == 0 ? "" : tmp.saveToString();
+        str = str.substring(str.indexOf('\n')+1);
+
+        FairTrade.getFt().i(str);
+        return str;
     }
 
     @SuppressWarnings("unchecked")
