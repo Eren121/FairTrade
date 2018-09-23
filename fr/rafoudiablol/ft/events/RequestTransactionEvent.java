@@ -12,8 +12,8 @@ import org.bukkit.event.HandlerList;
 public class RequestTransactionEvent extends AbstractTransactionEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
-    public RequestTransactionEvent(Player bully, Player victim) {
-        super(new Trade(bully, victim));
+    public RequestTransactionEvent(Player p1, Player p2) {
+        super(new Trade(p1, p2));
     }
     @Override public HandlerList getHandlers() {
         return handlers;
