@@ -35,7 +35,7 @@ public class Offer {
 
     public void setItem(int i, ItemStack item) {
 
-        if(item == null)
+        if(item == null && items.containsKey(i))
             items.remove(i);
         else
             items.put(i, item);
