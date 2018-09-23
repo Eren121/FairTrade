@@ -41,6 +41,18 @@ public class SlotConfirm extends AbstractSlotTrade {
                 Bukkit.getPluginManager().callEvent(e2);
             }
         }
+        else if(e.getAction() == InventoryAction.PICKUP_HALF) {
+
+            // If SELF-TRADING, right click on confirm button is to toggle remote confirmation
+
+            if(t.getOffer(0).getPlayer().getUniqueId().equals(t.getOffer(1).getPlayer().getUniqueId())) {
+
+                Offer o2 = (t.getOffer(o == t.getOffer(0) ? 1 : 0));
+                o2.toggle();
+                StatusTransactionEvent e2 = new StatusTransactionEvent(t, o2);
+                Bukkit.getPluginManager().callEvent(e2);
+            }
+        }
 
         return false;
     }
