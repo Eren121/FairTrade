@@ -10,7 +10,6 @@ import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -23,11 +22,11 @@ public class SlotOwner extends AbstractSlot {
     @Override
     public boolean action(InventoryClickEvent e) {
 
-        getFt().taskAtNextTick(() -> updateInventory(e.getWhoClicked(), e.getInventory(), e.getSlot()));
+        getFt().taskAtNextTick(() -> updateRemoteInventory(e.getWhoClicked(), e.getInventory(), e.getSlot()));
         return true;
     }
 
-    private void updateInventory(HumanEntity human, Inventory inv, int slot)
+    private void updateRemoteInventory(HumanEntity human, Inventory inv, int slot)
     {
         PlayerStatus status = getFt().getManager().getStatus(human.getUniqueId());
 
@@ -39,14 +38,14 @@ public class SlotOwner extends AbstractSlot {
             UpdateTransactionEvent event = new UpdateTransactionEvent(trade, offer, slot);
             Bukkit.getPluginManager().callEvent(event);
 
-            updateInventory(event);
+            updateRemoteInventory(event);
         }
         else {
             getFt().w("Orphan player trading '" + human.getName() + "'");
         }
     }
 
-    private void updateInventory(UpdateTransactionEvent e) {
+    private void updateRemoteInventory(UpdateTransactionEvent e) {
 
         AbstractSkeleton sk = Holder.tryGet(e.getInventory().getHolder());
         int index = sk.nth(e.getSlot());
