@@ -88,9 +88,7 @@ public class Options implements IOptions {
             StackTraceElement origins[] = e.getStackTrace();
             StackTraceElement s[] = new StackTraceElement[origins.length + 1];
             s[0] = new StackTraceElement("trading", "txt", "trading.txt", lineNo);
-            for(int i = 1; i < s.length; ++i) {
-                s[i] = origins[i-1];
-            }
+            System.arraycopy(origins, 0, s, 1, s.length - 1);
             plugin.w("cannot load trading.txt");
             e.setStackTrace(s);
             e.printStackTrace();
