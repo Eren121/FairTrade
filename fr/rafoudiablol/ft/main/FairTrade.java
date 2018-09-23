@@ -25,7 +25,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private static FairTrade INSTANCE;
     private Database db;
     private TransactionsManager manager;
-    private TradeTracker tracker;
+    private TradeTracker tradeTracker;
     private Options options;
 
     public static IFairTrade getFt() { return INSTANCE; }
@@ -61,7 +61,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
     @Override
     public TradeTracker getTracker() {
-        return tracker;
+        return tradeTracker;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         getServer().getPluginManager().registerEvents(new TradingListener(getLogger()), this);
         getServer().getPluginManager().registerEvents(new RequestTracker(), this);
         getServer().getPluginManager().registerEvents(manager, this);
-        getServer().getPluginManager().registerEvents(tracker, this);
+        getServer().getPluginManager().registerEvents(tradeTracker, this);
         getServer().getPluginManager().registerEvents(db, this);
         getServer().getPluginManager().registerEvents(new RequiredDistance(), this);
         getServer().getPluginManager().registerEvents(new DummyUpdater(), this);
@@ -126,7 +126,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
     private void setupDb()
     {
-        File tracker = new File(getDataFolder(), "tracker.sqlite");
+        File tracker = new File(getDataFolder(), "tradeTracker.sqlite");
 
         if(!tracker.exists())
         {
@@ -157,7 +157,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private void setupManager()
     {
         manager = new TransactionsManager();
-        tracker = new TradeTracker();
+        tradeTracker = new TradeTracker();
     }
 
     private void welcome() {
