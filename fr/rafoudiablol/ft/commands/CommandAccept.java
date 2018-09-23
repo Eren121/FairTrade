@@ -2,6 +2,7 @@ package fr.rafoudiablol.ft.commands;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
+import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.Offer;
 import fr.rafoudiablol.ft.manager.Trade;
@@ -26,10 +27,11 @@ public class CommandAccept implements CommandExecutor {
             trade.setOffer(1, new Offer(dst));
 
             InitiateTransactionEvent event = new InitiateTransactionEvent(trade);
+            SkeletonTrade sk = FairTrade.getFt().getOptions().getSkeleton();
             Bukkit.getPluginManager().callEvent(event);
 
             if (!event.isCancelled()) {
-                event.forEach((p1, p2) -> p1.openInventory(FairTrade.getFt().getOptions().getSkeleton().buildInventory(EnumI18n.TITLE.localize(p1, p2))));
+                event.forEach((p1, p2) -> p1.openInventory(sk.buildInventory(EnumI18n.TITLE.localize(p1, p2))));
             }
         }
         else {
