@@ -60,4 +60,23 @@ public class TradeTracker implements Listener {
 
         return null;
     }
+
+    public Trade getTrade(UUID player) {
+
+        Trade t;
+
+        for(int i = 0; i < trades.size(); ++i) {
+
+            t = trades.get(i);
+
+            if(t.getOffer(0).getPlayer().getUniqueId().equals(player)) {
+                return t;
+            }
+            if(t.getOffer(1).getPlayer().getUniqueId().equals(player)) {
+                return t;
+            }
+        }
+
+        return null;
+    }
 }
