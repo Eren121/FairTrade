@@ -21,11 +21,18 @@ public class AcceptTransactionEvent extends Event {
 
     protected Player players[];
 
-    public AcceptTransactionEvent(Player p1, Player p2) {
-        players = new Player[] {p1, p2};
+    public AcceptTransactionEvent(Player commandSrc) {
+        players = new Player[] {null, commandSrc};
     }
 
     public Player getPlayer(int i) {
         return players[i];
+    }
+
+    /**
+     * @param p the player targeted by /accept command
+     */
+    public void setTarget(Player p) {
+        players[0] = p;
     }
 }

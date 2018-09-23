@@ -1,6 +1,7 @@
 package fr.rafoudiablol.ft.commands;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
+import fr.rafoudiablol.ft.events.AcceptTransactionEvent;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.main.FairTrade;
@@ -18,7 +19,7 @@ public class CommandAccept implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 
         Player dst = (Player)commandSender;
-        Player src = FairTrade.getFt().getManager().popSource(dst);
+        AcceptTransactionEvent e = new AcceptTransactionEvent(dst);
 
         if(src != null) {
 
