@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.inventory.SlotConfirm;
-import fr.rafoudiablol.ft.inventory.SlotOwner;
+import fr.rafoudiablol.ft.inventory.SlotLocal;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
@@ -42,7 +42,7 @@ public class SkeletonLog extends AbstractSkeleton {
 
         for(int i = 0; i < size(); ++i)
         {
-            if(!whatReqGive.isEmpty() && trade.get(i) instanceof SlotOwner)
+            if(!whatReqGive.isEmpty() && trade.get(i) instanceof SlotLocal)
             {
                 inv.setItem(i, whatReqGive.removeLast());
             }

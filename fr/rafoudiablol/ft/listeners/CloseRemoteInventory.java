@@ -1,13 +1,10 @@
 package fr.rafoudiablol.ft.listeners;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
-import fr.rafoudiablol.ft.events.AbstractTransactionEvent;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
-import fr.rafoudiablol.ft.inventory.SlotOwner;
+import fr.rafoudiablol.ft.inventory.SlotLocal;
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.spy.Transaction;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,8 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Make sure when a player close a trade inventory, the other close to, and keep items into player inventory
@@ -52,7 +47,7 @@ public class CloseRemoteInventory implements Listener {
 
         for(int i = 0; i < inventory.getSize(); ++i) {
 
-            if(!(SkeletonTrade.instance.get(i) instanceof SlotOwner)) {
+            if(!(SkeletonTrade.instance.get(i) instanceof SlotLocal)) {
 
                 inventory.clear(i);
             }

@@ -15,7 +15,7 @@ public class SkeletonTrade extends AbstractSkeleton {
 
         instance = this;
         registerSlot(0, new SlotEmpty());
-        registerSlot(1, new SlotOwner());
+        registerSlot(1, new SlotLocal());
         registerSlot(2, new SlotRemote());
         registerSlot(3, new SlotConfirm());
         registerSlot(7, new SlotStatusLocal());

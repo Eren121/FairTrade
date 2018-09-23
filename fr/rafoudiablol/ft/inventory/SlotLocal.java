@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-public class SlotOwner extends AbstractSlotTrade {
+public class SlotLocal extends AbstractSlotTrade {
 
     @Override
     public boolean action(InventoryClickEvent e, Trade t, Offer o) {
