@@ -51,7 +51,7 @@ public class DummyUpdater implements Listener {
         }
         else if(remote) {
             title = EnumI18n.BUTTON_CONFIRM.localize();
-            msg = EnumI18n.NOBODY_ACCEPTED.localize();
+            msg = EnumI18n.REMOTE_ACCEPTED.localize();
         }
         else {
             title = EnumI18n.BUTTON_CONFIRM.localize();
@@ -59,5 +59,6 @@ public class DummyUpdater implements Listener {
         }
 
         ItemStacksUtils.renameAndBrief(confirm, title, msg);
+        player.updateInventory();
     }
 }
