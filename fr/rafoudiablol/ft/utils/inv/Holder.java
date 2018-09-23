@@ -29,4 +29,9 @@ public class Holder implements InventoryHolder {
     public static AbstractSkeleton tryGet(InventoryHolder holder) {
         return holder instanceof Holder && !((Holder)holder).isAborted() ? ((Holder)holder).skeleton : null;
     }
+
+    public static boolean isInstanceof(Inventory inv, Class<? extends AbstractSkeleton> clazz) {
+        AbstractSkeleton sk = tryGet(inv.getHolder());
+        return sk != null && clazz.equals(sk.getClass());
+    }
 }
