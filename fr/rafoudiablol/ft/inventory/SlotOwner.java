@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.inventory;
 
+import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.events.UpdateTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.Offer;
@@ -24,6 +25,12 @@ public class SlotOwner extends AbstractSlotTrade {
 
         UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
         Bukkit.getPluginManager().callEvent(event);
+
+        if(o.getConfirm()) {
+
+            o.toggle();
+            Bukkit.getPluginManager().callEvent(new StatusTransactionEvent(t, o));
+        }
 
         getFt().taskAtNextTick(() -> updateRemoteInventory(event));
 
