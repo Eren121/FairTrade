@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.manager.Trade;
+import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;

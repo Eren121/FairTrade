@@ -2,8 +2,8 @@ package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.events.UpdateTransactionEvent;
-import fr.rafoudiablol.ft.manager.Offer;
-import fr.rafoudiablol.ft.manager.Trade;
+import fr.rafoudiablol.ft.trade.Offer;
+import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;

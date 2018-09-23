@@ -1,7 +1,7 @@
 package fr.rafoudiablol.ft.events;
 
-import fr.rafoudiablol.ft.manager.Offer;
-import fr.rafoudiablol.ft.manager.Trade;
+import fr.rafoudiablol.ft.trade.Offer;
+import fr.rafoudiablol.ft.trade.Trade;
 import org.bukkit.entity.Player;
 
 public abstract class AbstractOfferEvent extends AbstractTransactionEvent {

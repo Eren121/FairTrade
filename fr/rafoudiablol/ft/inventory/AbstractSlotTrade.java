@@ -1,8 +1,8 @@
 package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.manager.Offer;
-import fr.rafoudiablol.ft.manager.Trade;
+import fr.rafoudiablol.ft.trade.Offer;
+import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import org.bukkit.event.inventory.InventoryClickEvent;
 

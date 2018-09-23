@@ -1,4 +1,4 @@
-package fr.rafoudiablol.ft.manager;
+package fr.rafoudiablol.ft.trade;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

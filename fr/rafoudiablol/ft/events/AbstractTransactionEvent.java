@@ -1,7 +1,7 @@
 package fr.rafoudiablol.ft.events;
 
-import fr.rafoudiablol.ft.manager.ITransactionLink;
-import fr.rafoudiablol.ft.manager.Trade;
+import fr.rafoudiablol.ft.trade.ITransactionLink;
+import fr.rafoudiablol.ft.trade.Trade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
