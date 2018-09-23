@@ -17,12 +17,12 @@ public abstract class AbstractTransactionEvent extends Event implements ITransac
     }
 
     @Override
-    public final Player getPlayer() {
+    public Player getPlayer() {
         return trade.getOffer(0).getPlayer();
     }
 
     @Override
-    public final Player getOther() {
+    public Player getOther() {
         return trade.getOffer(1).getPlayer();
     }
 
