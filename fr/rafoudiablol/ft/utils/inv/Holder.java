@@ -26,12 +26,18 @@ public class Holder implements InventoryHolder {
         aborted = true;
     }
 
+    /**
+     * Does check if yet tracing
+     */
     public static AbstractSkeleton tryGet(InventoryHolder holder) {
-        return holder instanceof Holder && !((Holder)holder).isAborted() ? ((Holder)holder).skeleton : null;
+        return holder instanceof Holder && !((Holder)holder).isAborted() ? ((Holder) holder).skeleton : null;
     }
 
+    /**
+     * Does NOT check if yet tracing
+     */
     public static boolean isInstanceof(Inventory inv, Class<? extends AbstractSkeleton> clazz) {
-        AbstractSkeleton sk = tryGet(inv.getHolder());
+        AbstractSkeleton sk = inv.getHolder() instanceof Holder ? ((Holder) inv.getHolder()).skeleton : null;
         return sk != null && clazz.equals(sk.getClass());
     }
 }

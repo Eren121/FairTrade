@@ -15,7 +15,7 @@ public class YamlUtils
     public static String toString(ItemStack stacks[])
     {
         tmp.set(KEY, stacks);
-        String str = stacks.length == 0 ? "" : tmp.saveToString();
+        String str = (stacks != null && stacks.length == 0) ? "" : tmp.saveToString();
         str = str.substring(str.indexOf('\n')+1);
 
         FairTrade.getFt().i(str);
