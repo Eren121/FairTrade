@@ -3,10 +3,12 @@ package fr.rafoudiablol.ft.utils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class InventoriesUtils {
@@ -51,5 +53,20 @@ public class InventoriesUtils {
         }
 
         return ret.toArray(new ItemStack[0]);
+    }
+
+    public static ItemStack[] getAllItemsFromType(Class<? extends AbstractSlot> clazz, Inventory inventory) {
+
+        AbstractSkeleton sk = Holder.tryGet(inventory.getHolder());
+        List<Integer> slots = sk.byType(clazz);
+        ArrayList<ItemStack> stacks = new ArrayList<>(slots.size());
+
+        for(int slot : slots) {
+
+            if(inventory.getItem(slot) != null)
+                stacks.add(inventory.getItem(slot));
+        }
+
+        return stacks.toArray(new ItemStack[0]);
     }
 }
