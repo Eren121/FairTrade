@@ -12,13 +12,11 @@ import org.bukkit.inventory.Inventory;
 public class UpdateTransactionEvent extends AbstractOfferEvent {
 
     private static final HandlerList handlers = new HandlerList();
-    private HumanEntity src;
     private Inventory inv;
     private int slot;
 
     public UpdateTransactionEvent(Trade trade, Offer offer, int slot) {
         super(trade, offer);
-        this.src = offer.getPlayer();
         this.inv = offer.getPlayer().getOpenInventory().getTopInventory();
         this.slot = slot;
     }
