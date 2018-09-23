@@ -10,11 +10,6 @@ import org.bukkit.inventory.ItemStack;
 public abstract class AbstractSlot {
 
     /**
-     * all slots types must be unique in same inventory
-     */
-    public abstract int getId();
-
-    /**
      * @return false is the slot is not modifiable, otherwise true
      */
     public abstract boolean action(InventoryClickEvent e);

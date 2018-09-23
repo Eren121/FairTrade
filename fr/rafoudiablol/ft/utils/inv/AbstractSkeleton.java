@@ -17,9 +17,9 @@ public abstract class AbstractSkeleton {
     private AbstractSlot[] matrix; // multiple of 9
     private Map<Integer, AbstractSlot> slots = new HashMap<>();
 
-    public void registerSlot(AbstractSlot type) {
-        slots.put(type.getId(), type);
-        FairTrade.getFt().i(getClass().getName() + " bind id " + type.getId() + " " + type.getClass().getName());
+    public void registerSlot(int id, AbstractSlot type) {
+        slots.put(id, type);
+        FairTrade.getFt().i(getClass().getName() + " bind id " + id + " " + type.getClass().getName());
     }
 
     public void setMatrix(int[] ids) {

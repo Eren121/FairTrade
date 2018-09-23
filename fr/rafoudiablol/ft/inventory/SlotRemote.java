@@ -4,8 +4,4 @@ import fr.rafoudiablol.ft.utils.inv.SlotLocked;
 
 public class SlotRemote extends SlotLocked {
 
-    @Override
-    public int getId() {
-        return 2;
-    }
 }

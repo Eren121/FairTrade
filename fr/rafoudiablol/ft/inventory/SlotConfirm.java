@@ -24,11 +24,6 @@ public class SlotConfirm extends AbstractSlot {
     }
 
     @Override
-    public int getId() {
-        return 3;
-    }
-
-    @Override
     public boolean action(InventoryClickEvent e) {
 
         if(e.getAction() == InventoryAction.PICKUP_ALL) {

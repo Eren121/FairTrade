@@ -19,11 +19,9 @@ public class SkeletonLog extends AbstractSkeleton {
 
     public SkeletonLog() {
 
-        registerSlot(new SlotLocked());
+        registerSlot(0, new SlotLocked());
 
         int[] m = new int[9 * 6];
-
-        Arrays.fill(m, SlotLocked.ID);
         setMatrix(m);
     }
 

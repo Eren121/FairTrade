@@ -13,12 +13,12 @@ public class SkeletonTrade extends AbstractSkeleton {
 
     public SkeletonTrade(int[] slots) {
 
-        registerSlot(new SlotEmpty());
-        registerSlot(new SlotOwner());
-        registerSlot(new SlotRemote());
-        registerSlot(new SlotConfirm());
-        registerSlot(new SlotStatusLocal());
-        registerSlot(new SlotStatusRemote());
+        registerSlot(0, new SlotEmpty());
+        registerSlot(1, new SlotOwner());
+        registerSlot(2, new SlotRemote());
+        registerSlot(3, new SlotConfirm());
+        registerSlot(7, new SlotStatusLocal());
+        registerSlot(8, new SlotStatusRemote());
         setMatrix(slots);
     }
 

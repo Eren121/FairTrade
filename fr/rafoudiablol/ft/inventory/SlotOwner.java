@@ -19,11 +19,6 @@ import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 public class SlotOwner extends AbstractSlot {
 
     @Override
-    public int getId() {
-        return 1;
-    }
-
-    @Override
     public boolean action(InventoryClickEvent e) {
 
         getFt().taskAtNextTick(() -> updateInventory(e.getWhoClicked(), e.getInventory(), e.getSlot()));
