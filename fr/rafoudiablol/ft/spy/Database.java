@@ -85,7 +85,7 @@ public class Database implements IDatabase, Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void event(FinalizeTransactionEvent e) {
 
-        int id = registerTransaction(e.getPlayer(), e.getOther(), YamlUtils.toString(e.getPlayerGift()), YamlUtils.toString(e.getOtherGift()));
+        int id = registerTransaction(e.getPlayer(), e.getOther(), YamlUtils.toString(e.getTrade().getOffer(0).getItems()), YamlUtils.toString(e.getTrade().getOffer(1).getItems()));
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
     }
 
