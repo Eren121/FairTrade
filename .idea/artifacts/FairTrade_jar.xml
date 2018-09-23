@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="FairTrade:jar">
+    <output-path>$PROJECT_DIR$/../../Spigot/plugins</output-path>
+    <root id="root">
+      <element id="archive" name="FairTrade.jar">
+        <element id="module-output" name="FairTrade" />
+      </element>
+    </root>
+  </artifact>
+</component>
