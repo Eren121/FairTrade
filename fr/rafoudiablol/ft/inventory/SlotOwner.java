@@ -20,10 +20,6 @@ public class SlotOwner extends AbstractSlotTrade {
         UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
         Bukkit.getPluginManager().callEvent(event);
 
-        o.setItem(e.getSlot(), e.getCurrentItem());
-
-        FairTrade.getFt().i("current=" + e.getCurrentItem() + "___cursor="+e.getCursor());
-
         if(o.getConfirm()) {
 
             o.toggle();
