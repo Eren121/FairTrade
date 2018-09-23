@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.utils;
 
 import java.util.logging.Logger;
 
-public interface ILoggeable {
+public interface ILoggable {
 
     Logger getLogger();
 

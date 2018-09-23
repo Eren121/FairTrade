@@ -1,7 +1,7 @@
 package fr.rafoudiablol.ft.config;
 
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
-import fr.rafoudiablol.ft.utils.ILoggeable;
+import fr.rafoudiablol.ft.utils.ILoggable;
 import fr.rafoudiablol.ft.spy.SkeletonLog;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -22,7 +22,7 @@ public class Options implements IOptions {
     private SkeletonLog skeForLog;
     private I18n i18n;
 
-    public <T extends JavaPlugin & ILoggeable>Options(T plugin) {
+    public <T extends JavaPlugin & ILoggable>Options(T plugin) {
         this.plugin = plugin;
 
         i18n = new I18n();
