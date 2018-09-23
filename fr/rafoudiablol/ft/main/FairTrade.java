@@ -5,8 +5,6 @@ import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.config.Options;
 import fr.rafoudiablol.ft.listeners.*;
-import fr.rafoudiablol.ft.manager.ITransactionManager;
-import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
 import fr.rafoudiablol.ft.utils.APIListener;
@@ -24,7 +22,6 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
     private static FairTrade INSTANCE;
     private Database db;
-    private TransactionsManager manager;
     private TradeTracker tradeTracker;
     private Options options;
 
@@ -39,7 +36,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         readConfiguration();
         registerCommands();
         setupDb();
-        setupManager();
+        setupTracker();
         registerListeners();
         doUnitTests();
         welcome();
@@ -65,9 +62,6 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     }
 
     @Override
-    public ITransactionManager getManager() { return manager; }
-
-    @Override
     public void taskAtNextTick(Runnable task)
     {
         getServer().getScheduler().scheduleSyncDelayedTask(this, task, 1L);
@@ -85,7 +79,6 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         getServer().getPluginManager().registerEvents(new TradingListener(getLogger()), this);
         getServer().getPluginManager().registerEvents(new RequestTracker(), this);
         getServer().getPluginManager().registerEvents(new CloseRemoteInventory(), this);
-        getServer().getPluginManager().registerEvents(manager, this);
         getServer().getPluginManager().registerEvents(tradeTracker, this);
         getServer().getPluginManager().registerEvents(db, this);
         getServer().getPluginManager().registerEvents(new RequiredDistance(), this);
@@ -155,9 +148,8 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         options = new Options(this);
     }
 
-    private void setupManager()
+    private void setupTracker()
     {
-        manager = new TransactionsManager();
         tradeTracker = new TradeTracker();
     }
 
