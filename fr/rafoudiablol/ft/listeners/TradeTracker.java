@@ -59,16 +59,12 @@ public class TradeTracker implements Listener {
 
     public Offer getOffer(UUID player) {
 
-        Trade t;
+        for(Trade t : trades) {
 
-        for(int i = 0; i < trades.size(); ++i) {
-
-            t = trades.get(i);
-
-            if(t.getOffer(0).getPlayer().getUniqueId().equals(player)) {
+            if (t.getOffer(0).getPlayer().getUniqueId().equals(player)) {
                 return t.getOffer(0);
             }
-            if(t.getOffer(1).getPlayer().getUniqueId().equals(player)) {
+            if (t.getOffer(1).getPlayer().getUniqueId().equals(player)) {
                 return t.getOffer(1);
             }
         }
@@ -78,16 +74,12 @@ public class TradeTracker implements Listener {
 
     public Trade getTrade(UUID player) {
 
-        Trade t;
+        for (Trade t : trades) {
 
-        for(int i = 0; i < trades.size(); ++i) {
-
-            t = trades.get(i);
-
-            if(t.getOffer(0).getPlayer().getUniqueId().equals(player)) {
+            if (t.getOffer(0).getPlayer().getUniqueId().equals(player)) {
                 return t;
             }
-            if(t.getOffer(1).getPlayer().getUniqueId().equals(player)) {
+            if (t.getOffer(1).getPlayer().getUniqueId().equals(player)) {
                 return t;
             }
         }
