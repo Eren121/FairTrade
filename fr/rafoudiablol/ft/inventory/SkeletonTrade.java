@@ -9,8 +9,11 @@ import org.bukkit.entity.HumanEntity;
 
 public class SkeletonTrade extends AbstractSkeleton {
 
+    public static SkeletonTrade instance;
+
     public SkeletonTrade(int[] slots) {
 
+        instance = this;
         registerSlot(0, new SlotEmpty());
         registerSlot(1, new SlotOwner());
         registerSlot(2, new SlotRemote());
