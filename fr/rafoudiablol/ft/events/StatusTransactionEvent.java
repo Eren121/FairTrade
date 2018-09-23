@@ -2,7 +2,6 @@ package fr.rafoudiablol.ft.events;
 
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.Inventory;
 
