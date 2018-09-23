@@ -15,9 +15,18 @@ public abstract class AbstractSlotTrade extends AbstractSlot {
     public final boolean action(InventoryClickEvent e) {
 
         Trade t = FairTrade.getFt().getTracker().getTrade(e.getWhoClicked().getUniqueId());
-        Offer o = t.getOffer(e.getWhoClicked() == t.getOffer(0).getPlayer() ? 0 : 1);
 
-        return action(e, t, o);
+        if(t != null) {
+
+            Offer o = t.getOffer(e.getWhoClicked() == t.getOffer(0).getPlayer() ? 0 : 1);
+
+            if(o != null) {
+                return action(e, t, o);
+            }
+        }
+
+        // The trade was not tracked, default behaviour.
+        return true;
     }
 
     public abstract boolean action(InventoryClickEvent e, Trade t, Offer o);

@@ -3,6 +3,7 @@ package fr.rafoudiablol.ft.inventory;
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
+import fr.rafoudiablol.ft.manager.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
@@ -32,15 +33,9 @@ public class SkeletonTrade extends AbstractSkeleton {
     @Override
     public void close(HumanEntity src) {
 
-        PlayerStatus status = FairTrade.getFt().getManager().getStatus(src.getUniqueId());
+        Trade trade = FairTrade.getFt().getTracker().getTrade(src.getUniqueId());
 
-        // Dunno
-        if(status != null && !status.aborted) {
-
-            Player player = status.getPlayer();
-            Player other = status.getOther();
-            PlayerStatus otherStatus = FairTrade.getFt().getManager().getStatus(other.getUniqueId());
-            status.aborted = true;
+        if(trade != null) {
 
             if (otherStatus != null) {
 
