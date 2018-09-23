@@ -3,11 +3,14 @@ package fr.rafoudiablol.ft.trade;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 public class Offer {
 
     protected Player p; // The player that offers what following
     protected boolean confirmed; // If the player has confirmed or not
-    protected ItemStack[] items; // Items that the player want to give
+    protected HashMap<Integer, ItemStack> items; // Items that the player want to give
 
     public Offer(Player p) {
 
@@ -27,10 +30,14 @@ public class Offer {
     }
 
     public ItemStack[] getItems() {
-        return items;
+        return items.values().toArray(new ItemStack[0]);
     }
 
-    public void setItems(ItemStack[] items) {
-        this.items = items;
+    public void setItem(int i, ItemStack item) {
+
+        if(item == null)
+            items.remove(i);
+        else
+            items.put(i, item);
     }
 }

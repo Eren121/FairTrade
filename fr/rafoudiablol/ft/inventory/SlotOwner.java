@@ -19,6 +19,8 @@ public class SlotOwner extends AbstractSlotTrade {
         UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
         Bukkit.getPluginManager().callEvent(event);
 
+        o.setItem(e.getSlot(), e.getInventory().getItem(e.getSlot()));
+
         if(o.getConfirm()) {
 
             o.toggle();
