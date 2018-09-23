@@ -8,6 +8,7 @@ import fr.rafoudiablol.ft.listeners.DummyUpdater;
 import fr.rafoudiablol.ft.listeners.RequiredDistance;
 import fr.rafoudiablol.ft.listeners.TradingListener;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
+import fr.rafoudiablol.ft.manager.TradeTracker;
 import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
@@ -27,6 +28,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private static FairTrade INSTANCE;
     private Database db;
     private TransactionsManager manager;
+    private TradeTracker tracker;
     private Options options;
 
     public static IFairTrade getFt() { return INSTANCE; }
@@ -59,6 +61,12 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
     @Override
     public Database getDatabase() { return db; }
+
+    @Override
+    public TradeTracker getTracker() {
+        return tracker;
+    }
+
     @Override
     public ITransactionManager getManager() { return manager; }
 
@@ -79,6 +87,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     {
         getServer().getPluginManager().registerEvents(new TradingListener(getLogger()), this);
         getServer().getPluginManager().registerEvents(manager, this);
+        getServer().getPluginManager().registerEvents(tracker, this);
         getServer().getPluginManager().registerEvents(db, this);
         getServer().getPluginManager().registerEvents(new RequiredDistance(), this);
         getServer().getPluginManager().registerEvents(new DummyUpdater(), this);
@@ -150,6 +159,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private void setupManager()
     {
         manager = new TransactionsManager();
+        tracker = new TradeTracker();
     }
 
     private void welcome() {
