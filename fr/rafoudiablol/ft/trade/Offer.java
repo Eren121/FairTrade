@@ -29,4 +29,8 @@ public class Offer {
     public ItemStack[] getItems() {
         return items;
     }
+
+    public void setItems(ItemStack[] items) {
+        this.items = items;
+    }
 }
