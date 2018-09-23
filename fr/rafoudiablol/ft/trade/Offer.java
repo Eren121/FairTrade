@@ -10,7 +10,7 @@ public class Offer {
 
     protected Player p; // The player that offers what following
     protected boolean confirmed; // If the player has confirmed or not
-    protected HashMap<Integer, ItemStack> items; // Items that the player want to give
+    protected HashMap<Integer, ItemStack> items = new HashMap<>(); // Items that the player want to give
 
     public Offer(Player p) {
 
@@ -35,7 +35,7 @@ public class Offer {
 
     public void setItem(int i, ItemStack item) {
 
-        if(item == null && items.containsKey(i))
+        if(item == null)
             items.remove(i);
         else
             items.put(i, item);
