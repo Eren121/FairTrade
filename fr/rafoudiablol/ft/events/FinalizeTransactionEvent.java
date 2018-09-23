@@ -10,8 +10,6 @@ import org.bukkit.inventory.ItemStack;
 public class FinalizeTransactionEvent extends AbstractTransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
-    private ItemStack[] playerGift = new ItemStack[0];
-    private ItemStack[] otherGift = new ItemStack[0];
 
     public FinalizeTransactionEvent(Trade trade) {
         super(trade);
@@ -25,21 +23,5 @@ public class FinalizeTransactionEvent extends AbstractTransactionEvent {
     @SuppressWarnings("unused")
     public static HandlerList getHandlerList() {
         return handlers;
-    }
-
-    public void setPlayerGift(ItemStack[] itemStacks) {
-        playerGift = itemStacks;
-    }
-
-    public void setOtherGift(ItemStack[] itemStacks) {
-        otherGift = itemStacks;
-    }
-
-    public ItemStack[] getPlayerGift() {
-        return playerGift;
-    }
-
-    public ItemStack[] getOtherGift() {
-        return otherGift;
     }
 }
