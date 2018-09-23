@@ -1,6 +1,7 @@
 package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
+import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.manager.Offer;
 import fr.rafoudiablol.ft.manager.Trade;
@@ -26,6 +27,22 @@ public class TradeTracker implements Listener {
 
     @EventHandler
     public void event(AbortTransactionEvent e) {
+
+        for(int i = 0; i < trades.size(); ++i) {
+
+            if(trades.get(i).getOffer(0).getPlayer().getUniqueId().equals(e.getPlayerID())) {
+                trades.remove(i);
+                break;
+            }
+            if(trades.get(i).getOffer(1).getPlayer().getUniqueId().equals(e.getOtherID())) {
+                trades.remove(i);
+                break;
+            }
+        }
+    }
+
+    @EventHandler
+    public void event(FinalizeTransactionEvent e) {
 
         for(int i = 0; i < trades.size(); ++i) {
 
