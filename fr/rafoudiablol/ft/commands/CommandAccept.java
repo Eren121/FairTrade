@@ -18,14 +18,14 @@ public class CommandAccept implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 
-        Player dst = (Player)commandSender;
-        AcceptTransactionEvent e = new AcceptTransactionEvent(dst);
+        AcceptTransactionEvent e = new AcceptTransactionEvent((Player)commandSender);
+        Bukkit.getPluginManager().callEvent(e);
 
-        if(src != null) {
+        if(e.getPlayer(0) != null) { // If a player matches
 
             Trade trade = new Trade();
-            trade.setOffer(0, new Offer(src));
-            trade.setOffer(1, new Offer(dst));
+            trade.setOffer(0, new Offer(e.getPlayer(0)));
+            trade.setOffer(1, new Offer(e.getPlayer(1)));
 
             InitiateTransactionEvent event = new InitiateTransactionEvent(trade);
             SkeletonTrade sk = FairTrade.getFt().getOptions().getSkeleton();
