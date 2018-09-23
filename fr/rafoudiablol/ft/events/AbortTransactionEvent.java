@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 /**
  * Fire when a player don't want to trade anymore (disconnect, close gui)
  */
-public class AbortTransactionEvent extends TransactionEvent {
+public class AbortTransactionEvent extends AbstractTransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     public AbortTransactionEvent(Player bully, Player victim) {

@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 /**
  * Fire when a player change a trade item
  */
-public class UpdateTransactionEvent extends TransactionEvent {
+public class UpdateTransactionEvent extends AbstractTransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private HumanEntity src;

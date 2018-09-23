@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
  * Fire when a player send a transaction request to another player.
  * If cancelled, the request is ignored and never saw by the other player
  */
-public class RequestTransactionEvent extends TransactionEvent implements Cancellable {
+public class RequestTransactionEvent extends AbstractTransactionEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
     public RequestTransactionEvent(Player bully, Player victim) {

@@ -9,7 +9,7 @@ import org.bukkit.inventory.Inventory;
  * Fire when a player click on confirmation button to switch his status
  * (from confirm to cancel or from cancel to confirm)
  */
-public class StatusTransactionEvent extends TransactionEvent {
+public class StatusTransactionEvent extends AbstractTransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean status;

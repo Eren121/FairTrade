@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
  * Fire when a trade transaction begin (opening of the GUI)
  * If cancelled, the transaction is aborted
  */
-public class InitiateTransactionEvent extends TransactionEvent implements Cancellable {
+public class InitiateTransactionEvent extends AbstractTransactionEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;

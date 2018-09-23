@@ -7,11 +7,11 @@ import org.bukkit.event.Event;
 /**
  * Base event for FairTrade events
  */
-public abstract class TransactionEvent extends Event implements ITransactionLink {
+public abstract class AbstractTransactionEvent extends Event implements ITransactionLink {
 
     protected Player player, other;
 
-    public TransactionEvent(Player bully, Player victim)
+    public AbstractTransactionEvent(Player bully, Player victim)
     {
         this.player = bully;
         this.other = victim;

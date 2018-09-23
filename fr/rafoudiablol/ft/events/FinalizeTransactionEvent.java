@@ -5,13 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Fire when all players have confirmed and trade items
  */
-public class FinalizeTransactionEvent extends TransactionEvent {
+public class FinalizeTransactionEvent extends AbstractTransactionEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private ItemStack[] playerGift = new ItemStack[0];
