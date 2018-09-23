@@ -18,7 +18,7 @@ public class SlotConfirm extends AbstractSlotTrade {
     @Override
     public ItemStack getDefault() {
 
-        ItemStack ret = new ItemStack(Material.WRITTEN_BOOK);
+        ItemStack ret = new ItemStack(Material.WRITABLE_BOOK);
         ItemStacksUtils.rename(ret, EnumI18n.CONFIRM.localize());
         return ret;
     }
