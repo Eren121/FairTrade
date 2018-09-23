@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-public class SlotConfirm extends AbstractSlot {
+public class SlotConfirm extends AbstractSlotTrade {
 
     @Override
     public ItemStack getDefault() {
@@ -27,15 +27,13 @@ public class SlotConfirm extends AbstractSlot {
     }
 
     @Override
-    public boolean action(InventoryClickEvent e) {
+    public boolean action(InventoryClickEvent e, Trade t, Offer o) {
 
         if(e.getAction() == InventoryAction.PICKUP_ALL) {
 
-            Trade trade = FairTrade.getFt().getTracker().getTrade(e.getWhoClicked().getUniqueId());
-            Offer offer = trade.getOffer(e.getWhoClicked() == trade.getOffer(0).getPlayer() ? 0 : 1);
-            offer.toggle();
+            o.toggle();
 
-            StatusTransactionEvent event = new StatusTransactionEvent(trade, offer);
+            StatusTransactionEvent event = new StatusTransactionEvent(t, o);
             Bukkit.getPluginManager().callEvent(event);
         }
 

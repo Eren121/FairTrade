@@ -17,32 +17,17 @@ import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
 //TODO: confirm is not reseted to false when changed now!
 
-public class SlotOwner extends AbstractSlot {
+public class SlotOwner extends AbstractSlotTrade {
 
     @Override
-    public boolean action(InventoryClickEvent e) {
+    public boolean action(InventoryClickEvent e, Trade t, Offer o) {
 
-        getFt().taskAtNextTick(() -> updateRemoteInventory(e.getWhoClicked(), e.getInventory(), e.getSlot()));
+        UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
+        Bukkit.getPluginManager().callEvent(event);
+
+        getFt().taskAtNextTick(() -> updateRemoteInventory(event));
+
         return true;
-    }
-
-    private void updateRemoteInventory(HumanEntity human, Inventory inv, int slot)
-    {
-        PlayerStatus status = getFt().getManager().getStatus(human.getUniqueId());
-
-        if(status != null) {
-
-            Trade trade = FairTrade.getFt().getTracker().getTrade(human.getUniqueId());
-            Offer offer = trade.getOffer(human == trade.getOffer(0).getPlayer() ? 0 : 1);
-
-            UpdateTransactionEvent event = new UpdateTransactionEvent(trade, offer, slot);
-            Bukkit.getPluginManager().callEvent(event);
-
-            updateRemoteInventory(event);
-        }
-        else {
-            getFt().w("Orphan player trading '" + human.getName() + "'");
-        }
     }
 
     private void updateRemoteInventory(UpdateTransactionEvent e) {
