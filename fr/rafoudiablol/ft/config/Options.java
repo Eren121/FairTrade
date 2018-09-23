@@ -118,8 +118,7 @@ public class Options implements IOptions {
     @Override
     public ItemStack getDummyItem(boolean ok) {
 
-        ItemStack i = new ItemStack(ok ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
-        return i;
+        return new ItemStack(ok ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
     }
 
     @Override
@@ -139,8 +138,7 @@ public class Options implements IOptions {
 
     @Override
     public ItemStack getEmptyItem() {
-        ItemStack i = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
-        return i;
+        return new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
     }
 
     private void setAndSave(EnumOption opt, Object o) {
