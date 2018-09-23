@@ -3,6 +3,8 @@ package fr.rafoudiablol.ft.commands;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
+import fr.rafoudiablol.ft.manager.Offer;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +16,16 @@ public class CommandAccept implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 
-        Player dest = (Player)commandSender;
-        Player source = FairTrade.getFt().getManager().popSource(dest);
+        Player dst = (Player)commandSender;
+        Player src = FairTrade.getFt().getManager().popSource(dst);
 
-        if(source != null) {
-            InitiateTransactionEvent event = new InitiateTransactionEvent(source, dest);
+        if(src != null) {
+
+            Trade trade = new Trade();
+            trade.setOffer(0, new Offer(src));
+            trade.setOffer(1, new Offer(dst));
+
+            InitiateTransactionEvent event = new InitiateTransactionEvent(trade);
             Bukkit.getPluginManager().callEvent(event);
 
             if (!event.isCancelled()) {

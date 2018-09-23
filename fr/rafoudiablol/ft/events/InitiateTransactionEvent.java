@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.events;
 
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -13,8 +14,8 @@ public class InitiateTransactionEvent extends AbstractTransactionEvent implement
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
 
-    public InitiateTransactionEvent(Player bully, Player victim) {
-        super(bully, victim);
+    public InitiateTransactionEvent(Trade trade) {
+        super(trade);
     }
 
     @Override
@@ -27,14 +28,8 @@ public class InitiateTransactionEvent extends AbstractTransactionEvent implement
         return handlers;
     }
 
-    public Player getAsker() { return this.player; }
-    public Player getReplier() { return this.other; }
-    public void setAsker(Player asker) {
-        this.player = asker;
-    }
-    public void setReplier(Player replier) {
-        this.other = replier;
-    }
+    public Player getAsker() { return trade.getOffer(0).getPlayer(); }
+    public Player getReplier() { return trade.getOffer(1).getPlayer(); }
 
     @Override
     public boolean isCancelled() {

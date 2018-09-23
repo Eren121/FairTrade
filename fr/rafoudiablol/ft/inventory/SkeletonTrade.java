@@ -50,7 +50,7 @@ public class SkeletonTrade extends AbstractSkeleton {
                 FairTrade.getFt().taskAtNextTick(other::closeInventory);
             }
 
-            Bukkit.getPluginManager().callEvent(new AbortTransactionEvent(player, other));
+            Bukkit.getPluginManager().callEvent(new AbortTransactionEvent(FairTrade.getFt().getTracker().getTrade(src.getUniqueId())));
         }
     }
 }

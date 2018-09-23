@@ -1,5 +1,6 @@
 package fr.rafoudiablol.ft.events;
 
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -12,7 +13,7 @@ public class RequestTransactionEvent extends AbstractTransactionEvent implements
 
     private static final HandlerList handlers = new HandlerList();
     public RequestTransactionEvent(Player bully, Player victim) {
-        super(bully, victim);
+        super(new Trade(bully, victim));
     }
     @Override public HandlerList getHandlers() {
         return handlers;

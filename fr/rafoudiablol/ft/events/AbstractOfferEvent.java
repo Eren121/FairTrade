@@ -1,14 +1,15 @@
 package fr.rafoudiablol.ft.events;
 
 import fr.rafoudiablol.ft.manager.Offer;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.Player;
 
 public abstract class AbstractOfferEvent extends AbstractTransactionEvent {
 
     protected Offer offer;
 
-    public AbstractOfferEvent(Player bully, Player victim, Offer offer) {
-        super(bully, victim);
+    public AbstractOfferEvent(Trade trade, Offer offer) {
+        super(trade);
         this.offer = offer;
     }
 

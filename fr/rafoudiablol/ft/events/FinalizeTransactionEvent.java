@@ -1,6 +1,8 @@
 package fr.rafoudiablol.ft.events;
 
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +16,8 @@ public class FinalizeTransactionEvent extends AbstractTransactionEvent {
     private ItemStack[] playerGift = new ItemStack[0];
     private ItemStack[] otherGift = new ItemStack[0];
 
-    /**
-     *
-     * @param player the asker (/request)
-     * @param other the replier (/accept)
-     */
-    public FinalizeTransactionEvent(Player player, Player other) {
-        super(player, other);
+    public FinalizeTransactionEvent(Trade trade) {
+        super(trade);
     }
 
     @Override
@@ -35,14 +32,7 @@ public class FinalizeTransactionEvent extends AbstractTransactionEvent {
 
     public static FinalizeTransactionEvent cookEvent(PlayerStatus status) {
 
-        FinalizeTransactionEvent ret;
-
-        if(status.isAsker())
-            ret = new FinalizeTransactionEvent(status.getPlayer(), status.getOther());
-        else
-            ret = new FinalizeTransactionEvent(status.getOther(), status.getPlayer());
-
-        return ret;
+        return new FinalizeTransactionEvent(FairTrade.getFt().getTracker().getTrade(status.getPlayerID()));
     }
 
     public void setPlayerGift(ItemStack[] itemStacks) {

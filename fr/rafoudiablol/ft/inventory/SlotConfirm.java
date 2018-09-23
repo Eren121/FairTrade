@@ -2,7 +2,10 @@ package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
+import fr.rafoudiablol.ft.main.FairTrade;
+import fr.rafoudiablol.ft.manager.Offer;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
+import fr.rafoudiablol.ft.manager.Trade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import org.bukkit.Bukkit;
@@ -28,12 +31,12 @@ public class SlotConfirm extends AbstractSlot {
 
         if(e.getAction() == InventoryAction.PICKUP_ALL) {
 
-            PlayerStatus status = getFt().getManager().getStatus(e.getWhoClicked().getUniqueId());
+            Trade trade = FairTrade.getFt().getTracker().getTrade(e.getWhoClicked().getUniqueId());
+            Offer offer = trade.getOffer(e.getWhoClicked() == trade.getOffer(0).getPlayer() ? 0 : 1);
+            offer.toggle();
 
-            if(status != null) {
-                StatusTransactionEvent event = new StatusTransactionEvent(status.getPlayer(), status.getOther(), e.getInventory(), !status.hasConfirm());
-                Bukkit.getPluginManager().callEvent(event);
-            }
+            StatusTransactionEvent event = new StatusTransactionEvent(trade, offer);
+            Bukkit.getPluginManager().callEvent(event);
         }
 
         return false;

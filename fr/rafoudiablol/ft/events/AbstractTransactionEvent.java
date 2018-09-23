@@ -1,6 +1,7 @@
 package fr.rafoudiablol.ft.events;
 
 import fr.rafoudiablol.ft.manager.ITransactionLink;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
@@ -9,21 +10,23 @@ import org.bukkit.event.Event;
  */
 public abstract class AbstractTransactionEvent extends Event implements ITransactionLink {
 
-    protected Player player, other;
+    protected Trade trade;
 
-    public AbstractTransactionEvent(Player bully, Player victim)
-    {
-        this.player = bully;
-        this.other = victim;
+    public AbstractTransactionEvent(Trade trade) {
+        this.trade = trade;
     }
 
     @Override
     public final Player getPlayer() {
-        return player;
+        return trade.getOffer(0).getPlayer();
     }
 
     @Override
     public final Player getOther() {
-        return other;
+        return trade.getOffer(1).getPlayer();
+    }
+
+    public Trade getTrade() {
+        return trade;
     }
 }

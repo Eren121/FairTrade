@@ -1,5 +1,7 @@
 package fr.rafoudiablol.ft.events;
 
+import fr.rafoudiablol.ft.manager.Offer;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -8,17 +10,17 @@ import org.bukkit.inventory.Inventory;
 /**
  * Fire when a player change a trade item
  */
-public class UpdateTransactionEvent extends AbstractTransactionEvent {
+public class UpdateTransactionEvent extends AbstractOfferEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private HumanEntity src;
     private Inventory inv;
     private int slot;
 
-    public UpdateTransactionEvent(Player player, Player other, Inventory inv, int slot) {
-        super(player, other);
-        this.src = player;
-        this.inv = inv;
+    public UpdateTransactionEvent(Trade trade, Offer offer, int slot) {
+        super(trade, offer);
+        this.src = offer.getPlayer();
+        this.inv = offer.getPlayer().getOpenInventory().getTopInventory();
         this.slot = slot;
     }
 
@@ -30,10 +32,6 @@ public class UpdateTransactionEvent extends AbstractTransactionEvent {
     @SuppressWarnings("unused")
     public static HandlerList getHandlerList() {
         return handlers;
-    }
-
-    public HumanEntity getWhoClicked() {
-        return src;
     }
 
     public Inventory getInventory() {

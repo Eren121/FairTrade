@@ -19,11 +19,7 @@ public class TradeTracker implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void event(InitiateTransactionEvent e) {
 
-        Trade trade = new Trade();
-        trade.setOffer(0, new Offer(e.getAsker()));
-        trade.setOffer(1, new Offer(e.getReplier()));
-
-        trades.add(trade);
+        trades.add(e.getTrade());
     }
 
     @EventHandler
