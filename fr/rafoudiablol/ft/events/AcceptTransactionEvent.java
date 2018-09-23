@@ -19,7 +19,7 @@ public class AcceptTransactionEvent extends Event {
         return handlers;
     }
 
-    protected Player players[0];
+    protected Player players[];
 
     public AcceptTransactionEvent(Player p1, Player p2) {
         players = new Player[] {p1, p2};
