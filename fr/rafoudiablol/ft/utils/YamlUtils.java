@@ -14,7 +14,8 @@ public class YamlUtils
     public static String toString(ItemStack stacks[])
     {
         tmp.set(KEY, stacks);
-        return tmp.saveToString();
+        String str = tmp.saveToString();
+        return str.substring(str.indexOf('\n')+1);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,8 +23,11 @@ public class YamlUtils
     {
         ItemStack[] ret = {};
 
+        if(yaml.isEmpty())
+            return ret;
+
         try {
-            tmp.loadFromString(yaml);
+            tmp.loadFromString(KEY + ":\n" + yaml);
             ret = ((List<ItemStack>)tmp.get(KEY)).toArray(new ItemStack[0]);
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
