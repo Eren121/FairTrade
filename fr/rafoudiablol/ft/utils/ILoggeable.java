@@ -1,4 +1,4 @@
-package fr.rafoudiablol.ft.main;
+package fr.rafoudiablol.ft.utils;
 
 import java.util.logging.Logger;
 

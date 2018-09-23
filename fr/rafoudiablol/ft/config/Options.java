@@ -1,7 +1,7 @@
 package fr.rafoudiablol.ft.config;
 
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
-import fr.rafoudiablol.ft.main.ILoggeable;
+import fr.rafoudiablol.ft.utils.ILoggeable;
 import fr.rafoudiablol.ft.spy.SkeletonLog;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
