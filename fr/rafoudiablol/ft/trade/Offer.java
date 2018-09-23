@@ -25,4 +25,8 @@ public class Offer {
     public void toggle() {
         confirmed = !confirmed;
     }
+
+    public ItemStack[] getItems() {
+        return items;
+    }
 }
