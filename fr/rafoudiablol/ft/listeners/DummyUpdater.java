@@ -6,6 +6,7 @@ import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotStatusLocal;
 import fr.rafoudiablol.ft.inventory.SlotStatusRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
+import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
@@ -25,46 +26,36 @@ public class DummyUpdater implements Listener {
     @EventHandler
     public void event(StatusTransactionEvent e) {
 
-        e.forEach(p -> updateInventory(p, e));
+        Trade trade = e.getTrade();
+
+        for(int i = 0; i <= 1; ++i) {
+
+            updateStatus(trade.getOffer(i).getPlayer(), trade.getOffer(i).getConfirm(), trade.getOffer(1-i).getConfirm());
+        }
     }
 
-    private void updateInventory(Player p, StatusTransactionEvent e)
-    {
-        Inventory inv = p.getOpenInventory().getTopInventory();
-        AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
-        Class<? extends AbstractSlot> clazz = (p == e.getPlayer()) ? SlotStatusLocal.class : SlotStatusRemote.class;
+    private void updateStatus(Player player, boolean local, boolean remote) {
 
-        ItemStack decoration = FairTrade.getFt().getOptions().getDummyItem(e.hasConfirm());
-        sk.byType(clazz).forEach(slot -> inv.setItem(slot, decoration));
+        Inventory inv = player.getOpenInventory().getTopInventory();
+        AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
+
+        sk.byType(SlotStatusLocal.class).forEach(slot -> inv.setItem(slot, FairTrade.getFt().getOptions().getDummyItem(local)));
+        sk.byType(SlotStatusRemote.class).forEach(slot -> inv.setItem(slot, FairTrade.getFt().getOptions().getDummyItem(remote)));
 
         ItemStack confirm = inv.getItem(sk.firstSlot(SlotConfirm.class));
         String title, msg;
 
-        if(p == e.getPlayer())
-        {
-            if(e.hasConfirm())
-            {
-                title = EnumI18n.BUTTON_CANCEL.localize();
-                msg = EnumI18n.YOU_ACCEPTED.localize();
-            }
-            else
-            {
-                title = EnumI18n.BUTTON_CONFIRM.localize();
-                msg = EnumI18n.NOBODY_ACCEPTED.localize();
-            }
+        if(local) {
+            title = EnumI18n.BUTTON_CANCEL.localize();
+            msg = EnumI18n.YOU_ACCEPTED.localize();
         }
-        else
-        {
+        else if(remote) {
             title = EnumI18n.BUTTON_CONFIRM.localize();
-
-            if(e.hasConfirm())
-            {
-                msg = EnumI18n.REMOTE_ACCEPTED.localize(e.getPlayer());
-            }
-            else
-            {
-                msg = EnumI18n.NOBODY_ACCEPTED.localize();
-            }
+            msg = EnumI18n.NOBODY_ACCEPTED.localize();
+        }
+        else {
+            title = EnumI18n.BUTTON_CONFIRM.localize();
+            msg = EnumI18n.NOBODY_ACCEPTED.localize();
         }
 
         ItemStacksUtils.renameAndBrief(confirm, title, msg);
