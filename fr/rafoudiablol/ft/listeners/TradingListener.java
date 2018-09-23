@@ -24,8 +24,5 @@ public class TradingListener implements Listener {
 
         e.setOtherGift(InventoriesUtils.merge(SlotRemote.class, e.getPlayer().getInventory(), e.getPlayer().getOpenInventory().getTopInventory()));
         e.setPlayerGift(InventoriesUtils.merge(SlotRemote.class, e.getOther().getInventory(), e.getOther().getOpenInventory().getTopInventory()));
-
-        ((Holder)e.getPlayer().getOpenInventory().getTopInventory().getHolder()).stopTracing();
-        ((Holder)e.getOther().getOpenInventory().getTopInventory().getHolder()).stopTracing();
     }
 }
