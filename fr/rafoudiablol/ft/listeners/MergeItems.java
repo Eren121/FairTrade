@@ -19,7 +19,7 @@ public class MergeItems implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void event(FinalizeTransactionEvent e) {
 
-        for(int i = 0; i < 1; ++i) {
+        for(int i = 0; i <= 1; ++i) {
 
             Offer offer = e.getTrade().getOffer(i);
             Player player = offer.getPlayer();
