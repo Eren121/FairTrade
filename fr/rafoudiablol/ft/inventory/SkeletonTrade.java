@@ -36,16 +36,7 @@ public class SkeletonTrade extends AbstractSkeleton {
         Trade trade = FairTrade.getFt().getTracker().getTrade(src.getUniqueId());
 
         if(trade != null) {
-
-            if (otherStatus != null) {
-
-                ((Holder)other.getOpenInventory().getTopInventory().getHolder()).stopTracing();
-                otherStatus.aborted = true;
-                other.closeInventory();
-                FairTrade.getFt().taskAtNextTick(other::closeInventory);
-            }
-
-            Bukkit.getPluginManager().callEvent(new AbortTransactionEvent(FairTrade.getFt().getTracker().getTrade(src.getUniqueId())));
+            Bukkit.getPluginManager().callEvent(new AbortTransactionEvent(trade));
         }
     }
 }
