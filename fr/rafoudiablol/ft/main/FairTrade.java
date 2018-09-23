@@ -4,11 +4,8 @@ import fr.rafoudiablol.ft.commands.*;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.config.Options;
-import fr.rafoudiablol.ft.listeners.DummyUpdater;
-import fr.rafoudiablol.ft.listeners.RequiredDistance;
-import fr.rafoudiablol.ft.listeners.TradingListener;
+import fr.rafoudiablol.ft.listeners.*;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
-import fr.rafoudiablol.ft.listeners.TradeTracker;
 import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
@@ -86,6 +83,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private void registerListeners()
     {
         getServer().getPluginManager().registerEvents(new TradingListener(getLogger()), this);
+        getServer().getPluginManager().registerEvents(new RequestTracker(), this);
         getServer().getPluginManager().registerEvents(manager, this);
         getServer().getPluginManager().registerEvents(tracker, this);
         getServer().getPluginManager().registerEvents(db, this);
