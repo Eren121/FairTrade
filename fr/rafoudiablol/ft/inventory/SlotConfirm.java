@@ -28,18 +28,7 @@ public class SlotConfirm extends AbstractSlotTrade {
 
         if(e.getAction() == InventoryAction.PICKUP_ALL) {
 
-            o.toggle();
-
-            if(t.getOffer(0).getConfirm() && t.getOffer(1).getConfirm()) {
-
-                FinalizeTransactionEvent e2 = new FinalizeTransactionEvent(t);
-                Bukkit.getPluginManager().callEvent(e2);
-            }
-            else {
-
-                StatusTransactionEvent e2 = new StatusTransactionEvent(t, o);
-                Bukkit.getPluginManager().callEvent(e2);
-            }
+            update(t, o);
         }
         else if(e.getAction() == InventoryAction.PICKUP_HALF) {
 
@@ -47,13 +36,33 @@ public class SlotConfirm extends AbstractSlotTrade {
 
             if(t.getOffer(0).getPlayer().getUniqueId().equals(t.getOffer(1).getPlayer().getUniqueId())) {
 
-                Offer o2 = (t.getOffer(o == t.getOffer(0) ? 1 : 0));
-                o2.toggle();
-                StatusTransactionEvent e2 = new StatusTransactionEvent(t, o2);
-                Bukkit.getPluginManager().callEvent(e2);
+                Offer o2;
+
+                if(o == t.getOffer(0))
+                    o2 = t.getOffer(1);
+                else
+                    o2 = t.getOffer(0);
+
+                update(t, o2);
             }
         }
 
         return false;
+    }
+
+    private void update(Trade t, Offer o) {
+
+        o.toggle();
+
+        if(t.getOffer(0).getConfirm() && t.getOffer(1).getConfirm()) {
+
+            FinalizeTransactionEvent e2 = new FinalizeTransactionEvent(t);
+            Bukkit.getPluginManager().callEvent(e2);
+        }
+        else {
+
+            StatusTransactionEvent e2 = new StatusTransactionEvent(t, o);
+            Bukkit.getPluginManager().callEvent(e2);
+        }
     }
 }
