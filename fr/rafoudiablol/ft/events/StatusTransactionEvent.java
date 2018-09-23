@@ -14,12 +14,10 @@ public class StatusTransactionEvent extends AbstractOfferEvent {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean status;
-    private HumanEntity src;
     private Inventory inv;
 
     public StatusTransactionEvent(Trade trade, Offer offer) {
         super(trade, offer);
-        this.src = offer.getPlayer();
         this.inv = offer.getPlayer().getOpenInventory().getTopInventory();
         this.status = offer.getConfirm();
     }
@@ -39,6 +37,6 @@ public class StatusTransactionEvent extends AbstractOfferEvent {
     }
 
     public boolean hasConfirm() {
-        return status;
+        return offer.getConfirm();
     }
 }
