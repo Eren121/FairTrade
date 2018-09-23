@@ -1,20 +1,15 @@
 package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.events.AcceptTransactionEvent;
 import fr.rafoudiablol.ft.events.RequestTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.manager.ITransactionLink;
-import fr.rafoudiablol.ft.manager.PlayerStatus;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class RequestTracker implements Listener {
 
