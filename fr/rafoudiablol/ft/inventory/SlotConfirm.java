@@ -1,6 +1,7 @@
 package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
+import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.manager.Offer;
 import fr.rafoudiablol.ft.manager.Trade;
@@ -28,8 +29,16 @@ public class SlotConfirm extends AbstractSlotTrade {
 
             o.toggle();
 
-            StatusTransactionEvent event = new StatusTransactionEvent(t, o);
-            Bukkit.getPluginManager().callEvent(event);
+            if(t.getOffer(0).getConfirm() && t.getOffer(1).getConfirm()) {
+
+                FinalizeTransactionEvent e2 = new FinalizeTransactionEvent(t);
+                Bukkit.getPluginManager().callEvent(e2);
+            }
+            else {
+
+                StatusTransactionEvent e2 = new StatusTransactionEvent(t, o);
+                Bukkit.getPluginManager().callEvent(e2);
+            }
         }
 
         return false;
