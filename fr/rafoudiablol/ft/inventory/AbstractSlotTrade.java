@@ -19,10 +19,7 @@ public abstract class AbstractSlotTrade extends AbstractSlot {
         if(t != null) {
 
             Offer o = t.getOffer(e.getWhoClicked() == t.getOffer(0).getPlayer() ? 0 : 1);
-
-            if(o != null) {
-                return action(e, t, o);
-            }
+            return action(e, t, o);
         }
 
         // The trade was not tracked, default behaviour.
