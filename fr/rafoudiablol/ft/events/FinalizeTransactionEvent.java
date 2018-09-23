@@ -1,7 +1,5 @@
 package fr.rafoudiablol.ft.events;
 
-import fr.rafoudiablol.ft.main.FairTrade;
-import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
@@ -27,11 +25,6 @@ public class FinalizeTransactionEvent extends AbstractTransactionEvent {
     @SuppressWarnings("unused")
     public static HandlerList getHandlerList() {
         return handlers;
-    }
-
-    public static FinalizeTransactionEvent cookEvent(PlayerStatus status) {
-
-        return new FinalizeTransactionEvent(FairTrade.getFt().getTracker().getTrade(status.getPlayerID()));
     }
 
     public void setPlayerGift(ItemStack[] itemStacks) {
