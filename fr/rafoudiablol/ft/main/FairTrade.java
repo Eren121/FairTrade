@@ -7,6 +7,7 @@ import fr.rafoudiablol.ft.config.Options;
 import fr.rafoudiablol.ft.listeners.*;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;
+import fr.rafoudiablol.ft.test.UnitTest;
 import fr.rafoudiablol.ft.utils.APIListener;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorIntegerArg;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorOPlayerArg;

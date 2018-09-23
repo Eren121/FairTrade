@@ -1,8 +1,9 @@
-package fr.rafoudiablol.ft.main;
+package fr.rafoudiablol.ft.test;
 
 import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotOwner;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.utils.ArraysUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.apache.commons.lang.Validate;
