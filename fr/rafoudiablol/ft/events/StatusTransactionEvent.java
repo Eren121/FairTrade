@@ -36,6 +36,6 @@ public class StatusTransactionEvent extends AbstractOfferEvent {
     }
 
     public boolean hasConfirm() {
-        return offer.getConfirm();
+        return status;
     }
 }
