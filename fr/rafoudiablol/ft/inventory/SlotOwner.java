@@ -2,17 +2,12 @@ package fr.rafoudiablol.ft.inventory;
 
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.events.UpdateTransactionEvent;
-import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.Offer;
-import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.manager.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 

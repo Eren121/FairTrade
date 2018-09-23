@@ -1,7 +1,6 @@
 package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
-import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.events.AbstractTransactionEvent;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
 import fr.rafoudiablol.ft.events.RequestTransactionEvent;

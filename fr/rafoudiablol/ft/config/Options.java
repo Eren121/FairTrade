@@ -3,7 +3,6 @@ package fr.rafoudiablol.ft.config;
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.main.ILoggeable;
 import fr.rafoudiablol.ft.spy.SkeletonLog;
-import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;

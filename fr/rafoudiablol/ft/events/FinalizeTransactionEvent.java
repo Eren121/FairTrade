@@ -3,7 +3,6 @@ package fr.rafoudiablol.ft.events;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.manager.PlayerStatus;
 import fr.rafoudiablol.ft.manager.Trade;
-import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
