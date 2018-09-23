@@ -1,7 +1,9 @@
-package fr.rafoudiablol.ft.manager;
+package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.events.InitiateTransactionEvent;
+import fr.rafoudiablol.ft.manager.Offer;
+import fr.rafoudiablol.ft.manager.Trade;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

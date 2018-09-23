@@ -8,7 +8,7 @@ import fr.rafoudiablol.ft.listeners.DummyUpdater;
 import fr.rafoudiablol.ft.listeners.RequiredDistance;
 import fr.rafoudiablol.ft.listeners.TradingListener;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
-import fr.rafoudiablol.ft.manager.TradeTracker;
+import fr.rafoudiablol.ft.listeners.TradeTracker;
 import fr.rafoudiablol.ft.manager.TransactionsManager;
 import fr.rafoudiablol.ft.spy.Database;
 import fr.rafoudiablol.ft.spy.Queries;

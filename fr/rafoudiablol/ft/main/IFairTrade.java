@@ -2,7 +2,7 @@ package fr.rafoudiablol.ft.main;
 
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.manager.ITransactionManager;
-import fr.rafoudiablol.ft.manager.TradeTracker;
+import fr.rafoudiablol.ft.listeners.TradeTracker;
 import fr.rafoudiablol.ft.spy.Database;
 import org.bukkit.command.CommandSender;
 
