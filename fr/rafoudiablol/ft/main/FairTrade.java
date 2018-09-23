@@ -84,6 +84,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     {
         getServer().getPluginManager().registerEvents(new TradingListener(getLogger()), this);
         getServer().getPluginManager().registerEvents(new RequestTracker(), this);
+        getServer().getPluginManager().registerEvents(new CloseRemoteInventory(), this);
         getServer().getPluginManager().registerEvents(manager, this);
         getServer().getPluginManager().registerEvents(tradeTracker, this);
         getServer().getPluginManager().registerEvents(db, this);
