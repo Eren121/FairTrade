@@ -6,6 +6,7 @@ import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotStatusLocal;
 import fr.rafoudiablol.ft.inventory.SlotStatusRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
+import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
@@ -28,13 +29,19 @@ public class DummyUpdater implements Listener {
 
         Trade trade = e.getTrade();
 
-        for(int i = 0; i <= 1; ++i) {
 
-            updateStatus(trade.getOffer(i).getPlayer(), trade.getOffer(i).getConfirm(), trade.getOffer(1-i).getConfirm());
-        }
+        FairTrade.getFt().taskAtNextTick(() -> {
+            for (int i = 0; i <= 1; ++i) {
+
+                Offer o = trade.getOffer(i);
+                Offer o2 = trade.getOffer(1-i);
+
+                updateStatus(o.getPlayer(), o2.getPlayer().getName(), o.getConfirm(), o2.getConfirm());
+            }
+        });
     }
 
-    private void updateStatus(Player player, boolean local, boolean remote) {
+    private void updateStatus(Player player, String remoteName, boolean local, boolean remote) {
 
         Inventory inv = player.getOpenInventory().getTopInventory();
         AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
@@ -51,7 +58,7 @@ public class DummyUpdater implements Listener {
         }
         else if(remote) {
             title = EnumI18n.BUTTON_CONFIRM.localize();
-            msg = EnumI18n.REMOTE_ACCEPTED.localize();
+            msg = EnumI18n.REMOTE_ACCEPTED.localize(remoteName);
         }
         else {
             title = EnumI18n.BUTTON_CONFIRM.localize();
@@ -59,6 +66,5 @@ public class DummyUpdater implements Listener {
         }
 
         ItemStacksUtils.renameAndBrief(confirm, title, msg);
-        player.updateInventory();
     }
 }

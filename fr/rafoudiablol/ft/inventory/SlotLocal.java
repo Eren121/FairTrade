@@ -20,9 +20,7 @@ public class SlotLocal extends AbstractSlotTrade {
         UpdateTransactionEvent event = new UpdateTransactionEvent(t, o, e.getSlot());
         Bukkit.getPluginManager().callEvent(event);
 
-        if(o.getConfirm()) {
-
-            o.toggle();
+        if(t.reset()) {
             Bukkit.getPluginManager().callEvent(new StatusTransactionEvent(t, o));
         }
 
