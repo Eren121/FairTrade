@@ -154,7 +154,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
             String insert = db.getClass().getPackage().getName().replace('.', '/') + "/sql/insert.sql";
             i(insert);
-            db.setInsertStatement(insert);
+            db.setInsertStatement(IOUtils.toString(this.getTextResource(insert)));
         }
         catch(IOException e) {
             e.printStackTrace();

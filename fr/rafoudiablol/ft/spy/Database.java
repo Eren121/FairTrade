@@ -105,17 +105,18 @@ public class Database implements IDatabase, Listener
 
         try {
 
-            String prepared = insertStatement;
+            for(String prepared : insertStatement.split(";")) {
 
-            for(int i = 0; i <= 1; ++i) {
-                prepared = prepared.replace(":name" + i, offers[i].getPlayer().getName());
-                prepared = prepared.replace(":uuid" + i, offers[i].getPlayer().getUniqueId().toString());
-                prepared = prepared.replace(":items" + i, YamlUtils.toString(offers[i].getItems()));
-                prepared = prepared.replace(":money" + i, String.valueOf(offers[i].getMoney()));
+                for (int i = 0; i <= 1; ++i) {
+                    prepared = prepared.replace(":name" + i, '\'' + offers[i].getPlayer().getName() + '\'');
+                    prepared = prepared.replace(":uuid" + i, '\'' + offers[i].getPlayer().getUniqueId().toString() + '\'');
+                    prepared = prepared.replace(":items" + i, '\'' + YamlUtils.toString(offers[i].getItems()) + '\'');
+                    prepared = prepared.replace(":money" + i, String.valueOf(offers[i].getMoney()));
+                }
+
+                PreparedStatement st = connection.prepareStatement(prepared);
+                st.executeUpdate();
             }
-
-            PreparedStatement st = connection.prepareStatement(prepared);
-            st.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +136,7 @@ public class Database implements IDatabase, Listener
     public Transaction getTransactionFromID(int id)
     {
         ResultSet res = query("SELECT tradeDate, playerUUID, offerItems, offerMoney FROM Trades, Offers " +
-                "WHERE tradeID = " + id + " AND (Trades.offersID = Offers.offersID OR Trades.offersID+1 = Offers.offersID)");
+                "WHERE tradeID = " + id + " AND (Trades.offerID = Offers.offerID OR Trades.offerID + 1 = Offers.offerID)");
 
         Transaction ret = null;
 
@@ -149,16 +150,16 @@ public class Database implements IDatabase, Listener
                 }
 
                 ret = new Transaction();
-                ret.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(0)).toString();
-                ret.requesterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(1))).getName();
-                ret.whatRequesterGives = YamlUtils.toItems(res.getString(2));
+                ret.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(1)).toString();
+                ret.requesterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName();
+                ret.whatRequesterGives = YamlUtils.toItems(res.getString(3));
 
                 if(!res.next()) {
                     return null;
                 }
 
-                ret.accepterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(1))).getName();
-                ret.whatAccepterGives = YamlUtils.toItems(res.getString(2));
+                ret.accepterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName();
+                ret.whatAccepterGives = YamlUtils.toItems(res.getString(3));
 
             } catch (SQLException | ParseException e) {
                 e.printStackTrace();

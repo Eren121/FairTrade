@@ -17,8 +17,6 @@ public class YamlUtils
         tmp.set(KEY, stacks);
         String str = (stacks != null && stacks.length == 0) ? "" : tmp.saveToString();
         str = str.substring(str.indexOf('\n')+1);
-
-        FairTrade.getFt().i(str);
         return str;
     }
 
