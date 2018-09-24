@@ -38,7 +38,7 @@
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/fr/rafoudiablol/ft/spy/sql/init.sql" connection-id="bedf3c6c-99a1-4d92-b0fd-d4165b4fc315" session-id="MAIN" current-schema="" />
-    <mapping file-url="file://$PROJECT_DIR$/fr/rafoudiablol/ft/spy/sql/update.sql" connection-id="bedf3c6c-99a1-4d92-b0fd-d4165b4fc315" session-id="MAIN" current-schema="main" />
+    <mapping file-url="file://$PROJECT_DIR$/fr/rafoudiablol/ft/spy/sql/insert.sql" connection-id="bedf3c6c-99a1-4d92-b0fd-d4165b4fc315" session-id="MAIN" current-schema="main" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
@@ -544,13 +544,6 @@
     </general-settings>
   </component>
   <component name="DBNavigator.Project.StatementExecutionManager">
-    <execution-variables>
-      <file path="file://$PROJECT_DIR$/fr/rafoudiablol/ft/spy/sql/update.sql">
-        <variable name=":money1" dataType="NUMERIC" values="100.0" />
-        <variable name=":items1" dataType="LITERAL" values="A LOT OF ITEMS" />
-        <variable name=":uuid0" dataType="LITERAL" values="000000" />
-        <variable name=":name0" dataType="LITERAL" values="Notch" />
-      </file>
-    </execution-variables>
+    <execution-variables />
   </component>
 </project>
