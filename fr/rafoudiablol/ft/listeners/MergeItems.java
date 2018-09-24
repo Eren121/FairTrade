@@ -2,6 +2,7 @@ package fr.rafoudiablol.ft.listeners;
 
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.utils.InventoriesUtils;
 import org.bukkit.entity.Player;
@@ -25,6 +26,20 @@ public class MergeItems implements Listener {
             Player player = offer.getPlayer();
 
             e.getTrade().getOffer(1-i).setItems(InventoriesUtils.merge(SlotRemote.class, player.getInventory(), player.getOpenInventory().getTopInventory()));
+        }
+
+        for(int i = 0; i <= 1; ++i) {
+
+            // Give money + Take money
+            double sum = e.getTrade().getOffer(i-1).getMoney() - e.getTrade().getOffer(i).getMoney();
+
+            if(sum > 0.0) {
+                FairTrade.getFt().getEconomy().depositPlayer(e.getTrade().getOffer(i).getPlayer(), sum);
+            }
+            else if(sum < 0.0) {
+                sum = -sum;
+                FairTrade.getFt().getEconomy().withdrawPlayer(e.getTrade().getOffer(i).getPlayer(), sum);
+            }
         }
     }
 }

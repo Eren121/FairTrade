@@ -9,26 +9,27 @@ import static java.util.Arrays.asList;
 
 public class ItemStacksUtils {
 
-    public static void rename(ItemStack i, String display)
-    {
-        setMeta(i, meta -> meta.setDisplayName(display));
+    public static ItemStack rename(ItemStack i, String display) {
+        return setMeta(i, meta -> meta.setDisplayName(display));
     }
 
-    public static void brief(ItemStack i, String... des)
-    {
-        setMeta(i, meta -> meta.setLore(asList(des)));
+    public static ItemStack brief(ItemStack i, String... des) {
+        return setMeta(i, meta -> meta.setLore(asList(des)));
     }
 
-    public static void renameAndBrief(ItemStack i, String s1, String... s2)
-    {
+    public static ItemStack renameAndBrief(ItemStack i, String s1, String... s2) {
         rename(i, s1);
-        brief(i, s2);
+        return brief(i, s2);
     }
 
-    public static void setMeta(ItemStack i, Consumer<ItemMeta> f)
-    {
+    public static ItemStack setMeta(ItemStack i, Consumer<ItemMeta> f) {
         ItemMeta meta = i.getItemMeta();
         f.accept(meta);
         i.setItemMeta(meta);
+        return i;
+    }
+
+    public static ItemStack addLore(ItemStack i, String... lore) {
+        return setMeta(i, m -> m.getLore().addAll(asList(lore)));
     }
 }

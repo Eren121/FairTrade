@@ -10,7 +10,6 @@ import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,12 +35,12 @@ public class DummyUpdater implements Listener {
                 Offer o = trade.getOffer(i);
                 Offer o2 = trade.getOffer(1-i);
 
-                updateStatus(o.getPlayer(), o2.getPlayer().getName(), o.getConfirm(), o2.getConfirm());
+                updateStatus(o.getPlayer(), o2.getPlayer().getName(), o.getConfirm(), o2.getConfirm(), o.getMoney(), o2.getMoney());
             }
         });
     }
 
-    private void updateStatus(Player player, String remoteName, boolean local, boolean remote) {
+    private void updateStatus(Player player, String remoteName, boolean local, boolean remote, double localMoney, double remoteMoney) {
 
         Inventory inv = player.getOpenInventory().getTopInventory();
         AbstractSkeleton sk = Holder.tryGet(inv.getHolder());
@@ -65,6 +64,8 @@ public class DummyUpdater implements Listener {
             msg = EnumI18n.NOBODY_ACCEPTED.localize();
         }
 
-        ItemStacksUtils.renameAndBrief(confirm, title, msg);
+        ItemStacksUtils.renameAndBrief(confirm, title, msg,
+                "Give: " + FairTrade.getFt().getEconomy().format(localMoney),
+                "Get: " + FairTrade.getFt().getEconomy().format(remoteMoney));
     }
 }

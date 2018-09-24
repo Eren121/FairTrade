@@ -13,7 +13,9 @@ import fr.rafoudiablol.ft.utils.commands.CommandDecoratorIntegerArg;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorOPlayerArg;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayer;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayerArg;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -25,6 +27,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private Database db;
     private TradeTracker tradeTracker;
     private Options options;
+    private Economy econ;
 
     public static IFairTrade getFt() { return INSTANCE; }
 
@@ -36,6 +39,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
         readConfiguration();
         registerCommands();
+        setupEconomy();
         setupDb();
         setupTracker();
         registerListeners();
@@ -47,6 +51,11 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     public void onDisable()
     {
         db.close();
+    }
+
+    @Override
+    public Economy getEconomy() {
+        return econ;
     }
 
     @Override
@@ -134,6 +143,27 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         db = new Database(getLogger());
         db.connect(tracker.getPath());
         db.update(Queries.CreateTable.query);
+    }
+
+    // copypasta
+    // https://github.com/MilkBowl/VaultAPI
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+
+        if(econ != null) {
+            i("Vault dependency found");
+        }
+        else {
+            i("Vault dependency not found, can't trade money");
+        }
+        return econ != null;
     }
 
     private void readConfiguration()

@@ -18,6 +18,8 @@ public class SkeletonTrade extends AbstractSkeleton {
         registerSlot(1, new SlotLocal());
         registerSlot(2, new SlotRemote());
         registerSlot(3, new SlotConfirm());
+        registerSlot(4, new SlotMoney.Plus());
+        registerSlot(5, new SlotMoney.Minus());
         registerSlot(7, new SlotStatusLocal());
         registerSlot(8, new SlotStatusRemote());
         setMatrix(slots);
