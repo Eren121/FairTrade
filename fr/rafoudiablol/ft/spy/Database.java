@@ -2,7 +2,9 @@ package fr.rafoudiablol.ft.spy;
 
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
+import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.utils.YamlUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,16 +13,18 @@ import org.bukkit.event.Listener;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
-import static fr.rafoudiablol.ft.spy.Queries.*;
+import static fr.rafoudiablol.ft.spy.Query.*;
 
 public class Database implements IDatabase, Listener
 {
     private Connection connection;
     private Statement statement;
     private Logger log;
+    private String insertStatement;
 
     public Database(Logger log)
     {
@@ -83,7 +87,7 @@ public class Database implements IDatabase, Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void event(FinalizeTransactionEvent e) {
 
-        int id = registerTransaction(e.getPlayer(), e.getOther(), YamlUtils.toString(e.getTrade().getOffer(0).getItems()), YamlUtils.toString(e.getTrade().getOffer(1).getItems()));
+        int id = registerTransaction(new Offer[] {e.getTrade().getOffer(0), e.getTrade().getOffer(1)});
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
     }
 
@@ -95,17 +99,22 @@ public class Database implements IDatabase, Listener
      * @param accepterGive what accepter gives to requester
      * @return ID of the transaction
      */
-    private int registerTransaction(HumanEntity requester, HumanEntity accepter, String requesterGive, String accepterGive)
-    {
+    private int registerTransaction(Offer offers[]) {
+
         int ret = -1;
 
         try {
 
-            PreparedStatement st = connection.prepareStatement(Queries.InsertTransaction.query);
-            st.setString(1, requester.getName());
-            st.setString(2, accepter.getName());
-            st.setString(3, requesterGive);
-            st.setString(4, accepterGive);
+            String prepared = insertStatement;
+
+            for(int i = 0; i <= 1; ++i) {
+                prepared = prepared.replace(":name" + i, offers[i].getPlayer().getName());
+                prepared = prepared.replace(":uuid" + i, offers[i].getPlayer().getUniqueId().toString());
+                prepared = prepared.replace(":items" + i, YamlUtils.toString(offers[i].getItems()));
+                prepared = prepared.replace(":money" + i, String.valueOf(offers[i].getMoney()));
+            }
+
+            PreparedStatement st = connection.prepareStatement(prepared);
             st.executeUpdate();
 
         } catch (SQLException e) {
@@ -113,7 +122,7 @@ public class Database implements IDatabase, Listener
         }
 
         try {
-            ResultSet res = query("SELECT MAX(id) FROM notary");
+            ResultSet res = query("SELECT MAX(tradeID) FROM Trades");
             res.next();
             ret = res.getInt(1);
         } catch (SQLException e) {
@@ -125,22 +134,31 @@ public class Database implements IDatabase, Listener
 
     public Transaction getTransactionFromID(int id)
     {
-        ResultSet res = query("SELECT * FROM notary WHERE id = " + id);
+        ResultSet res = query("SELECT tradeDate, playerUUID, offerItems, offerMoney FROM Trades, Offers " +
+                "WHERE tradeID = " + id + " AND (Trades.offersID = Offers.offersID OR Trades.offersID+1 = Offers.offersID)");
+
         Transaction ret = null;
 
         if(res != null)
         {
             try {
 
-                //Check ID was found
-                if(res.next()) {
-                    ret = new Transaction(
-                            res.getString(Requester.query),
-                            res.getString(Accepter.query),
-                            res.getString(WhatRequestGive.query),
-                            res.getString(WhatAccepterGive.query),
-                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(At.query)).toString());
+
+                if(!res.next()) {
+                    return null;
                 }
+
+                ret = new Transaction();
+                ret.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(0)).toString();
+                ret.requesterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(1))).getName();
+                ret.whatRequesterGives = YamlUtils.toItems(res.getString(2));
+
+                if(!res.next()) {
+                    return null;
+                }
+
+                ret.accepterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(1))).getName();
+                ret.whatAccepterGives = YamlUtils.toItems(res.getString(2));
 
             } catch (SQLException | ParseException e) {
                 e.printStackTrace();
@@ -148,5 +166,9 @@ public class Database implements IDatabase, Listener
         }
 
         return ret;
+    }
+
+    public void setInsertStatement(String insert) {
+        this.insertStatement = insert;
     }
 }

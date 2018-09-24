@@ -5,19 +5,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class Transaction
 {
-    public final String requesterName;
-    public final String accepterName;
-    public final ItemStack[] whatRequesterGives;
-    public final ItemStack[] whatAccepterGives;
-    public final String date;
+    public String requesterName;
+    public String accepterName;
+    public ItemStack[] whatRequesterGives;
+    public ItemStack[] whatAccepterGives;
+    public String date;
 
-    public Transaction(String requesterName, String accepterName, String whatRequesterGives, String whatAccepterGives, String date) {
-
-        this.requesterName = requesterName;
-        this.accepterName = accepterName;
-        this.whatRequesterGives = YamlUtils.toItems(whatRequesterGives);
-        this.whatAccepterGives = YamlUtils.toItems(whatAccepterGives);
-        this.date = date;
+    public Transaction() {
     }
 
     public String getTitle() {

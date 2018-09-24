@@ -1,12 +1,14 @@
 package fr.rafoudiablol.ft.main;
 
-import fr.rafoudiablol.ft.commands.*;
+import fr.rafoudiablol.ft.commands.CommandAccept;
+import fr.rafoudiablol.ft.commands.CommandRequest;
+import fr.rafoudiablol.ft.commands.CommandSpy;
+import fr.rafoudiablol.ft.commands.TypeCommand;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.config.Options;
 import fr.rafoudiablol.ft.listeners.*;
 import fr.rafoudiablol.ft.spy.Database;
-import fr.rafoudiablol.ft.spy.Queries;
 import fr.rafoudiablol.ft.test.UnitTest;
 import fr.rafoudiablol.ft.utils.APIListener;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorIntegerArg;
@@ -14,6 +16,7 @@ import fr.rafoudiablol.ft.utils.commands.CommandDecoratorOPlayerArg;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayer;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayerArg;
 import net.milkbowl.vault.economy.Economy;
+import org.apache.commons.io.IOUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -142,7 +145,20 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
         db = new Database(getLogger());
         db.connect(tracker.getPath());
-        db.update(Queries.CreateTable.query);
+
+        try {
+
+            String init = db.getClass().getPackage().getName().replace('.', '/') + "/sql/init.sql";
+            i(init);
+            db.update(IOUtils.toString(this.getTextResource(init)));
+
+            String insert = db.getClass().getPackage().getName().replace('.', '/') + "/sql/insert.sql";
+            i(insert);
+            db.setInsertStatement(insert);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // copypasta
