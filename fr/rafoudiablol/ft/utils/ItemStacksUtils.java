@@ -30,6 +30,12 @@ public class ItemStacksUtils {
     }
 
     public static ItemStack addLore(ItemStack i, String... lore) {
-        return setMeta(i, m -> m.getLore().addAll(asList(lore)));
+        return setMeta(i, m -> {
+
+            if(m.hasLore())
+                m.getLore().addAll(asList(lore));
+            else
+                m.setLore(asList(lore));
+        });
     }
 }

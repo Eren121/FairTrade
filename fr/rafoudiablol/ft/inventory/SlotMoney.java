@@ -31,7 +31,7 @@ public abstract class SlotMoney extends AbstractSlotTrade {
         t.reset();
         Bukkit.getPluginManager().callEvent(new StatusTransactionEvent(t, o));
 
-        return super.action(e);
+        return false;
     }
 
     public abstract double getDelta(); // Can be negative, of course... Checks are made

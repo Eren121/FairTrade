@@ -31,7 +31,7 @@ public class MergeItems implements Listener {
         for(int i = 0; i <= 1; ++i) {
 
             // Give money + Take money
-            double sum = e.getTrade().getOffer(i-1).getMoney() - e.getTrade().getOffer(i).getMoney();
+            double sum = e.getTrade().getOffer(1-i).getMoney() - e.getTrade().getOffer(i).getMoney();
 
             if(sum > 0.0) {
                 FairTrade.getFt().getEconomy().depositPlayer(e.getTrade().getOffer(i).getPlayer(), sum);

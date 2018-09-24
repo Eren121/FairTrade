@@ -149,19 +149,21 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     // https://github.com/MilkBowl/VaultAPI
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            i("Vault dependency not found, can't trade money");
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
+            i("Economy registration service not found, can't trade money");
             return false;
         }
         econ = rsp.getProvider();
 
         if(econ != null) {
-            i("Vault dependency found");
+            i("Vault dependency found, you can trade with money !");
         }
         else {
-            i("Vault dependency not found, can't trade money");
+            i("Economy provider not found, can't trade money");
         }
         return econ != null;
     }
