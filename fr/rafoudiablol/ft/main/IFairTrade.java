@@ -7,6 +7,10 @@ import fr.rafoudiablol.ft.utils.ILoggable;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
 
+/**
+ * A public interface for {@link FairTrade} plugin.
+ * Standardize all common functions.
+ */
 public interface IFairTrade extends ILoggable {
 
     Economy getEconomy();

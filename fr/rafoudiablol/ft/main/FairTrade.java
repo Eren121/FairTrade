@@ -24,6 +24,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The main plugin class.<br>
+ * This is the class registered in <u>plugin.yml</u>
+ */
 public class FairTrade extends JavaPlugin implements IFairTrade {
 
     private static FairTrade INSTANCE;
@@ -32,8 +36,17 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     private Options options;
     private Economy econ;
 
+    /**
+     * Get the plugin instance.<br>
+     * Actually an instance of {@link FairTrade}, but provide an API only for useful operations.
+     *
+     * @return The plugin instance
+     */
     public static IFairTrade getFt() { return INSTANCE; }
 
+    /**
+     * Enable the plugin
+     */
     @Override
     public void onEnable() {
 
@@ -50,36 +63,84 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         welcome();
     }
 
+    /**
+     * Disable the plugin
+     */
     @Override
     public void onDisable()
     {
         db.close();
     }
 
+    /**
+     * Get the generic <b>Vault</b> economy plugin API.
+     * May return null, if:
+     *
+     * <ul>
+     *     <li>The "trade money" option is disabled.
+     *     <li>The server has not Vault plugin.
+     *     <li>The server has no economy plugin.
+     *     <li>Either Vault or the economy plugin was not found, or this plugin cannot load it.
+     * </ul>
+     *
+     * @return the {@link Economy} instance used for trade.
+     */
     @Override
     public Economy getEconomy() {
         return econ;
     }
 
+    /**
+     * Get all options of this plugin.
+     *
+     * It must be the preferred way to get/set plugin options externally.
+     *
+     * @return The {@link IOptions} instance.
+     */
     @Override
     public IOptions getOptions() {
         return options;
     }
 
+    /**
+     * Get Database of past trades.
+     *
+     * @return The {@link Database} instance.
+     */
     @Override
     public Database getDatabase() { return db; }
 
+    /**
+     * Get the manager for trades that are in run.
+     *
+     * @return The {@link TradeTracker} instance.
+     */
     @Override
     public TradeTracker getTracker() {
         return tradeTracker;
     }
 
+    /**
+     * Schedule a task for next server tick.
+     *
+     * @param task The task to be run at next tick.
+     */
     @Override
     public void taskAtNextTick(Runnable task)
     {
         getServer().getScheduler().scheduleSyncDelayedTask(this, task, 1L);
     }
 
+    /**
+     * Send a message to one or multiples targets.
+     * Add the plugin {@link EnumI18n#PREFIX prefix} to the message.
+     * Use this method and avoid direct messaging to send messages to players, as then, they known from where does the message come from.
+     *
+     * @param msg The same message to send to all players
+     * @param players A varargs of players that will receive the message. It can be actually any {@link CommandSender} to remove unecessary cast.
+     *
+     * @see EnumI18n#PREFIX
+     */
     @Override
     public void sendMessage(String msg, CommandSender... players) {
         for(CommandSender p : players) {
