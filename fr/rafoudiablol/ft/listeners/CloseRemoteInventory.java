@@ -27,8 +27,11 @@ public class CloseRemoteInventory implements Listener {
         e.forEach(p -> {
 
             clearNonLocal(p);
-            keep(p);
-            close(p);
+            
+            if(keep(p)) {
+                
+                close(p);
+            }
         });
     }
 
@@ -38,8 +41,11 @@ public class CloseRemoteInventory implements Listener {
         e.forEach(p -> {
 
             clearNonLocal(p);
-            keep(p);
-            close(p);
+            
+            if(keep(p)) {
+                
+                close(p);
+            }
         });
     }
 
@@ -56,7 +62,7 @@ public class CloseRemoteInventory implements Listener {
         }
     }
 
-    private void keep(Player p) {
+    private boolean keep(Player p) {
 
         Inventory inventory = p.getOpenInventory().getTopInventory();
         Inventory bag = p.getInventory();
@@ -66,6 +72,8 @@ public class CloseRemoteInventory implements Listener {
 
         if(!stacks.isEmpty())
             inventory.addItem(stacks.toArray(new ItemStack[0]));
+        
+        return stacks.isEmpty();
     }
 
     private void close(Player p) {
