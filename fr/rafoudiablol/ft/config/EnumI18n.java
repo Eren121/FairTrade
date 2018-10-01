@@ -33,7 +33,7 @@ public enum EnumI18n {
     MONEY_GET("<money>");
 
     public final String path;
-    public final String[] args;
+    protected final String[] args;
 
     EnumI18n(String... args) {
         this.path = this.name();

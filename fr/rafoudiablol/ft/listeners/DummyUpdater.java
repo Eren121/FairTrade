@@ -65,7 +65,7 @@ public class DummyUpdater implements Listener {
         }
 
         ItemStacksUtils.renameAndBrief(confirm, title, msg,
-                "Give: " + FairTrade.getFt().getEconomy().format(localMoney),
-                "Get: " + FairTrade.getFt().getEconomy().format(remoteMoney));
+                EnumI18n.MONEY_GIVE.localize(FairTrade.getFt().getEconomy().format(localMoney)),
+                EnumI18n.MONEY_GET.localize(FairTrade.getFt().getEconomy().format(remoteMoney)));
     }
 }
