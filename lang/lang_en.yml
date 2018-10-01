@@ -19,3 +19,6 @@ BUTTON_CANCEL: "Click to §2cancel§c!"
 YOU_ACCEPTED: "You have accepted!"
 NOBODY_ACCEPTED: "Nobody has accepted."
 REMOTE_ACCEPTED: "<player> has accepted."
+
+MONEY_GIVE: "Give: §b<money>"
+MONEY_GET: "Get: §b<money>"

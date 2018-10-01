@@ -13,11 +13,6 @@ import org.bukkit.inventory.ItemStack;
 public abstract class SlotMoney extends AbstractSlotTrade {
 
     @Override
-    public ItemStack getDefault() {
-        return new ItemStack(Material.GOLD_BLOCK);
-    }
-
-    @Override
     public boolean action(InventoryClickEvent e, Trade t, Offer o) {
 
 
@@ -34,31 +29,36 @@ public abstract class SlotMoney extends AbstractSlotTrade {
         return false;
     }
 
+    @Override
+    public ItemStack getDefault() {
+
+        ItemStack item = new ItemStack(Material.GOLD_BLOCK);
+        ItemStacksUtils.addLore(item, getDelta() > 0 ? "+" + getDelta() : String.valueOf(getDelta()));
+
+        return item;
+    }
+
     public abstract double getDelta(); // Can be negative, of course... Checks are made
 
+    /**
+     * Add money to balance
+     */
     public static class Plus extends SlotMoney {
 
         @Override
         public double getDelta() {
             return 10;
         }
-
-        @Override
-        public ItemStack getDefault() {
-            return ItemStacksUtils.addLore(super.getDefault(), "+" + getDelta());
-        }
     }
 
+    /**
+     * Remove money from balance
+     */
     public static class Minus extends SlotMoney {
 
         @Override
         public double getDelta() {
             return -10;
-        }
-
-        @Override
-        public ItemStack getDefault() {
-            return ItemStacksUtils.addLore(super.getDefault(), "" + getDelta());
         }
     }
 }

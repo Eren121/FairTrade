@@ -27,7 +27,10 @@ public enum EnumI18n {
 
     YOU_ACCEPTED,
     REMOTE_ACCEPTED("<player>"),
-    NOBODY_ACCEPTED;
+    NOBODY_ACCEPTED,
+
+    MONEY_GIVE("<money>"),
+    MONEY_GET("<money>");
 
     public final String path;
     public final String[] args;
