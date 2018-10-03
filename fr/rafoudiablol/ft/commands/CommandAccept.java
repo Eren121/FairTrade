@@ -32,7 +32,7 @@ public class CommandAccept implements CommandExecutor {
             Bukkit.getPluginManager().callEvent(event);
 
             if (!event.isCancelled()) {
-                event.forEach((p1, p2) -> p1.openInventory(sk.buildInventory(EnumI18n.TITLE.localize(p1, p2))));
+                event.forEach((p1, p2) -> p1.openInventory(sk.buildInventory(EnumI18n.TITLE.localize(p2))));
             }
         }
         else {

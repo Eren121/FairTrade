@@ -181,6 +181,8 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
                 new CommandSpy()
             )
         ));
+
+        getCommand(TypeCommand.MAX.name).setExecutor(new CommandDecoratorIntegerArg(new CommandSpy(), true));
     }
 
     private void doUnitTests()

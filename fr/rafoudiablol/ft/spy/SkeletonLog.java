@@ -5,6 +5,7 @@ import fr.rafoudiablol.ft.inventory.SlotConfirm;
 import fr.rafoudiablol.ft.inventory.SlotLocal;
 import fr.rafoudiablol.ft.inventory.SlotRemote;
 import fr.rafoudiablol.ft.main.FairTrade;
+import fr.rafoudiablol.ft.trade.OfflineTrade;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
 import fr.rafoudiablol.ft.utils.inv.SlotLocked;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SkeletonLog extends AbstractSkeleton {
 
@@ -33,12 +35,12 @@ public class SkeletonLog extends AbstractSkeleton {
      * @param tr
      * @return
      */
-    public Inventory buildInventory(Transaction tr) {
+    public Inventory buildInventory(OfflineTrade tr) {
 
         AbstractSkeleton trade = FairTrade.getFt().getOptions().getSkeleton();
-        Inventory inv = super.buildInventory(tr.getTitle());
-        LinkedList<ItemStack> whatAccGive = new LinkedList<>(Arrays.asList(tr.whatAccepterGives));
-        LinkedList<ItemStack> whatReqGive = new LinkedList<>(Arrays.asList(tr.whatRequesterGives));
+        Inventory inv = super.buildInventory("[" + tr.getOffer(0).getName() + "] >>> <<< [" + tr.getOffer(1).getName() + "]");
+        LinkedList<ItemStack> whatAccGive = new LinkedList<>(Arrays.asList(tr.getOffer(1).getItems()));
+        LinkedList<ItemStack> whatReqGive = new LinkedList<>(Arrays.asList(tr.getOffer(0).getItems()));
 
         for(int i = 0; i < size(); ++i)
         {
@@ -57,16 +59,18 @@ public class SkeletonLog extends AbstractSkeleton {
         return inv;
     }
 
-    private ItemStack getHistoryInfoItem(Transaction tr)
+    private ItemStack getHistoryInfoItem(OfflineTrade tr)
     {
-        String[] info = new String[3];
-        info[0] = EnumI18n.INFO_1.localize(tr.requesterName, tr.accepterName, tr.date);
-        info[1] = EnumI18n.INFO_2.localize(tr.requesterName, tr.accepterName, tr.date);
-        info[2] = EnumI18n.INFO_3.localize(tr.requesterName, tr.accepterName, tr.date);
+        List<String> list = EnumI18n.LOG_BRIEF.localizeList(
+                tr.getOffer(0).getName(),
+                tr.getOffer(1).getName(),
+                FairTrade.getFt().getEconomy().format(tr.getOffer(0).getMoney()),
+                FairTrade.getFt().getEconomy().format(tr.getOffer(1).getMoney()),
+                tr.getDate());
 
+        String name = list.remove(0);
         ItemStack item = new ItemStack(Material.BARRIER);
-        ItemStacksUtils.rename(item, EnumI18n.INFO_0.localize(tr.requesterName, tr.accepterName, tr.date));
-        ItemStacksUtils.brief(item, info);
+        ItemStacksUtils.renameAndBrief(item, name, list.toArray(new String[0]));
 
         return item;
     }

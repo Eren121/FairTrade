@@ -40,7 +40,7 @@ public class RequiredDistance implements Listener {
     private String getReason(Player p1, Player p2) {
         if (p1.getWorld() != p2.getWorld()) {
             return EnumI18n.REASON_WORLD.localize();
-        } else if (p1.getLocation().distanceSquared(p2.getLocation()) > FairTrade.getFt().getOptions().getDistanceMinSq()) {
+        } else if (p1.getLocation().distanceSquared(p2.getLocation()) > FairTrade.getFt().getOptions().getDistanceMaxSq()) {
             return EnumI18n.REASON_DISTANCE.localize();
         } else {
             return null;

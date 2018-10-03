@@ -18,6 +18,10 @@ public class Offer {
         this.p = p;
     }
 
+    public String getName() {
+        return p.getName();
+    }
+
     public Player getPlayer() {
         return p;
     }

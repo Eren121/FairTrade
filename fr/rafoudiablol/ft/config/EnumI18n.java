@@ -3,6 +3,8 @@ package fr.rafoudiablol.ft.config;
 import fr.rafoudiablol.ft.main.FairTrade;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static fr.rafoudiablol.ft.config.I18n.PWNED;
 
 public enum EnumI18n {
@@ -12,15 +14,13 @@ public enum EnumI18n {
     NO_REQUEST,
     NO_TRANSACTION("<id>"),
     CONFIRM,
-    TITLE("<left>", "<right>", "<date>"),
-    INFO_0("<left", "<right>", "<date>"),
-    INFO_1("<left", "<right>", "<date>"),
-    INFO_2("<left", "<right>", "<date>"),
-    INFO_3("<left", "<right>", "<date>"),
     REQUEST("<player>"),
     REASON_WORLD,
     REASON_DISTANCE,
+    TITLE("<player>"),
+
     FINALIZED("<id>"),
+
 
     BUTTON_CANCEL,
     BUTTON_CONFIRM,
@@ -30,7 +30,9 @@ public enum EnumI18n {
     NOBODY_ACCEPTED,
 
     MONEY_GIVE("<money>"),
-    MONEY_GET("<money>");
+    MONEY_GET("<money>"),
+
+    LOG_BRIEF("<p0>", "<p1>", "<money0>", "<money1>", "<date>");
 
     public final String path;
     protected final String[] args;
@@ -60,5 +62,9 @@ public enum EnumI18n {
 
     public String localize(Object... args) {
         return FairTrade.getFt().getOptions().geti18n().localize(this, args);
+    }
+
+    public List<String> localizeList(Object... args) {
+        return FairTrade.getFt().getOptions().geti18n().localizeList(this, args);
     }
 }

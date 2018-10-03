@@ -13,7 +13,7 @@ public interface IOptions {
     ItemStack getDummyItem(boolean ok);
     boolean canSelfTrade();
 
-    default double getDistanceMinSq() {
+    default double getDistanceMaxSq() {
         double f = getDistanceMax();
         return f * f;
     }

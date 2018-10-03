@@ -3,9 +3,11 @@ package fr.rafoudiablol.ft.spy;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.trade.Offer;
+import fr.rafoudiablol.ft.trade.OfflineOffer;
+import fr.rafoudiablol.ft.trade.OfflineTrade;
+import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.YamlUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -17,7 +19,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
-import static fr.rafoudiablol.ft.spy.Query.*;
 
 public class Database implements IDatabase, Listener
 {
@@ -91,14 +92,6 @@ public class Database implements IDatabase, Listener
         e.forEach(p -> getFt().sendMessage(EnumI18n.FINALIZED.localize(id), p));
     }
 
-    /**
-     *
-     * @param requester the player who /request
-     * @param accepter the player who /accept
-     * @param requesterGive what requester gives to accepter
-     * @param accepterGive what accepter gives to requester
-     * @return ID of the transaction
-     */
     private int registerTransaction(Offer offers[]) {
 
         int ret = -1;
@@ -133,40 +126,45 @@ public class Database implements IDatabase, Listener
         return ret;
     }
 
-    public Transaction getTransactionFromID(int id)
+    public OfflineTrade getTradeFromID(int id)
     {
         ResultSet res = query("SELECT tradeDate, playerUUID, offerItems, offerMoney FROM Trades, Offers " +
                 "WHERE tradeID = " + id + " AND (Trades.offerID = Offers.offerID OR Trades.offerID + 1 = Offers.offerID)");
 
-        Transaction ret = null;
+        if(res == null)
+            return null;
 
-        if(res != null)
-        {
-            try {
+        try {
 
-
-                if(!res.next()) {
-                    return null;
-                }
-
-                ret = new Transaction();
-                ret.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(1)).toString();
-                ret.requesterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName();
-                ret.whatRequesterGives = YamlUtils.toItems(res.getString(3));
-
-                if(!res.next()) {
-                    return null;
-                }
-
-                ret.accepterName = Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName();
-                ret.whatAccepterGives = YamlUtils.toItems(res.getString(3));
-
-            } catch (SQLException | ParseException e) {
-                e.printStackTrace();
+            if(!res.next()) {
+                return null;
             }
-        }
 
-        return ret;
+            OfflineTrade t = new OfflineTrade();
+            OfflineOffer o = new OfflineOffer();
+            t.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(1)).toString());
+            o.setName(Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName());
+            o.setItems(YamlUtils.toItems(res.getString(3)));
+            o.setMoney(res.getDouble(4));
+            t.setOffer(0, o);
+
+            if(!res.next()) {
+                return null;
+            }
+
+            o = new OfflineOffer();
+            o.setName(Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName());
+            o.setItems(YamlUtils.toItems(res.getString(3)));
+            o.setMoney(res.getDouble(4));
+            t.setOffer(1, o);
+
+            return t;
+
+        } catch (SQLException | ParseException e) {
+
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setInsertStatement(String insert) {

@@ -4,7 +4,8 @@ public enum TypeCommand {
 
     REQUEST("trade"),
     ACCEPT("accept"),
-    HISTORY("tradelog");
+    HISTORY("tradelog"),
+    MAX("max");
 
     public final String name;
 
