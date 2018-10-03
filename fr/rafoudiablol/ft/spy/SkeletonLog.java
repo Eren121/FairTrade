@@ -64,8 +64,8 @@ public class SkeletonLog extends AbstractSkeleton {
         List<String> list = EnumI18n.LOG_BRIEF.localizeList(
                 tr.getOffer(0).getName(),
                 tr.getOffer(1).getName(),
-                FairTrade.getFt().getEconomy().format(tr.getOffer(0).getMoney()),
-                FairTrade.getFt().getEconomy().format(tr.getOffer(1).getMoney()),
+                FairTrade.getFt().formatMoney(tr.getOffer(0).getMoney()),
+                FairTrade.getFt().formatMoney(tr.getOffer(1).getMoney()),
                 tr.getDate());
 
         String name = list.remove(0);

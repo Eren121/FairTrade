@@ -19,4 +19,8 @@ public interface IFairTrade extends ILoggable {
     TradeTracker getTracker();
     void taskAtNextTick(Runnable task);
     void sendMessage(String msg, CommandSender... players);
+
+    default String formatMoney(double money) {
+        return getEconomy() == null ? money + "§k?" : getEconomy().format(money);
+    }
 }

@@ -12,7 +12,6 @@ public class CommandMax implements CommandExecutor {
 
         if(strings.length == 1) {
 
-            int i = Integer.valueOf(strings[0]);
             FairTrade.getFt().getOptions().setDistanceMax(Integer.valueOf(strings[0]));
         }
 

@@ -1,9 +1,6 @@
 package fr.rafoudiablol.ft.main;
 
-import fr.rafoudiablol.ft.commands.CommandAccept;
-import fr.rafoudiablol.ft.commands.CommandRequest;
-import fr.rafoudiablol.ft.commands.CommandSpy;
-import fr.rafoudiablol.ft.commands.TypeCommand;
+import fr.rafoudiablol.ft.commands.*;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.config.Options;
@@ -182,7 +179,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
             )
         ));
 
-        getCommand(TypeCommand.MAX.name).setExecutor(new CommandDecoratorIntegerArg(new CommandSpy(), true));
+        getCommand(TypeCommand.MAX.name).setExecutor(new CommandDecoratorIntegerArg(new CommandMax(), true));
     }
 
     private void doUnitTests()
@@ -227,6 +224,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
     // copypasta
     // https://github.com/MilkBowl/VaultAPI
     private boolean setupEconomy() {
+
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             i("Vault dependency not found, can't trade money");
             return false;

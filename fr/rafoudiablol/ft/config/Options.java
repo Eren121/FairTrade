@@ -3,6 +3,7 @@ package fr.rafoudiablol.ft.config;
 import fr.rafoudiablol.ft.inventory.SkeletonTrade;
 import fr.rafoudiablol.ft.utils.ILoggable;
 import fr.rafoudiablol.ft.spy.SkeletonLog;
+import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -116,7 +117,9 @@ public class Options implements IOptions {
     @Override
     public ItemStack getDummyItem(boolean ok) {
 
-        return new ItemStack(ok ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
+        ItemStack item = new ItemStack(ok ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
+        ItemStacksUtils.rename(item,"§kHidden text§r 007 §kRafoudiablol");
+        return item;
     }
 
     @Override
@@ -136,7 +139,9 @@ public class Options implements IOptions {
 
     @Override
     public ItemStack getEmptyItem() {
-        return new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
+        ItemStack item = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
+        ItemStacksUtils.rename(item,"§kHidden text§r 008 Her§kobr.");
+        return item;
     }
 
     private void setAndSave(EnumOption opt, Object o) {

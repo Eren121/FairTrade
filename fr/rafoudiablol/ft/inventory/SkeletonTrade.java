@@ -18,8 +18,18 @@ public class SkeletonTrade extends AbstractSkeleton {
         registerSlot(1, new SlotLocal());
         registerSlot(2, new SlotRemote());
         registerSlot(3, new SlotConfirm());
-        registerSlot(4, new SlotMoney.Plus());
-        registerSlot(5, new SlotMoney.Minus());
+
+        if(FairTrade.getFt().getEconomy() != null) {
+
+            registerSlot(4, new SlotMoney.Plus());
+            registerSlot(5, new SlotMoney.Minus());
+        }
+        else {
+
+            registerSlot(4, new SlotEmpty());
+            registerSlot(5, new SlotEmpty());
+        }
+
         registerSlot(7, new SlotStatusLocal());
         registerSlot(8, new SlotStatusRemote());
         setMatrix(slots);
