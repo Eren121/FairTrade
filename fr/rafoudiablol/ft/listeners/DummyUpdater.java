@@ -30,6 +30,7 @@ public class DummyUpdater implements Listener {
 
 
         FairTrade.getFt().taskAtNextTick(() -> {
+
             for (int i = 0; i <= 1; ++i) {
 
                 Offer o = trade.getOffer(i);
@@ -64,8 +65,15 @@ public class DummyUpdater implements Listener {
             msg = EnumI18n.NOBODY_ACCEPTED.localize();
         }
 
-        ItemStacksUtils.renameAndBrief(confirm, title, msg,
-                EnumI18n.MONEY_GIVE.localize(FairTrade.getFt().getEconomy().format(localMoney)),
-                EnumI18n.MONEY_GET.localize(FairTrade.getFt().getEconomy().format(remoteMoney)));
+        if(FairTrade.getFt().getEconomy() == null) {
+
+            ItemStacksUtils.renameAndBrief(confirm, title, msg);
+        }
+        else {
+
+            ItemStacksUtils.renameAndBrief(confirm, title, msg,
+                    EnumI18n.MONEY_GIVE.localize(FairTrade.getFt().formatMoney(localMoney)),
+                    EnumI18n.MONEY_GET.localize(FairTrade.getFt().formatMoney(remoteMoney)));
+        }
     }
 }
