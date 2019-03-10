@@ -1,0 +1,25 @@
+WELCOME: "Plugin <name> initialisé, bienvenue!"
+PREFIX: "§b[§lCommerce§r§b]§r "
+CONFIRM: "Clic gauche pour confirmer!"
+NO_REQUEST: "Pas de requêtes en attente."
+NO_TRANSACTION: "Transaction avec l'ID §l<id>§c introuvable."
+TITLE: "Commercer avec §l<player>"
+REQUEST: "Vous avez reçu une requête de commerce venant de §i<player>"
+REASON_WORLD: "Vous êtes dans des mondes différents."
+REASON_DISTANCE: "Distance trop élevée."
+FINALIZED: "Transaction finalisée! ID §u<id>"
+
+BUTTON_CONFIRM: "Clic pour §2accepter§c!"
+BUTTON_CANCEL: "Clic to §2annuler§c!"
+
+YOU_ACCEPTED: "Vous avez accepté."
+NOBODY_ACCEPTED: "Personne n'a accepté."
+REMOTE_ACCEPTED: "<player> a accepté."
+
+MONEY_GIVE: "Donner: §b<money>"
+MONEY_GET: "Recevoir: §b<money>"
+
+LOG_BRIEF:
+  - "à §e<date>"
+  - "<p0> a donné §2<money0>"
+  - "<p1> a donné §2<money1>"

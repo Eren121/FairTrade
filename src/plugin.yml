@@ -1,0 +1,36 @@
+name: FairTrade
+main: fr.rafoudiablol.ft.main.FairTrade
+version: 2.1
+api-version: 1.13
+softdepend: [Vault]
+
+commands:
+  trade:
+    description: Send a trade request.
+    aliases: [req]
+    permission: trade.trade
+    usage: "Usage: /<command> <player>"
+  accept:
+    description: Accept last trade request.
+    aliases: [acc]
+    permission: trade.trade
+    usage: "Usage: /<command>"
+  tradelog:
+    description: Show server trade history.
+    permission: trade.log
+    usage: "Usage: /command> <ID>"
+  trademax:
+    description: Set trade distance max.
+    permission: trade.max
+    usage: "Usage: /<command> [distance]"
+
+permissions:
+  trade.trade:
+    description: Allow set maximum distance command.
+    default: true
+  trade.log:
+    description: Allow history command.
+    default: op
+  trade.max:
+    description: Allow set maximum distance command.
+    default: op

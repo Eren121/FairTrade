@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS Offers(
+  tradeID INTEGER PRIMARY KEY,
+  playerUUID CHAR(36),
+  offerItems TEXT,
+  offerMoney DECIMAL
+);
+
+CREATE TABLE IF NOT EXISTS Offers(
+  offerID INTEGER PRIMARY KEY,
+  tradeDate DATETIME,
+);
