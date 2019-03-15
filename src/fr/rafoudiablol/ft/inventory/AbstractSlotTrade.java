@@ -3,13 +3,13 @@ package fr.rafoudiablol.ft.inventory;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
+import fr.rafoudiablol.ft.utils.inv.ISlot;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 /**
  * Wrapper class for adding useful arguments to action() method
  */
-public abstract class AbstractSlotTrade extends AbstractSlot {
+public abstract class AbstractSlotTrade implements ISlot {
 
     @Override
     public final boolean action(InventoryClickEvent e) {

@@ -12,14 +12,14 @@ public enum EnumI18n {
     WELCOME("<name>"),
     PREFIX,
     NO_REQUEST,
-    NO_TRANSACTION("<id>"),
+    NO_TRANSACTION("<item>"),
     CONFIRM,
     REQUEST("<player>"),
     REASON_WORLD,
     REASON_DISTANCE,
     TITLE("<player>"),
 
-    FINALIZED("<id>"),
+    FINALIZED("<item>"),
 
 
     BUTTON_CANCEL,

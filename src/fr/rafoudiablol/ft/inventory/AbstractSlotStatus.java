@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 public abstract class AbstractSlotStatus extends SlotLocked {
 
     @Override
-    public ItemStack getDefault() {
+    public ItemStack getDefault(int i) {
         return FairTrade.getFt().getOptions().getDummyItem(false);
     }
 }

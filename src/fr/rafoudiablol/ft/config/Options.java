@@ -138,6 +138,11 @@ public class Options implements IOptions {
     }
 
     @Override
+    public ItemStack getDefaultItem(EnumEditableItems item) {
+        return item.getItemFromConfig(getConfig().getConfigurationSection("layout"));
+    }
+
+    @Override
     public ItemStack getEmptyItem() {
         ItemStack item = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
         ItemStacksUtils.rename(item,"§kHidden text§r 008 Her§kobr.");

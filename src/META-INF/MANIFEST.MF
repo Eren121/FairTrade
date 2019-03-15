@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Class-Path: spigot-1.13.2.jar jdbi3-3.0.0-alpha10.jar antlr-runtime-3.
+ 4.jar stringtemplate-3.2.1.jar antlr-2.7.7.jar slf4j-api-1.7.21.jar a
+ nnotations-3.0.1.jar jcip-annotations-1.0.jar jsr305-3.0.1.jar guava-
+ 21.0.jar expiringmap-0.5.6.jar Vault.jar
+

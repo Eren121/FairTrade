@@ -5,7 +5,6 @@ import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
 import fr.rafoudiablol.ft.events.StatusTransactionEvent;
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.Trade;
-import fr.rafoudiablol.ft.utils.InventoriesUtils;
 import fr.rafoudiablol.ft.utils.ItemStacksUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class SlotConfirm extends AbstractSlotTrade {
 
     @Override
-    public ItemStack getDefault() {
+    public ItemStack getDefault(int i) {
 
         ItemStack ret = new ItemStack(Material.WRITABLE_BOOK);
         ItemStacksUtils.rename(ret, EnumI18n.CONFIRM.localize());

@@ -21,4 +21,6 @@ public interface IOptions {
     ItemStack getEmptyItem();
     SkeletonTrade getSkeleton();
     SkeletonLog getSkeletonForLog();
+
+    ItemStack getDefaultItem(EnumEditableItems item);
 }

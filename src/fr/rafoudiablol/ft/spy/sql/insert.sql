@@ -1,4 +1,7 @@
-INSERT INTO Offers VALUES(NULL, :uuid0, :items0, :money0);
-INSERT INTO Offers VALUES(NULL, :uuid1, :items1, :money1);
+INSERT INTO Trade VALUES(NULL, DATETIME('now'));
 
-INSERT INTO Trades VALUES(NULL, (SELECT MAX(offerID) FROM Offers) - 1, DATETIME('now'));
+INSERT INTO Offer VALUES(NULL, :uuid0, :items0, :money0);
+INSERT INTO Link VALUES((SELECT MAX(id) FROM Trade), (SELECT MAX(id) FROM Offer));
+
+INSERT INTO Offer VALUES(NULL, :uuid1, :items1, :money1);
+INSERT INTO Link VALUES((SELECT MAX(id) FROM Trade), (SELECT MAX(id) FROM Offer));

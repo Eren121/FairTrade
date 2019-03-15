@@ -1,6 +1,6 @@
 name: FairTrade
 main: fr.rafoudiablol.ft.main.FairTrade
-version: 2.1
+version: 2.2
 api-version: 1.13
 softdepend: [Vault]
 
@@ -23,6 +23,9 @@ commands:
     description: Set trade distance max.
     permission: trade.max
     usage: "Usage: /<command> [distance]"
+  tradelayout:
+    description: Set trade GUI layout.
+    usage: "Usage: /<command>"
 
 permissions:
   trade.trade:
@@ -33,4 +36,7 @@ permissions:
     default: op
   trade.max:
     description: Allow set maximum distance command.
+    default: op
+  trade.layout:
+    description: Allow set GUI layout
     default: op

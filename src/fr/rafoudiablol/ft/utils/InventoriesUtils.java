@@ -1,9 +1,8 @@
 package fr.rafoudiablol.ft.utils;
 
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
-import fr.rafoudiablol.ft.utils.inv.AbstractSlot;
 import fr.rafoudiablol.ft.utils.inv.Holder;
-import org.apache.commons.lang.ArrayUtils;
+import fr.rafoudiablol.ft.utils.inv.ISlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -22,7 +21,7 @@ public class InventoriesUtils {
      * @param source
      * @return an array of all matches items, including what it cannot be stored
      */
-    public static ItemStack[] merge(Class<? extends AbstractSlot> filter, Inventory dest, Inventory source)
+    public static ItemStack[] merge(Class<? extends Object> filter, Inventory dest, Inventory source)
     {
         ArrayList<ItemStack> ret = new ArrayList<>();
         AbstractSkeleton sk = Holder.tryGet(source.getHolder());
@@ -55,7 +54,7 @@ public class InventoriesUtils {
         return ret.toArray(new ItemStack[0]);
     }
 
-    public static ItemStack[] getAllItemsFromType(Class<? extends AbstractSlot> clazz, Inventory inventory) {
+    public static ItemStack[] getAllItemsFromType(Class<? extends ISlot> clazz, Inventory inventory) {
 
         AbstractSkeleton sk = Holder.tryGet(inventory.getHolder());
         List<Integer> slots = sk.byType(clazz);

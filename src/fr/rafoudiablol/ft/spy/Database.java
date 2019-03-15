@@ -1,88 +1,77 @@
 package fr.rafoudiablol.ft.spy;
 
+import com.mojang.authlib.yggdrasil.response.User;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.events.FinalizeTransactionEvent;
+import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.trade.Offer;
 import fr.rafoudiablol.ft.trade.OfflineOffer;
 import fr.rafoudiablol.ft.trade.OfflineTrade;
-import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.YamlUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.Query;
+import org.jdbi.v3.core.statement.Script;
+import org.jdbi.v3.core.statement.StatementContext;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import static fr.rafoudiablol.ft.main.FairTrade.getFt;
 
-public class Database implements IDatabase, Listener
+public class Database implements Listener
 {
-    private Connection connection;
-    private Statement statement;
     private Logger log;
     private String insertStatement;
+    private Jdbi jdbi;
+    private Handle handle;
 
     public Database(Logger log)
     {
         this.log = log;
     }
 
-    @Override
-    public void connect(String path)
-    {
+    public void connect(String path) {
         String conPath = "jdbc:sqlite:" + path;
 
         try {
 
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(conPath);
-            statement = connection.createStatement();
-
+            jdbi = Jdbi.create(conPath);
+            handle = jdbi.open();
             log.info("Successfully connected to " + conPath);
         }
-        catch(ClassNotFoundException | SQLException e) {
+        catch(ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void close()
-    {
-        try {
-
-            if(statement != null) statement.close();
-            if(connection != null) connection.close();
-        }
-        catch(SQLException e) {}
+    public void close() {
+        handle.close();
     }
 
-    @Override
-    public ResultSet query(String request)
-    {
-        ResultSet ret = null;
-
-        try {
-            ret = statement.executeQuery(request);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return ret;
+    protected Query query(String request) {
+        return handle.createQuery(request);
     }
 
-    @Override
-    public void update(String request) {
+    public void update(String request) throws IllegalArgumentException{
 
-        try {
-            statement.executeUpdate(request);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbi.useHandle(handle -> {
+           handle.createScript(request).execute();
+        });
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -94,77 +83,49 @@ public class Database implements IDatabase, Listener
 
     private int registerTransaction(Offer offers[]) {
 
-        int ret = -1;
+        Handle transaction = handle.begin();
+        transaction.createUpdate("INSERT INTO Trade VALUES(NULL, DATETIME('now'))").execute();
 
-        try {
+        for(int i = 0; i < 2; i++) {
 
-            for(String prepared : insertStatement.split(";")) {
+            transaction.createUpdate("INSERT INTO Offer VALUES(NULL, :uuid, :items, :money)")
+                    .bind(Columns.UUID, offers[i].getPlayer().getUniqueId())
+                    .bind(Columns.ITEMSTACKS, YamlUtils.toString(offers[i].getItems()))
+                    .bind(Columns.MONEY, offers[i].getMoney())
+                    .execute();
 
-                for (int i = 0; i <= 1; ++i) {
-                    prepared = prepared.replace(":name" + i, '\'' + offers[i].getPlayer().getName() + '\'');
-                    prepared = prepared.replace(":uuid" + i, '\'' + offers[i].getPlayer().getUniqueId().toString() + '\'');
-                    prepared = prepared.replace(":items" + i, '\'' + YamlUtils.toString(offers[i].getItems()) + '\'');
-                    prepared = prepared.replace(":money" + i, String.valueOf(offers[i].getMoney()));
-                }
-
-                PreparedStatement st = connection.prepareStatement(prepared);
-                st.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            transaction.createUpdate("INSERT INTO Link VALUES((SELECT MAX(id) FROM Trade), (SELECT MAX(id) FROM Offer))")
+                    .execute();
         }
 
-        try {
-            ResultSet res = query("SELECT MAX(tradeID) FROM Trades");
-            res.next();
-            ret = res.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return ret;
+        transaction.commit();
+        return handle.createQuery("SELECT MAX(id) FROM Trade").mapTo(int.class).findOnly();
     }
 
     public OfflineTrade getTradeFromID(int id)
     {
-        ResultSet res = query("SELECT tradeDate, playerUUID, offerItems, offerMoney FROM Trades, Offers " +
-                "WHERE tradeID = " + id + " AND (Trades.offerID = Offers.offerID OR Trades.offerID + 1 = Offers.offerID)");
+        OfflineTrade ret = null;
+        List<Map<String, Object>> list = handle.createQuery("SELECT date_recorded, uuid, items, money FROM Offer, Trade, Link" +
+                " WHERE tradeID = :id AND tradeID = Trade.id AND offerID = Offer.id").bind("id", id).mapToMap().list();
 
-        if(res == null)
-            return null;
+        if(list.size() == 2) {
 
-        try {
-
-            if(!res.next()) {
-                return null;
-            }
-
-            OfflineTrade t = new OfflineTrade();
+            ret = new OfflineTrade();
             OfflineOffer o = new OfflineOffer();
-            t.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(res.getString(1)).toString());
-            o.setName(Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName());
-            o.setItems(YamlUtils.toItems(res.getString(3)));
-            o.setMoney(res.getDouble(4));
-            t.setOffer(0, o);
+            ret.setDate((String)list.get(0).get(Columns.DATE_RECORDED));
 
-            if(!res.next()) {
-                return null;
+            for(int i = 0; i < 2; i++) {
+
+                Map<String, Object> map = list.get(i);
+                o.setName(Bukkit.getOfflinePlayer(UUID.fromString((String)map.get(Columns.UUID))).getName());
+                o.setItems(YamlUtils.toItems((String)map.get(Columns.ITEMSTACKS)));
+                o.setMoney((Integer)map.get(Columns.MONEY));
+                ret.setOffer(i, o);
             }
 
-            o = new OfflineOffer();
-            o.setName(Bukkit.getOfflinePlayer(UUID.fromString(res.getString(2))).getName());
-            o.setItems(YamlUtils.toItems(res.getString(3)));
-            o.setMoney(res.getDouble(4));
-            t.setOffer(1, o);
-
-            return t;
-
-        } catch (SQLException | ParseException e) {
-
-            e.printStackTrace();
-            return null;
         }
+
+        return ret;
     }
 
     public void setInsertStatement(String insert) {

@@ -30,7 +30,7 @@ public abstract class SlotMoney extends AbstractSlotTrade {
     }
 
     @Override
-    public ItemStack getDefault() {
+    public ItemStack getDefault(int i) {
 
         ItemStack item = new ItemStack(Material.GOLD_BLOCK);
         ItemStacksUtils.addLore(item, getDelta() > 0 ? "+" + getDelta() : String.valueOf(getDelta()));

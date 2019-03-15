@@ -4,7 +4,9 @@ import fr.rafoudiablol.ft.events.AbortTransactionEvent;
 import fr.rafoudiablol.ft.main.FairTrade;
 import fr.rafoudiablol.ft.trade.Trade;
 import fr.rafoudiablol.ft.utils.inv.AbstractSkeleton;
+import fr.rafoudiablol.ft.utils.inv.ISlot;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_13_R2.Overridden;
 import org.bukkit.entity.HumanEntity;
 
 public class SkeletonTrade extends AbstractSkeleton {

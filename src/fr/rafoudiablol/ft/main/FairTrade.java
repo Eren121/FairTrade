@@ -1,11 +1,14 @@
 package fr.rafoudiablol.ft.main;
 
+import com.google.gson.Gson;
 import fr.rafoudiablol.ft.commands.*;
 import fr.rafoudiablol.ft.config.EnumI18n;
 import fr.rafoudiablol.ft.config.IOptions;
 import fr.rafoudiablol.ft.config.Options;
+import fr.rafoudiablol.ft.editor.ModuleEditor;
 import fr.rafoudiablol.ft.listeners.*;
 import fr.rafoudiablol.ft.spy.Database;
+import fr.rafoudiablol.ft.test.SerializationTest;
 import fr.rafoudiablol.ft.test.UnitTest;
 import fr.rafoudiablol.ft.utils.APIListener;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorIntegerArg;
@@ -14,9 +17,14 @@ import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayer;
 import fr.rafoudiablol.ft.utils.commands.CommandDecoratorPlayerArg;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.MemoryConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jdbi.v3.core.Jdbi;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,13 +64,14 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         setupEconomy();
         readConfiguration();
         registerCommands();
-        //setupDb();
+        setupDb();
         setupTracker();
         registerListeners();
         doUnitTests();
         welcome();
 
-        modules.forEach(IFairTradeModule::onEnableModule);
+        modules.add(new ModuleEditor());
+        modules.forEach(module -> module.onEnableModule(this));
     }
 
     /**
@@ -70,8 +79,8 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
      */
     @Override
     public void onDisable() {
-        //db.close();
-        modules.forEach(IFairTradeModule::onDisableModule);
+        db.close();
+        modules.forEach(module -> module.onDisableModule(this));
     }
 
     /**
@@ -156,7 +165,7 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         getServer().getPluginManager().registerEvents(new RequestTracker(), this);
         getServer().getPluginManager().registerEvents(new CloseRemoteInventory(), this);
         getServer().getPluginManager().registerEvents(tradeTracker, this);
-        //getServer().getPluginManager().registerEvents(db, this);
+        getServer().getPluginManager().registerEvents(db, this);
         getServer().getPluginManager().registerEvents(new RequiredDistance(), this);
         getServer().getPluginManager().registerEvents(new DummyUpdater(), this);
         getServer().getPluginManager().registerEvents(new APIListener(), this);
@@ -192,6 +201,8 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
         UnitTest unitTest = new UnitTest();
         unitTest.checkSkeletonInventory();
         unitTest.checkArraysUtils();
+
+        new SerializationTest(getLogger());
         getLogger().info("Unit Tests ok.");
     }
 
@@ -213,12 +224,10 @@ public class FairTrade extends JavaPlugin implements IFairTrade {
 
         try {
 
-            String init = db.getClass().getPackage().getName().replace('.', '/') + "/sql/init.sql";
-            i(init);
-            db.update(IOUtils.toString(this.getTextResource(init)));
+            String path = db.getClass().getPackage().getName().replace('.', '/') + "/sql/create.sql";
+            db.update(IOUtils.toString(this.getTextResource(path)));
 
             String insert = db.getClass().getPackage().getName().replace('.', '/') + "/sql/insert.sql";
-            i(insert);
             db.setInsertStatement(IOUtils.toString(this.getTextResource(insert)));
         }
         catch(IOException e) {
