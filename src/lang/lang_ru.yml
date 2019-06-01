@@ -1,0 +1,25 @@
+WELCOME: "Плагин <name> инициализирован."
+PREFIX: "§b[§lТорговля§r§b]§r "
+CONFIRM: "Нажмите, чтобы подтвердить!"
+NO_REQUEST: "Нет входящих предложений."
+NO_TRANSACTION: "Сделка с номером §l<item>§c не найдена."
+TITLE: "Сделка с §l<player>"
+REQUEST: "Вы получили предложение сделки от §i<player>§r.\nВведите §i/accept§r, чтобы согласиться."
+REASON_WORLD: "Вы в разных мирах."
+REASON_DISTANCE: "Вы слишком далеко."
+FINALIZED: "Сделка успешно завершена. Номер сделки §u<item>"
+
+BUTTON_CONFIRM: "Нажмите, чтобы §2подтвердить§c!"
+BUTTON_CANCEL: "Нажмите, чтобы §2отменить§c!"
+
+YOU_ACCEPTED: "Вы принимаете сделку!"
+NOBODY_ACCEPTED: "Никто не принимает сделку."
+REMOTE_ACCEPTED: "<player> принимает сделку."
+
+MONEY_GIVE: "Даёте: §b<money>"
+MONEY_GET: "Получаете: §b<money>"
+
+LOG_BRIEF:
+  - "Сделка завершена: §e<date>"
+  - "<p0> дал §2<money0>"
+  - "<p1> дал §2<money1>"
