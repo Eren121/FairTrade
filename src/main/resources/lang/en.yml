@@ -1,0 +1,31 @@
+players-only: This command can only be performed by players.
+player-not-found: Player %1 not found.
+generic-reason: Can't trade with %1.
+ask: "%1 want to trade with you [§n§l%2§r / §n§l%3§r]"
+accept: Accept
+refuse: Refuse
+not-enough-place: Not enough place.
+above-distance: "You can't trade because you are above the maximal trade distance."
+cross-world: "You can't trade across different worlds."
+self: "You can't trade with yourself."
+
+wait-title: "§oWaiting §1%1§r§o..."
+trade-title: "Trade with §l%1"
+
+wait-item: "§oWaiting to trade with §l%1"
+
+buttons:
+  status:
+    local:
+      true: You have accepted!
+      false: You have not already accepted.
+    remote:
+      true: "%1 has accepted the trade."
+      false: "%1 has not yet accepted the trade."
+  confirm:
+    true: Click to §lcancel§r!
+    false: Click to §laccept§r!
+  resource:
+    - You will give §l%1§r.
+    - You will receive §l%2§r.
+    - "Balance: §l%3§r."

@@ -1,0 +1,19 @@
+name: FairTrade
+version: ${project.version}
+main: fr.rafoudiablol.fairtrade.FairTrade
+api-version: 1.16
+softdepend: [Vault]
+
+commands:
+  trade:
+    description: Main command to the plugin §aFairTrade
+    usage: /<command> [command]
+    permission: fairtrade.trade
+
+permissions:
+  fairtrade.trade:
+    description: Give access to /trade command
+    default: true
+  fairtrade.selftrade:
+    description: Give access to trading with yourself. Only used for debugging.
+    default: op

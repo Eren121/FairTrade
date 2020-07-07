@@ -1,0 +1,10 @@
+player-already-ignored: "§l%1§r is already ignored."
+player-added: "§l%1§r has been added to your ignore list."
+limit-reached: "You can't ignore more than §l%1§r players!"
+
+player-not-ignored: "§l%  1§r is not ignored."
+player-removed: "§l%1§r has been removed from your ignore list."
+
+list-players: "Connected players ignored (total §l%1§r)"
+
+ignored: "You can't trade with §l%1§r because this player has ignored you."

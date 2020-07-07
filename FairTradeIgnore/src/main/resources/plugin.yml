@@ -1,0 +1,15 @@
+name: FairTradeIgnore
+version: ${project.version}
+main: fr.rafoudiablol.fairtrade.ignore.FairTradeIgnore
+api-version: 1.16
+depend: [FairTrade]
+
+commands:
+  tradeignore:
+    description: Main command to the plugin §aFairTradeIgnore
+    usage: /<command> [add|remove|list] <player>
+
+permissions:
+  fairtrade.ignore.listany:
+    description: Give access to see any player's ignore list.
+    default: op
